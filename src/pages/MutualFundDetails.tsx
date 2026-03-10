@@ -95,6 +95,7 @@ const MutualFundDetails: React.FC = () => {
                     history={fund.history}
                     color={fund.return1Y >= 0 ? "#10B981" : "#F43F5E"}
                     title={`${fund.name.split(' ')[0]} Performance History`}
+                    currencySymbol="₹"
                 />
             </div>
 

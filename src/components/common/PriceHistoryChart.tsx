@@ -6,13 +6,15 @@ interface PriceHistoryChartProps {
     color?: string;
     height?: number;
     title?: string;
+    currencySymbol?: string;
 }
 
 const PriceHistoryChart: React.FC<PriceHistoryChartProps> = ({
     history,
     color = '#4F46E5',
     height = 250,
-    title = "Price History"
+    title = "Price History",
+    currencySymbol = "$"
 }) => {
     const prices = history.map(h => h.price);
     const min = Math.min(...prices);
@@ -59,7 +61,7 @@ const PriceHistoryChart: React.FC<PriceHistoryChartProps> = ({
                 {hoveredPoint && (
                     <div className="text-right">
                         <p className="text-xs font-black text-indigo-600 uppercase tracking-widest">{hoveredPoint.date}</p>
-                        <p className="text-xl font-black text-indigo-950">${hoveredPoint.price}</p>
+                        <p className="text-xl font-black text-indigo-950">{currencySymbol}{hoveredPoint.price}</p>
                     </div>
                 )}
             </div>

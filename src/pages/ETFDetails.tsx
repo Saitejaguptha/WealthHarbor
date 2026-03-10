@@ -95,6 +95,7 @@ const ETFDetails: React.FC = () => {
                     history={etf.history}
                     color={etf.change >= 0 ? "#10B981" : "#F43F5E"}
                     title={`${etf.symbol} Price History`}
+                    currencySymbol="₹"
                 />
             </div>
 
@@ -176,8 +177,8 @@ const ETFDetails: React.FC = () => {
                         <button
                             onClick={toggleWatchlist}
                             className={`w-full mt-10 py-4 font-black rounded-2xl transition-all active:scale-95 shadow-xl flex items-center justify-center gap-2 ${inWatchlist
-                                    ? 'bg-emerald-500 text-white shadow-emerald-200'
-                                    : 'bg-white text-indigo-900 hover:bg-indigo-50'
+                                ? 'bg-emerald-500 text-white shadow-emerald-200'
+                                : 'bg-white text-indigo-900 hover:bg-indigo-50'
                                 }`}
                         >
                             {inWatchlist ? <FiCheck /> : <FiPlus />}

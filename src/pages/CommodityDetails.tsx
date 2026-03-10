@@ -14,6 +14,14 @@ const CommodityDetails: React.FC = () => {
         return (localStorage.getItem('wealthharbor_currency') as 'INR' | 'USD') || 'INR';
     });
 
+    const historyData = useMemo(() => {
+        const USD_CONVERSION = 0.012;
+        return commodity?.history.map(point => ({
+            ...point,
+            price: currency === 'USD' ? Number((point.price * USD_CONVERSION).toFixed(2)) : point.price
+        })) || [];
+    }, [commodity, currency]);
+
     const formatPrice = (price: number) => {
         const USD_CONVERSION = 0.012;
         const adjustedPrice = currency === 'USD' ? price * USD_CONVERSION : price;
@@ -80,9 +88,10 @@ const CommodityDetails: React.FC = () => {
             {/* Price History Chart */}
             <div className="mb-8">
                 <PriceHistoryChart
-                    history={commodity.history}
+                    history={historyData}
                     color={commodity.color}
                     title={`${commodity.name} Price Channel`}
+                    currencySymbol={currency === 'INR' ? '₹' : '$'}
                 />
             </div>
 
