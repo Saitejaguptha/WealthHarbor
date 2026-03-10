@@ -94,49 +94,49 @@ const GoldSilver: React.FC = () => {
         const displayPoint = data.history[data.history.length - 1];
 
         return (
-            <div className="bg-white/80 backdrop-blur-2xl border border-white p-6 md:p-10 rounded-[2.5rem] md:rounded-[3rem] shadow-2xl shadow-indigo-100/50 hover:shadow-indigo-200/50 transition-all duration-700 group">
-                <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 md:gap-8 mb-8 md:mb-10 pb-6 md:pb-8 border-b border-indigo-50">
+            <div className="bg-white/80 backdrop-blur-2xl border border-white p-5 md:p-10 rounded-[2rem] md:rounded-[3rem] shadow-2xl shadow-indigo-100/50 hover:shadow-indigo-200/50 transition-all duration-700 group">
+                <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 md:gap-8 mb-6 md:mb-10 pb-6 md:pb-8 border-b border-indigo-50">
                     <div className="space-y-4">
-                        <div className="flex items-center gap-4">
-                            <div className={`p-3 md:p-4 ${iconColor} rounded-[1.25rem] md:rounded-[1.5rem] text-white shadow-2xl group-hover:scale-110 transition-transform`}>
-                                <FiLayers className="text-2xl md:text-3xl" />
+                        <div className="flex items-center gap-3 md:gap-4">
+                            <div className={`p-2.5 md:p-4 ${iconColor} rounded-[1rem] md:rounded-[1.5rem] text-white shadow-2xl group-hover:scale-110 transition-transform`}>
+                                <FiLayers className="text-xl md:text-3xl" />
                             </div>
                             <div>
-                                <h2 className="text-2xl md:text-4xl font-black text-indigo-950 tracking-tighter">{data.name} Analysis</h2>
+                                <h2 className="text-xl md:text-4xl font-black text-indigo-950 tracking-tighter">{data.name} Analysis</h2>
                             </div>
                         </div>
                     </div>
 
                     <div className="flex flex-col items-start lg:items-end gap-1">
-                        <p className="text-indigo-900/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest mb-1">
-                            Current Market Price ({unit})
+                        <p className="text-indigo-900/40 text-[8px] md:text-[10px] font-black uppercase tracking-widest mb-1">
+                            Current Price ({unit})
                         </p>
-                        <div className="flex items-center gap-4">
-                            <span className="text-3xl md:text-5xl font-black text-indigo-950 tabular-nums">
+                        <div className="flex items-center gap-3 md:gap-4">
+                            <span className="text-2xl md:text-5xl font-black text-indigo-950 tabular-nums">
                                 {formatPrice(displayPoint.price)}
                             </span>
-                            <span className="px-2 py-0.5 md:px-3 md:py-1 bg-emerald-50 text-emerald-600 text-[10px] md:text-xs font-black rounded-xl flex items-center gap-1">
+                            <span className="px-1.5 py-0.5 md:px-3 md:py-1 bg-emerald-50 text-emerald-600 text-[10px] md:text-xs font-black rounded-lg md:rounded-xl flex items-center gap-1">
                                 <FiTrendingUp /> 1.2%
                             </span>
                         </div>
                     </div>
                 </div>
 
-                <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between px-4 py-4 md:px-6 bg-indigo-50/30 rounded-2xl mb-2 text-indigo-900/60 font-medium border border-white/50 gap-4">
+                <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between px-3 py-3 md:px-6 bg-indigo-50/30 rounded-xl md:rounded-2xl mb-2 text-indigo-900/60 font-medium border border-white/50 gap-3 md:gap-4">
                     <div className="flex items-center justify-between md:justify-start gap-4 md:gap-8">
                         <div>
-                            <span className="text-[8px] md:text-[9px] font-black uppercase block tracking-widest opacity-40">Live Analysis</span>
-                            <span className="text-base md:text-lg font-black text-indigo-950">{formatPrice(displayPoint.price)}</span>
+                            <span className="text-[7px] md:text-[9px] font-black uppercase block tracking-widest opacity-40">Live Analysis</span>
+                            <span className="text-sm md:text-lg font-black text-indigo-950">{formatPrice(displayPoint.price)}</span>
                         </div>
-                        <div className="h-8 w-px bg-indigo-100 hidden md:block" />
+                        <div className="h-6 md:h-8 w-px bg-indigo-100 hidden md:block" />
                         <div className="hidden sm:block">
-                            <span className="text-[8px] md:text-[9px] font-black uppercase block tracking-widest opacity-40">Tax (indicative)</span>
-                            <span className="text-base md:text-lg font-black text-indigo-950">3% GST extra</span>
+                            <span className="text-[7px] md:text-[9px] font-black uppercase block tracking-widest opacity-40">Tax (indicative)</span>
+                            <span className="text-sm md:text-lg font-black text-indigo-950">3% GST extra</span>
                         </div>
                     </div>
-                    <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center border-t md:border-t-0 border-indigo-50 pt-3 md:pt-0 mt-1 md:mt-0">
-                        <span className="text-[9px] md:text-[10px] font-black text-indigo-600 uppercase tracking-widest">Status: Market Open</span>
-                        <span className="text-[8px] md:text-[9px] font-bold opacity-40">Quotes refreshed: 1 min ago</span>
+                    <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center border-t md:border-t-0 border-indigo-50 pt-2 md:pt-0 mt-0.5 md:mt-0">
+                        <span className="text-[8px] md:text-[10px] font-black text-indigo-600 uppercase tracking-widest">Market Open</span>
+                        <span className="text-[7px] md:text-[9px] font-bold opacity-40">Refreshed: 1m ago</span>
                     </div>
                 </div>
 
@@ -153,37 +153,37 @@ const GoldSilver: React.FC = () => {
             <div className="bg-white/40 backdrop-blur-xl border border-white p-6 md:p-8 rounded-[2rem] md:rounded-[3rem] shadow-xl shadow-indigo-100/30 flex flex-col xl:flex-row items-center justify-between gap-6 md:gap-8">
                 <div className="text-center xl:text-left">
                     <h1 className="text-4xl md:text-6xl font-black text-indigo-950 mb-2 tracking-tighter">Gold & Silver</h1>
-                    <p className="text-indigo-900/60 font-medium text-sm md:text-base px-4 xl:px-0">Interactive historical tracking and live commodity rates</p>
+                    <p className="text-indigo-900/60 font-medium text-xs md:text-base px-4 xl:px-0">Historical tracking and live rates</p>
                 </div>
 
-                <div className="bg-indigo-50 p-1.5 rounded-[1.5rem] flex items-center gap-1">
+                <div className="bg-indigo-50 p-1 rounded-[1.25rem] md:rounded-[1.5rem] flex items-center gap-0.5 md:gap-1 scale-90 md:scale-100">
                     {/* Currency Switcher */}
                     <button
                         onClick={() => setCurrency('INR')}
-                        className={`px-4 md:px-6 py-2 md:py-3 rounded-[1.1rem] text-xs md:text-sm font-black transition-all uppercase tracking-widest whitespace-nowrap ${currency === 'INR' ? 'bg-white text-indigo-600 shadow-md' : 'text-indigo-900/40 hover:text-indigo-900 hover:bg-white/60'}`}
+                        className={`px-3 md:px-6 py-2 md:py-3 rounded-[0.9rem] md:rounded-[1.1rem] text-[10px] md:text-sm font-black transition-all uppercase tracking-widest whitespace-nowrap ${currency === 'INR' ? 'bg-white text-indigo-600 shadow-md' : 'text-indigo-900/40 hover:text-indigo-900 hover:bg-white/60'}`}
                     >
-                        INR (₹)
+                        INR
                     </button>
                     <button
                         onClick={() => setCurrency('USD')}
-                        className={`px-4 md:px-6 py-2 md:py-3 rounded-[1.1rem] text-xs md:text-sm font-black transition-all uppercase tracking-widest whitespace-nowrap ${currency === 'USD' ? 'bg-white text-indigo-600 shadow-md' : 'text-indigo-900/40 hover:text-indigo-900 hover:bg-white/60'}`}
+                        className={`px-3 md:px-6 py-2 md:py-3 rounded-[0.9rem] md:rounded-[1.1rem] text-[10px] md:text-sm font-black transition-all uppercase tracking-widest whitespace-nowrap ${currency === 'USD' ? 'bg-white text-indigo-600 shadow-md' : 'text-indigo-900/40 hover:text-indigo-900 hover:bg-white/60'}`}
                     >
-                        USD ($)
+                        USD
                     </button>
 
                     {/* Divider */}
-                    <div className="h-6 w-px bg-indigo-200 mx-1" />
+                    <div className="h-5 md:h-6 w-px bg-indigo-200 mx-1" />
 
                     {/* Unit Switcher */}
                     <button
                         onClick={() => setUnit('gram')}
-                        className={`px-4 md:px-6 py-2 md:py-3 rounded-[1.1rem] text-xs md:text-sm font-black transition-all uppercase tracking-widest whitespace-nowrap ${unit === 'gram' ? 'bg-white text-indigo-600 shadow-md' : 'text-indigo-900/40 hover:text-indigo-900 hover:bg-white/60'}`}
+                        className={`px-3 md:px-6 py-2 md:py-3 rounded-[0.9rem] md:rounded-[1.1rem] text-[10px] md:text-sm font-black transition-all uppercase tracking-widest whitespace-nowrap ${unit === 'gram' ? 'bg-white text-indigo-600 shadow-md' : 'text-indigo-900/40 hover:text-indigo-900 hover:bg-white/60'}`}
                     >
                         Gram
                     </button>
                     <button
                         onClick={() => setUnit('ounce')}
-                        className={`px-4 md:px-6 py-2 md:py-3 rounded-[1.1rem] text-xs md:text-sm font-black transition-all uppercase tracking-widest whitespace-nowrap ${unit === 'ounce' ? 'bg-white text-indigo-600 shadow-md' : 'text-indigo-900/40 hover:text-indigo-900 hover:bg-white/60'}`}
+                        className={`px-3 md:px-6 py-2 md:py-3 rounded-[0.9rem] md:rounded-[1.1rem] text-[10px] md:text-sm font-black transition-all uppercase tracking-widest whitespace-nowrap ${unit === 'ounce' ? 'bg-white text-indigo-600 shadow-md' : 'text-indigo-900/40 hover:text-indigo-900 hover:bg-white/60'}`}
                     >
                         Ounce
                     </button>

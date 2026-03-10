@@ -60,21 +60,21 @@ const Commodities: React.FC = () => {
     };
 
     return (
-        <div className="p-4 md:p-10 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-1000 space-y-8 md:space-y-12">
+        <div className="p-4 md:p-10 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-1000 space-y-6 md:space-y-12">
             {/* Header Section */}
-            <div className="bg-white/40 backdrop-blur-3xl border border-white/50 p-8 md:p-12 rounded-[2.5rem] md:rounded-[3.5rem] shadow-2xl shadow-indigo-100/30 flex flex-col xl:flex-row items-center justify-between gap-8 relative overflow-hidden group">
+            <div className="bg-white/40 backdrop-blur-3xl border border-white/50 p-6 md:p-12 rounded-[2.5rem] md:rounded-[3.5rem] shadow-2xl shadow-indigo-100/30 flex flex-col xl:flex-row items-center justify-between gap-6 md:gap-8 relative overflow-hidden group">
                 <div className="absolute top-0 right-0 p-12 opacity-[0.03] scale-150 rotate-12 group-hover:rotate-0 transition-transform duration-1000">
                     <FiGlobe className="text-[12rem] text-indigo-950" />
                 </div>
 
                 <div className="text-center xl:text-left relative z-10">
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-indigo-50 text-indigo-600 text-xs font-black rounded-full mb-6 tracking-widest uppercase">
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-indigo-50 text-indigo-600 text-[10px] md:text-xs font-black rounded-full mb-4 md:mb-6 tracking-widest uppercase">
                         <FiActivity className="animate-pulse" /> Live Market Feed
                     </div>
-                    <h1 className="text-5xl md:text-7xl font-black text-indigo-950 mb-4 tracking-tighter leading-none">
+                    <h1 className="text-4xl md:text-7xl font-black text-indigo-950 mb-4 tracking-tighter leading-tight md:leading-none">
                         Commodities <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-indigo-400">Hub</span>
                     </h1>
-                    <p className="text-indigo-900/60 font-medium text-lg max-w-xl">
+                    <p className="text-indigo-900/60 font-medium text-sm md:text-lg max-w-xl">
                         Monitor global energy, metals, and utility markets with real-time price tracking and volume analysis.
                     </p>
                 </div>
@@ -83,28 +83,28 @@ const Commodities: React.FC = () => {
                     <div className="bg-indigo-50 p-1.5 rounded-2xl flex items-center gap-1">
                         <button
                             onClick={() => setCurrency('INR')}
-                            className={`px-5 py-2.5 rounded-xl text-xs font-black transition-all uppercase tracking-widest ${currency === 'INR' ? 'bg-white text-indigo-600 shadow-sm' : 'text-indigo-900/40 hover:text-indigo-900'}`}
+                            className={`px-4 md:px-5 py-2 md:py-2.5 rounded-xl text-[10px] md:text-xs font-black transition-all uppercase tracking-widest ${currency === 'INR' ? 'bg-white text-indigo-600 shadow-sm' : 'text-indigo-900/40 hover:text-indigo-900'}`}
                         >
                             INR (₹)
                         </button>
                         <button
                             onClick={() => setCurrency('USD')}
-                            className={`px-5 py-2.5 rounded-xl text-xs font-black transition-all uppercase tracking-widest ${currency === 'USD' ? 'bg-white text-indigo-600 shadow-sm' : 'text-indigo-900/40 hover:text-indigo-900'}`}
+                            className={`px-4 md:px-5 py-2 md:py-2.5 rounded-xl text-[10px] md:text-xs font-black transition-all uppercase tracking-widest ${currency === 'USD' ? 'bg-white text-indigo-600 shadow-sm' : 'text-indigo-900/40 hover:text-indigo-900'}`}
                         >
                             USD ($)
                         </button>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4 w-full">
-                        <div className="bg-white/80 p-6 rounded-3xl border border-indigo-50 shadow-sm">
-                            <span className="text-[10px] font-black uppercase tracking-widest text-indigo-900/40 block mb-1">Global Volume</span>
-                            <span className="text-xl font-black text-indigo-950 font-mono">
+                    <div className="grid grid-cols-2 gap-3 md:gap-4 w-full">
+                        <div className="bg-white/80 p-4 md:p-6 rounded-3xl border border-indigo-50 shadow-sm">
+                            <span className="text-[8px] md:text-[10px] font-black uppercase tracking-widest text-indigo-900/40 block mb-1">Global Volume</span>
+                            <span className="text-sm md:text-xl font-black text-indigo-950 font-mono">
                                 {currency === 'INR' ? '₹1.24T' : '$14.9B'}
                             </span>
                         </div>
-                        <div className="bg-white/80 p-6 rounded-3xl border border-indigo-50 shadow-sm">
-                            <span className="text-[10px] font-black uppercase tracking-widest text-indigo-900/40 block mb-1">Market Sentiment</span>
-                            <span className="text-xl font-black text-emerald-600 font-mono">BULLISH</span>
+                        <div className="bg-white/80 p-4 md:p-6 rounded-3xl border border-indigo-50 shadow-sm">
+                            <span className="text-[8px] md:text-[10px] font-black uppercase tracking-widest text-indigo-900/40 block mb-1">Sentiment</span>
+                            <span className="text-sm md:text-xl font-black text-emerald-600 font-mono">BULLISH</span>
                         </div>
                     </div>
                 </div>
@@ -140,49 +140,49 @@ const Commodities: React.FC = () => {
             </div>
 
             {/* Commodity Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8">
                 {filteredCommodities.length > 0 ? (
                     filteredCommodities.map((item) => (
                         <div
                             key={item.id}
-                            className="bg-white/70 backdrop-blur-xl border border-white p-8 rounded-[2.5rem] shadow-xl shadow-indigo-100/50 hover:shadow-2xl hover:shadow-indigo-200/50 transition-all duration-500 group relative flex flex-col justify-between min-h-[320px] overflow-hidden"
+                            className="bg-white/70 backdrop-blur-xl border border-white p-5 md:p-8 rounded-[2rem] md:rounded-[2.5rem] shadow-xl shadow-indigo-100/50 hover:shadow-2xl hover:shadow-indigo-200/50 transition-all duration-500 group relative flex flex-col justify-between min-h-[280px] md:min-h-[320px] overflow-hidden"
                         >
                             <div className="absolute -top-4 -right-4 w-40 h-40 bg-indigo-50/50 rounded-full blur-3xl group-hover:bg-indigo-100/50 transition-colors" />
 
                             <div className="relative z-10">
-                                <div className="flex justify-between items-start mb-8">
-                                    <div className="flex items-center gap-4">
+                                <div className="flex justify-between items-start mb-6 md:mb-8">
+                                    <div className="flex items-center gap-3 md:gap-4">
                                         <div
-                                            className="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl shadow-inner border border-white/50"
+                                            className="w-12 h-12 md:w-14 md:h-14 rounded-2xl flex items-center justify-center text-2xl md:text-3xl shadow-inner border border-white/50"
                                             style={{ backgroundColor: `${item.color}15`, color: item.color }}
                                         >
                                             {item.icon}
                                         </div>
                                         <div>
                                             <div className="flex items-center gap-2">
-                                                <h3 className="text-2xl font-black text-indigo-950 tracking-tight">{item.name}</h3>
-                                                <span className="px-2 py-0.5 bg-indigo-50 text-indigo-400 text-[10px] font-black rounded-md border border-indigo-100/50">
+                                                <h3 className="text-xl md:text-2xl font-black text-indigo-950 tracking-tight">{item.name}</h3>
+                                                <span className="px-1.5 py-0.5 bg-indigo-50 text-indigo-400 text-[8px] md:text-[10px] font-black rounded-md border border-indigo-100/50">
                                                     {item.symbol}
                                                 </span>
                                             </div>
-                                            <p className="text-indigo-900/40 text-xs font-black uppercase tracking-widest">
+                                            <p className="text-indigo-900/40 text-[9px] md:text-xs font-black uppercase tracking-widest">
                                                 {item.category} Market
                                             </p>
                                         </div>
                                     </div>
-                                    <div className="flex flex-col items-end">
+                                    <div className="flex flex-col items-end opacity-80 md:opacity-100">
                                         <Sparkline history={item.history} color={item.change >= 0 ? '#10B981' : '#F43F5E'} />
                                     </div>
                                 </div>
 
-                                <div className="flex items-end justify-between mb-8">
+                                <div className="flex items-end justify-between mb-6 md:mb-8">
                                     <div>
-                                        <span className="text-indigo-900/40 text-[10px] font-black uppercase tracking-widest block mb-1">Last Traded Price</span>
+                                        <span className="text-indigo-900/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest block mb-1">Last Traded Price</span>
                                         <div className="flex items-baseline gap-2">
-                                            <span className="text-4xl font-black text-indigo-950 tabular-nums">
+                                            <span className="text-3xl md:text-4xl font-black text-indigo-950 tabular-nums">
                                                 {formatPrice(item.currentPrice)}
                                             </span>
-                                            <span className={`flex items-center gap-1 text-sm font-black px-2 py-1 rounded-xl ${item.change >= 0 ? 'bg-emerald-50 text-emerald-600' : 'bg-rose-50 text-rose-600'
+                                            <span className={`flex items-center gap-1 text-[10px] md:text-sm font-black px-1.5 py-0.5 md:px-2 md:py-1 rounded-lg md:rounded-xl ${item.change >= 0 ? 'bg-emerald-50 text-emerald-600' : 'bg-rose-50 text-rose-600'
                                                 }`}>
                                                 {item.change >= 0 ? <FiTrendingUp /> : <FiTrendingDown />}
                                                 {Math.abs(item.changePercent)}%
@@ -192,14 +192,14 @@ const Commodities: React.FC = () => {
                                 </div>
                             </div>
 
-                            <div className="relative z-10 grid grid-cols-2 gap-4 pt-6 border-t border-indigo-50/50">
+                            <div className="relative z-10 grid grid-cols-2 gap-4 pt-4 md:pt-6 border-t border-indigo-50/50">
                                 <div>
-                                    <span className="text-[9px] font-black text-indigo-300 uppercase tracking-widest block mb-0.5">24h Vol ({item.unit})</span>
-                                    <span className="text-sm font-black text-indigo-900/70">{item.currentVolume.toLocaleString()}</span>
+                                    <span className="text-[8px] md:text-[9px] font-black text-indigo-300 uppercase tracking-widest block mb-0.5">24h Vol ({item.unit})</span>
+                                    <span className="text-xs md:text-sm font-black text-indigo-900/70">{item.currentVolume.toLocaleString()}</span>
                                 </div>
                                 <div className="text-right">
-                                    <span className="text-[9px] font-black text-indigo-300 uppercase tracking-widest block mb-0.5">Day Range</span>
-                                    <span className="text-sm font-black text-indigo-900/70">{item.dayLow} - {item.dayHigh}</span>
+                                    <span className="text-[8px] md:text-[9px] font-black text-indigo-300 uppercase tracking-widest block mb-0.5">Day Range</span>
+                                    <span className="text-xs md:text-sm font-black text-indigo-900/70">{item.dayLow} - {item.dayHigh}</span>
                                 </div>
                             </div>
                         </div>
