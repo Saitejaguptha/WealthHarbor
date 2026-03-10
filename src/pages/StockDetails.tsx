@@ -42,57 +42,59 @@ const StockDetails: React.FC = () => {
     ];
 
     return (
-        <div className="p-8 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <div className="p-4 md:p-8 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700">
             {/* Header */}
-            <div className="flex items-center gap-4 mb-8">
-                <button
-                    onClick={() => navigate('/stocks')}
-                    className="p-3 bg-white border border-indigo-100 text-indigo-600 rounded-2xl hover:bg-indigo-50 transition-all active:scale-95"
-                >
-                    <FiArrowLeft className="text-xl" />
-                </button>
-                <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                        <span className="px-2 py-0.5 bg-indigo-600 text-white text-[10px] font-black rounded uppercase tracking-widest">
-                            {stock.symbol}
-                        </span>
-                        <span className="text-indigo-900/40 text-sm font-bold uppercase tracking-widest">
-                            {stock.sector} • {stock.marketCap}
-                        </span>
+            <div className="flex flex-col md:flex-row md:items-center gap-4 mb-6 md:mb-8">
+                <div className="flex items-center gap-4">
+                    <button
+                        onClick={() => navigate('/stocks')}
+                        className="p-3 bg-white border border-indigo-100 text-indigo-600 rounded-2xl hover:bg-indigo-50 transition-all active:scale-95 shadow-sm"
+                    >
+                        <FiArrowLeft className="text-lg md:text-xl" />
+                    </button>
+                    <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-1">
+                            <span className="px-2 py-0.5 bg-indigo-600 text-white text-[9px] md:text-[10px] font-black rounded uppercase tracking-widest">
+                                {stock.symbol}
+                            </span>
+                            <span className="text-indigo-900/40 text-[10px] md:text-sm font-bold uppercase tracking-widest truncate">
+                                {stock.sector} • {stock.marketCap}
+                            </span>
+                        </div>
+                        <h1 className="text-2xl md:text-3xl font-black text-indigo-950 tracking-tight leading-tight">{stock.name}</h1>
                     </div>
-                    <h1 className="text-3xl font-black text-indigo-950 tracking-tight">{stock.name}</h1>
                 </div>
                 <button
                     onClick={() => {
                         refreshStocks();
-                        window.location.reload(); // Quick way to re-randomize for this specific demo setup
+                        window.location.reload();
                     }}
-                    className="flex items-center gap-2 px-6 py-3 bg-indigo-50 text-indigo-600 font-bold rounded-2xl hover:bg-indigo-600 hover:text-white transition-all active:scale-95"
+                    className="flex items-center justify-center gap-2 px-6 py-3 md:py-3 bg-indigo-50 text-indigo-600 font-bold rounded-xl md:rounded-2xl hover:bg-indigo-600 hover:text-white transition-all active:scale-95 shadow-sm text-sm"
                 >
-                    <FiRefreshCw />
+                    <FiRefreshCw className="shrink-0" />
                     Re-Analyze
                 </button>
             </div>
 
             {/* Main Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                <div className="bg-gradient-to-br from-indigo-600 to-indigo-800 p-8 rounded-[2rem] text-white shadow-2xl shadow-indigo-200">
-                    <p className="text-indigo-100 font-bold uppercase tracking-widest text-xs mb-2">Current Price</p>
-                    <div className="flex items-baseline gap-4">
-                        <span className="text-6xl font-black">${stock.price}</span>
-                        <div className={`flex items-center gap-1 font-bold text-lg ${stock.change >= 0 ? 'text-emerald-300' : 'text-rose-300'}`}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 mb-6 md:mb-8">
+                <div className="bg-gradient-to-br from-indigo-600 to-indigo-800 p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] text-white shadow-2xl shadow-indigo-100">
+                    <p className="text-indigo-100/60 font-bold uppercase tracking-widest text-[10px] md:text-xs mb-2">Current Price</p>
+                    <div className="flex items-baseline gap-3 md:gap-4 flex-wrap">
+                        <span className="text-4xl md:text-6xl font-black">${stock.price}</span>
+                        <div className={`flex items-center gap-1 font-bold text-base md:text-lg ${stock.change >= 0 ? 'text-emerald-300' : 'text-rose-300'}`}>
                             {stock.change >= 0 ? <FiTrendingUp /> : <FiTrendingDown />}
                             <span>{stock.change >= 0 ? '+' : ''}{stock.changePercent}%</span>
                         </div>
                     </div>
                 </div>
 
-                <div className="bg-white p-8 rounded-[2rem] border border-indigo-50 shadow-xl shadow-indigo-50 flex flex-col justify-center">
-                    <div className="flex justify-between items-center mb-4">
-                        <span className="text-indigo-950 font-black text-xl">Quick Overview</span>
-                        <FiActivity className="text-indigo-200 text-3xl" />
+                <div className="bg-white/70 backdrop-blur-sm p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] border border-indigo-50 shadow-xl shadow-indigo-50 flex flex-col justify-center">
+                    <div className="flex justify-between items-center mb-3 md:mb-4">
+                        <span className="text-indigo-950 font-black text-lg md:text-xl">Quick Overview</span>
+                        <FiActivity className="text-indigo-200 text-2xl md:text-3xl" />
                     </div>
-                    <p className="text-indigo-900/60 leading-relaxed font-medium text-sm">
+                    <p className="text-indigo-900/60 leading-relaxed font-medium text-xs md:text-sm">
                         {stock.name} is a leading player in the {stock.sector} sector with a {stock.marketCap} valuation.
                         Currently trading at ${stock.price}, the stock has shown a {stock.changePercent}% movement in the latest session.
                     </p>
@@ -100,31 +102,33 @@ const StockDetails: React.FC = () => {
             </div>
 
             {/* Price History Chart */}
-            <div className="mb-12">
-                <PriceHistoryChart
-                    history={stock.history}
-                    color={stock.change >= 0 ? "#10B981" : "#F43F5E"}
-                    title={`${stock.symbol} Price History`}
-                />
+            <div className="mb-8 md:mb-12">
+                <div className="bg-white/40 backdrop-blur-md rounded-[1.5rem] md:rounded-[2.5rem] p-0 border border-white/50 shadow-sm overflow-hidden">
+                    <PriceHistoryChart
+                        history={stock.history}
+                        color={stock.change >= 0 ? "#10B981" : "#F43F5E"}
+                        title={`${stock.symbol} Price History`}
+                    />
+                </div>
             </div>
 
             {/* Metrics Grid */}
-            <h2 className="text-2xl font-black text-indigo-950 mb-6 tracking-tight flex items-center gap-3">
+            <h2 className="text-xl md:text-2xl font-black text-indigo-950 mb-4 md:mb-6 tracking-tight flex items-center gap-3">
                 Financial Metrics
                 <div className="h-1 flex-1 bg-indigo-50 rounded-full"></div>
             </h2>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 mb-10">
                 {metrics.map((metric, idx) => (
                     <div
                         key={idx}
-                        className="bg-white/50 backdrop-blur-sm border border-indigo-50 p-6 rounded-3xl hover:border-indigo-200 hover:shadow-lg transition-all group relative overflow-hidden"
+                        className="bg-white p-4 md:p-6 rounded-[1.25rem] md:rounded-3xl border border-indigo-50 hover:border-indigo-200 hover:shadow-lg transition-all group relative overflow-hidden"
                     >
-                        <div className="text-indigo-400 mb-3 text-xl group-hover:text-indigo-600 transition-colors">
+                        <div className="text-indigo-400 mb-2 md:mb-3 text-lg md:text-xl group-hover:text-indigo-600 transition-colors">
                             {metric.icon}
                         </div>
-                        <p className="text-indigo-900/40 text-[10px] font-black uppercase tracking-widest mb-1">{metric.label}</p>
-                        <p className="text-xl font-bold text-indigo-950">
+                        <p className="text-indigo-900/40 text-[8px] md:text-[10px] font-black uppercase tracking-widest mb-1">{metric.label}</p>
+                        <p className="text-lg md:text-xl font-bold text-indigo-950 truncate">
                             {metric.value}{metric.suffix}
                         </p>
                         <MetricInfo metricKey={metric.label} />

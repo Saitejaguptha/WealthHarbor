@@ -8,6 +8,7 @@ const Profile: React.FC = () => {
     // Profile State
     const [profile, setProfile] = useState({
         username: 'Saiteja Guptha',
+        email: 'saiteja@example.com',
         dob: '1995-05-15',
     });
 
@@ -68,6 +69,20 @@ const Profile: React.FC = () => {
                                     onChange={(e) => setProfile({ ...profile, username: e.target.value })}
                                     className="w-full pl-9 md:pl-12 pr-4 py-3 md:py-4 bg-white border-2 border-indigo-50 rounded-xl md:rounded-2xl focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all font-semibold text-indigo-950 text-xs md:text-base min-w-0"
                                     placeholder="Enter username"
+                                />
+                            </div>
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="text-[9px] md:text-sm font-black text-indigo-900/40 uppercase tracking-widest ml-1">Email Address</label>
+                            <div className="relative group">
+                                <div className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 text-indigo-300 group-focus-within:text-indigo-600 transition-colors text-xs md:text-base">@</div>
+                                <input
+                                    type="email"
+                                    value={profile.email}
+                                    onChange={(e) => setProfile({ ...profile, email: e.target.value })}
+                                    className="w-full pl-9 md:pl-12 pr-4 py-3 md:py-4 bg-white border-2 border-indigo-50 rounded-xl md:rounded-2xl focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all font-semibold text-indigo-950 text-xs md:text-base min-w-0"
+                                    placeholder="Enter email"
                                 />
                             </div>
                         </div>

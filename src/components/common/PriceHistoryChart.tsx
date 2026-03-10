@@ -67,10 +67,22 @@ const PriceHistoryChart: React.FC<PriceHistoryChartProps> = ({
             <div style={{ height: `${height}px` }} className="relative">
                 <svg
                     viewBox={`0 0 ${VIEW_WIDTH} ${VIEW_HEIGHT}`}
-                    className="w-full h-full cursor-crosshair"
+                    className="w-full h-full cursor-crosshair touch-none"
                     preserveAspectRatio="none"
                     onMouseMove={handleMouseMove}
                     onMouseLeave={() => setHoveredPoint(null)}
+                    onTouchMove={(e) => {
+                        const touch = e.touches[0];
+                        const rect = e.currentTarget.getBoundingClientRect();
+                        const x = ((touch.clientX - rect.left) / rect.width) * VIEW_WIDTH;
+                        const index = Math.round(((x - PADDING) / (VIEW_WIDTH - 2 * PADDING)) * (history.length - 1));
+                        if (index >= 0 && index < history.length) {
+                            setHoveredPoint(history[index]);
+                            const pointX = (index / (history.length - 1)) * (VIEW_WIDTH - 2 * PADDING) + PADDING;
+                            setMousePos({ x: pointX, y: 0 });
+                        }
+                    }}
+                    onTouchEnd={() => setHoveredPoint(null)}
                 >
                     <defs>
                         <linearGradient id={`grad-chart`} x1="0" y1="0" x2="0" y2="1">
