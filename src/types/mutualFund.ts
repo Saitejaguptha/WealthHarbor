@@ -1,4 +1,6 @@
-export type MutualFundSector = 'Small Cap' | 'Large Cap' | 'Mid Cap' | 'Micro Cap' | 'Flexi Cap' | 'Gold' | 'Silver' | 'Debt' | 'Hybrid' | 'Index';
+import type { PriceHistoryPoint } from './history';
+
+export type MutualFundSector = 'Large Cap' | 'Mid Cap' | 'Small Cap' | 'Micro Cap' | 'Flexi Cap' | 'Gold' | 'Silver' | 'Debt' | 'Hybrid' | 'Index';
 
 export interface MutualFund {
     id: string;
@@ -25,4 +27,5 @@ export interface MutualFund {
     taxImplication: string;
     fundManager: string;
     description: string;
+    history: PriceHistoryPoint[];
 }

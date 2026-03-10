@@ -2,6 +2,8 @@ import React, { useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { FiArrowLeft, FiPieChart, FiActivity, FiShield, FiBriefcase, FiPercent, FiInfo, FiUser } from 'react-icons/fi';
 import { getMutualFunds } from '../utils/mutualFundData';
+import PriceHistoryChart from '../components/common/PriceHistoryChart';
+import MetricInfo from '../components/common/MetricInfo';
 
 const MutualFundDetails: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -34,7 +36,7 @@ const MutualFundDetails: React.FC = () => {
                     </Link>
                     <div>
                         <div className="flex items-center gap-2 mb-1">
-                            <span className="px-3 py-1 bg-indigo-50 text-indigo-600 text-[10px] font-black rounded-lg uppercase tracking-widest">
+                            <span className="px-3 py-1 bg-indigo-600 text-white text-[10px] font-black rounded-lg uppercase tracking-widest">
                                 {fund.sector}
                             </span>
                             <span className="text-indigo-900/40 text-sm font-bold uppercase tracking-widest">{fund.fundHouse}</span>
@@ -56,6 +58,15 @@ const MutualFundDetails: React.FC = () => {
                         </span>
                     </div>
                 </div>
+            </div>
+
+            {/* Price History Chart */}
+            <div className="mb-8">
+                <PriceHistoryChart
+                    history={fund.history}
+                    color={fund.return1Y >= 0 ? "#10B981" : "#F43F5E"}
+                    title={`${fund.name.split(' ')[0]} Performance History`}
+                />
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -103,17 +114,19 @@ const MutualFundDetails: React.FC = () => {
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div className="p-6 bg-indigo-50/50 rounded-3xl border border-indigo-50">
+                            <div className="p-6 bg-indigo-50/50 rounded-3xl border border-indigo-50 relative overflow-hidden">
                                 <FiActivity className="text-indigo-400 mb-3 text-xl" />
                                 <p className="text-indigo-900/40 text-[10px] font-black uppercase tracking-widest mb-1">Alpha</p>
                                 <p className="text-2xl font-black text-indigo-950">{fund.alpha > 0 ? '+' : ''}{fund.alpha}</p>
                                 <p className="text-[10px] text-indigo-900/40 mt-1 italic">Excess return over benchmark</p>
+                                <MetricInfo metricKey="Alpha" />
                             </div>
-                            <div className="p-6 bg-indigo-50/50 rounded-3xl border border-indigo-50">
+                            <div className="p-6 bg-indigo-50/50 rounded-3xl border border-indigo-50 relative overflow-hidden">
                                 <FiShield className="text-indigo-400 mb-3 text-xl" />
                                 <p className="text-indigo-900/40 text-[10px] font-black uppercase tracking-widest mb-1">Beta</p>
                                 <p className="text-2xl font-black text-indigo-950">{fund.beta}</p>
                                 <p className="text-[10px] text-indigo-900/40 mt-1 italic">Volatility relative to market</p>
+                                <MetricInfo metricKey="Beta" />
                             </div>
                             <div className="p-6 bg-indigo-50/50 rounded-3xl border border-indigo-50">
                                 <FiUser className="text-indigo-400 mb-3 text-xl" />
@@ -153,9 +166,10 @@ const MutualFundDetails: React.FC = () => {
                                 <span className="text-white/40 text-xs font-bold uppercase tracking-widest">Fund Size</span>
                                 <span className="text-xl font-black">₹{fund.aum}</span>
                             </div>
-                            <div className="flex justify-between items-center pb-4 border-b border-white/10">
+                            <div className="flex justify-between items-center pb-4 border-b border-white/10 relative">
                                 <span className="text-white/40 text-xs font-bold uppercase tracking-widest">Expense Ratio</span>
                                 <span className="text-xl font-black">{fund.expenseRatio}%</span>
+                                <MetricInfo metricKey="Expense Ratio" />
                             </div>
                             <div className="flex justify-between items-center">
                                 <span className="text-white/40 text-xs font-bold uppercase tracking-widest">Rating</span>
@@ -179,9 +193,10 @@ const MutualFundDetails: React.FC = () => {
                         </h3>
 
                         <div className="space-y-6">
-                            <div>
+                            <div className="relative overflow-hidden group">
                                 <p className="text-indigo-900/40 text-[9px] font-black uppercase tracking-widest mb-1 underline decoration-indigo-200 decoration-2 underline-offset-4">Exit Load</p>
                                 <p className="text-sm font-bold text-indigo-950">{fund.exitLoad}</p>
+                                <MetricInfo metricKey="Exit Load" />
                             </div>
                             <div>
                                 <p className="text-indigo-900/40 text-[9px] font-black uppercase tracking-widest mb-1 underline decoration-indigo-200 decoration-2 underline-offset-4">Stamp Duty</p>

@@ -1,3 +1,5 @@
+import type { PriceHistoryPoint } from './history';
+
 export type MarketCap = 'High Cap' | 'Mid Cap' | 'Small Cap' | 'Micro Cap';
 
 export interface Stock {
@@ -22,4 +24,5 @@ export interface Stock {
     debtToEquity: number;
     fiftyTwoWeekHigh: number;
     fiftyTwoWeekLow: number;
+    history: PriceHistoryPoint[];
 }

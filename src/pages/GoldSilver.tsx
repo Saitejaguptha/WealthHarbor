@@ -38,46 +38,95 @@ const GoldSilver: React.FC = () => {
         const max = Math.max(...prices);
         const range = max - min;
         const VIEW_WIDTH = 800;
-        const VIEW_HEIGHT = 250;
+        const VIEW_HEIGHT = 200;
         const PADDING = 20;
+
+        const [hoveredPoint, setHoveredPoint] = useState<MetalPricePoint | null>(null);
+        const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
         const points = useMemo(() => {
             return history.map((h, i) => {
                 const x = (i / (history.length - 1)) * (VIEW_WIDTH - 2 * PADDING) + PADDING;
-                const y = VIEW_HEIGHT - PADDING - ((h.price - min) / range) * (VIEW_HEIGHT - 2 * PADDING);
+                const y = VIEW_HEIGHT - PADDING - ((h.price - min) / (range || 1)) * (VIEW_HEIGHT - 2 * PADDING);
                 return `${x},${y}`;
             }).join(' ');
         }, [history, min, range]);
 
+        const handleMouseMove = (e: React.MouseEvent<SVGSVGElement>) => {
+            const svg = e.currentTarget;
+            const rect = svg.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * VIEW_WIDTH;
+
+            const index = Math.round(((x - PADDING) / (VIEW_WIDTH - 2 * PADDING)) * (history.length - 1));
+            if (index >= 0 && index < history.length) {
+                setHoveredPoint(history[index]);
+                const pointX = (index / (history.length - 1)) * (VIEW_WIDTH - 2 * PADDING) + PADDING;
+                setMousePos({ x: pointX, y: 0 });
+            }
+        };
+
         return (
-            <div className="relative w-full h-[200px] md:h-[300px] mt-6 bg-indigo-50/20 rounded-[2rem] p-4 border border-indigo-50 overflow-hidden group/chart">
-                <svg
-                    viewBox={`0 0 ${VIEW_WIDTH} ${VIEW_HEIGHT}`}
-                    className="w-full h-full drop-shadow-2xl"
-                    preserveAspectRatio="none"
-                >
-                    <defs>
-                        <linearGradient id={`grad-${color.replace('#', '')}`} x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stopColor={color} stopOpacity="0.4" />
-                            <stop offset="100%" stopColor={color} stopOpacity="0" />
-                        </linearGradient>
-                    </defs>
-                    <path
-                        d={`M ${PADDING},${VIEW_HEIGHT} L ${points} L ${VIEW_WIDTH - PADDING},${VIEW_HEIGHT} Z`}
-                        fill={`url(#grad-${color.replace('#', '')})`}
-                        className="transition-all duration-1000"
-                    />
-                    <polyline
-                        points={points}
-                        fill="none"
-                        stroke={color}
-                        strokeWidth="3"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="transition-all duration-1000"
-                    />
-                </svg>
-                <div className="absolute top-4 left-6 text-[9px] font-black uppercase tracking-widest text-indigo-900/20">30D PERFORMANCE HISTORICAL CHANNEL</div>
+            <div className="flex flex-col gap-4 mt-6">
+                <div className="flex justify-between items-end px-2">
+                    <div className="text-[9px] font-black uppercase tracking-widest text-indigo-900/20">30D PERFORMANCE HISTORICAL CHANNEL</div>
+                    {hoveredPoint && (
+                        <div className="text-right">
+                            <p className="text-[10px] font-black text-indigo-400 uppercase tracking-widest leading-none mb-1">{hoveredPoint.date}</p>
+                            <p className="text-lg md:text-2xl font-black text-indigo-950 leading-none">{formatPrice(hoveredPoint.price)}</p>
+                        </div>
+                    )}
+                </div>
+
+                <div className="relative w-full h-[180px] md:h-[250px] bg-indigo-50/20 rounded-[2rem] p-4 border border-indigo-50 overflow-hidden group/chart">
+                    <svg
+                        viewBox={`0 0 ${VIEW_WIDTH} ${VIEW_HEIGHT}`}
+                        className="w-full h-full cursor-crosshair"
+                        preserveAspectRatio="none"
+                        onMouseMove={handleMouseMove}
+                        onMouseLeave={() => setHoveredPoint(null)}
+                    >
+                        <defs>
+                            <linearGradient id={`grad-${color.replace('#', '')}`} x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stopColor={color} stopOpacity="0.3" />
+                                <stop offset="100%" stopColor={color} stopOpacity="0" />
+                            </linearGradient>
+                        </defs>
+                        <path
+                            d={`M ${PADDING},${VIEW_HEIGHT} L ${points} L ${VIEW_WIDTH - PADDING},${VIEW_HEIGHT} Z`}
+                            fill={`url(#grad-${color.replace('#', '')})`}
+                        />
+                        <polyline
+                            points={points}
+                            fill="none"
+                            stroke={color}
+                            strokeWidth="3"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        />
+
+                        {hoveredPoint && (
+                            <>
+                                <line
+                                    x1={mousePos.x}
+                                    y1={0}
+                                    x2={mousePos.x}
+                                    y2={VIEW_HEIGHT}
+                                    stroke={color}
+                                    strokeWidth="1"
+                                    strokeDasharray="4 4"
+                                />
+                                <circle
+                                    cx={mousePos.x}
+                                    cy={VIEW_HEIGHT - PADDING - ((hoveredPoint.price - min) / (range || 1)) * (VIEW_HEIGHT - 2 * PADDING)}
+                                    r="6"
+                                    fill={color}
+                                    stroke="white"
+                                    strokeWidth="3"
+                                />
+                            </>
+                        )}
+                    </svg>
+                </div>
             </div>
         );
     };

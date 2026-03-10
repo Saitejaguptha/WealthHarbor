@@ -1,9 +1,11 @@
 import React, { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FiTrendingUp, FiTrendingDown, FiSearch, FiActivity, FiGlobe } from 'react-icons/fi';
 import { getCommodities } from '../utils/commodityData';
 
 
 const Commodities: React.FC = () => {
+    const navigate = useNavigate();
     const [searchTerm, setSearchTerm] = useState('');
     const [currency, setCurrency] = useState<'INR' | 'USD'>('INR');
     const [selectedCategory, setSelectedCategory] = useState<string>('All');
@@ -151,7 +153,7 @@ const Commodities: React.FC = () => {
                     filteredCommodities.map((item) => (
                         <div
                             key={item.id}
-                            className="bg-white/70 backdrop-blur-xl border border-white p-5 md:p-8 rounded-[2rem] md:rounded-[2.5rem] shadow-xl shadow-indigo-100/50 hover:shadow-2xl hover:shadow-indigo-200/50 transition-all duration-500 group relative flex flex-col justify-between min-h-[280px] md:min-h-[320px] overflow-hidden"
+                            className="bg-white/70 backdrop-blur-xl border border-white p-5 md:p-8 rounded-[2rem] md:rounded-[2.5rem] shadow-xl shadow-indigo-100/50 hover:shadow-2xl hover:shadow-indigo-200/50 transition-all duration-500 group relative flex flex-col justify-between min-h-[300px] md:min-h-[350px] overflow-hidden"
                         >
                             <div className="absolute -top-4 -right-4 w-40 h-40 bg-indigo-50/50 rounded-full blur-3xl group-hover:bg-indigo-100/50 transition-colors" />
 
@@ -181,7 +183,7 @@ const Commodities: React.FC = () => {
                                     </div>
                                 </div>
 
-                                <div className="flex items-end justify-between mb-6 md:mb-8">
+                                <div className="flex items-end justify-between mb-6">
                                     <div>
                                         <span className="text-indigo-900/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest block mb-1">Last Traded Price</span>
                                         <div className="flex items-baseline gap-2">
@@ -198,15 +200,23 @@ const Commodities: React.FC = () => {
                                 </div>
                             </div>
 
-                            <div className="relative z-10 grid grid-cols-2 gap-4 pt-4 md:pt-6 border-t border-indigo-50/50">
-                                <div>
-                                    <span className="text-[8px] md:text-[9px] font-black text-indigo-300 uppercase tracking-widest block mb-0.5">24h Vol ({item.unit})</span>
-                                    <span className="text-xs md:text-sm font-black text-indigo-900/70">{item.currentVolume.toLocaleString()}</span>
+                            <div className="relative z-10 flex flex-col gap-4">
+                                <div className="grid grid-cols-2 gap-4 py-4 border-t border-indigo-50/50">
+                                    <div>
+                                        <span className="text-[8px] md:text-[9px] font-black text-indigo-300 uppercase tracking-widest block mb-0.5">24h Vol ({item.unit})</span>
+                                        <span className="text-xs md:text-sm font-black text-indigo-900/70">{item.currentVolume.toLocaleString()}</span>
+                                    </div>
+                                    <div className="text-right">
+                                        <span className="text-[8px] md:text-[9px] font-black text-indigo-300 uppercase tracking-widest block mb-0.5">Day Range</span>
+                                        <span className="text-xs md:text-sm font-black text-indigo-900/70">{item.dayLow} - {item.dayHigh}</span>
+                                    </div>
                                 </div>
-                                <div className="text-right">
-                                    <span className="text-[8px] md:text-[9px] font-black text-indigo-300 uppercase tracking-widest block mb-0.5">Day Range</span>
-                                    <span className="text-xs md:text-sm font-black text-indigo-900/70">{item.dayLow} - {item.dayHigh}</span>
-                                </div>
+                                <button
+                                    onClick={() => navigate(`/commodities/${item.id}`)}
+                                    className="w-full py-3 bg-indigo-600 text-white text-xs md:text-sm font-black rounded-xl hover:bg-indigo-700 transition-all active:scale-95 shadow-lg shadow-indigo-100 hover:shadow-indigo-200 uppercase tracking-widest"
+                                >
+                                    Analyze Data
+                                </button>
                             </div>
                         </div>
                     ))

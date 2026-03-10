@@ -1,4 +1,5 @@
 import type { MutualFund, MutualFundSector } from '../types/mutualFund';
+import { generatePriceHistory } from './historyUtils';
 
 export const MF_SECTORS: MutualFundSector[] = [
     'Large Cap', 'Mid Cap', 'Small Cap', 'Micro Cap', 'Flexi Cap', 'Gold', 'Silver', 'Debt', 'Hybrid', 'Index'
@@ -50,7 +51,8 @@ export const generateRandomMFs = (count: number): MutualFund[] => {
             stampDuty: '0.005% (One-time on investment)',
             taxImplication: sector === 'Debt' ? 'Taxed as per income slab' : '10% on gains > 1L (LTCG)',
             fundManager: ['John Doe', 'Sarah Smith', 'Aman Gupta', 'Elena Rodriguez'][Math.floor(Math.random() * 4)],
-            description: `A highly diversified ${sector.toLowerCase()} mutual fund aimed at providing long-term capital appreciation. Managed by professionals at ${house}, this fund focuses on high-growth assets.`
+            description: `A highly diversified ${sector.toLowerCase()} mutual fund aimed at providing long-term capital appreciation. Managed by professionals at ${house}, this fund focuses on high-growth assets.`,
+            history: generatePriceHistory(nav)
         };
     });
 };

@@ -9,6 +9,7 @@ import ETFs from './pages/ETFs';
 import ETFDetails from './pages/ETFDetails';
 import GoldSilver from './pages/GoldSilver';
 import Commodities from './pages/Commodities';
+import CommodityDetails from './pages/CommodityDetails';
 import Profile from './pages/Profile';
 import ScrollToTop from './components/common/ScrollToTop';
 
@@ -41,7 +42,10 @@ function App() {
             <Route path=":id" element={<ETFDetails />} />
           </Route>
           <Route path="gold-silver" element={<GoldSilver />} />
-          <Route path="commodities" element={<Commodities />} />
+          <Route path="commodities">
+            <Route index element={<Commodities />} />
+            <Route path=":id" element={<CommodityDetails />} />
+          </Route>
           <Route path="profile" element={<Profile />} />
           <Route path="settings" element={<PagePlaceholder title="Settings" />} />
         </Route>

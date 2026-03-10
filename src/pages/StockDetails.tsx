@@ -5,6 +5,8 @@ import {
     FiActivity, FiTarget, FiDollarSign, FiBarChart2, FiAward, FiRefreshCw
 } from 'react-icons/fi';
 import { getStockBySymbol, refreshStocks } from '../utils/stockData';
+import PriceHistoryChart from '../components/common/PriceHistoryChart';
+import MetricInfo from '../components/common/MetricInfo';
 
 const StockDetails: React.FC = () => {
     const { symbol } = useParams<{ symbol: string }>();
@@ -73,7 +75,7 @@ const StockDetails: React.FC = () => {
             </div>
 
             {/* Main Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                 <div className="bg-gradient-to-br from-indigo-600 to-indigo-800 p-8 rounded-[2rem] text-white shadow-2xl shadow-indigo-200">
                     <p className="text-indigo-100 font-bold uppercase tracking-widest text-xs mb-2">Current Price</p>
                     <div className="flex items-baseline gap-4">
@@ -90,11 +92,20 @@ const StockDetails: React.FC = () => {
                         <span className="text-indigo-950 font-black text-xl">Quick Overview</span>
                         <FiActivity className="text-indigo-200 text-3xl" />
                     </div>
-                    <p className="text-indigo-900/60 leading-relaxed font-medium">
+                    <p className="text-indigo-900/60 leading-relaxed font-medium text-sm">
                         {stock.name} is a leading player in the {stock.sector} sector with a {stock.marketCap} valuation.
                         Currently trading at ${stock.price}, the stock has shown a {stock.changePercent}% movement in the latest session.
                     </p>
                 </div>
+            </div>
+
+            {/* Price History Chart */}
+            <div className="mb-12">
+                <PriceHistoryChart
+                    history={stock.history}
+                    color={stock.change >= 0 ? "#10B981" : "#F43F5E"}
+                    title={`${stock.symbol} Price History`}
+                />
             </div>
 
             {/* Metrics Grid */}
@@ -107,7 +118,7 @@ const StockDetails: React.FC = () => {
                 {metrics.map((metric, idx) => (
                     <div
                         key={idx}
-                        className="bg-white/50 backdrop-blur-sm border border-indigo-50 p-6 rounded-3xl hover:border-indigo-200 hover:shadow-lg transition-all group"
+                        className="bg-white/50 backdrop-blur-sm border border-indigo-50 p-6 rounded-3xl hover:border-indigo-200 hover:shadow-lg transition-all group relative overflow-hidden"
                     >
                         <div className="text-indigo-400 mb-3 text-xl group-hover:text-indigo-600 transition-colors">
                             {metric.icon}
@@ -116,6 +127,7 @@ const StockDetails: React.FC = () => {
                         <p className="text-xl font-bold text-indigo-950">
                             {metric.value}{metric.suffix}
                         </p>
+                        <MetricInfo metricKey={metric.label} />
                     </div>
                 ))}
             </div>

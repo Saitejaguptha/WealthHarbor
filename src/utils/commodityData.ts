@@ -42,6 +42,7 @@ const COMMODITY_CONFIGS = [
 ] as const;
 
 export const getCommodities = (): CommodityData[] => {
+    // We should ideally cache this for the current session to keep history consistent
     return COMMODITY_CONFIGS.map(config => {
         const history = generateCommodityHistory(config.basePrice, config.baseVolume);
         const latest = history[history.length - 1];
@@ -62,4 +63,17 @@ export const getCommodities = (): CommodityData[] => {
             history
         };
     });
+};
+
+let cachedCommodities: CommodityData[] | null = null;
+
+export const getAllCommodities = () => {
+    if (!cachedCommodities) {
+        cachedCommodities = getCommodities();
+    }
+    return cachedCommodities;
+};
+
+export const getCommodityById = (id: string) => {
+    return getAllCommodities().find(c => c.id === id);
 };

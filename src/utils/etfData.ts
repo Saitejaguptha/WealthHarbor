@@ -1,4 +1,5 @@
 import type { ETF, ETFSector, ETFMarketCap } from '../types/etf';
+import { generatePriceHistory } from './historyUtils';
 
 export const ETF_SECTORS: ETFSector[] = [
     'Technology', 'Healthcare', 'Financials', 'Energy', 'Consumer Discretionary',
@@ -37,7 +38,8 @@ export const generateRandomETFs = (count: number): ETF[] => {
             aum: (Math.random() * 10 + 1).toFixed(1) + 'k Cr',
             avgVolume: (Math.random() * 5 + 0.1).toFixed(1) + 'M',
             rating: Math.floor(Math.random() * 5) + 1,
-            description: `${house} ${sector} ETF is designed to track the performance of its underlying ${sector.toLowerCase()} benchmark with high precision and low costs. It offers investors exposure to a diversified basket of securities with deep liquidity.`
+            description: `${house} ${sector} ETF is designed to track the performance of its underlying ${sector.toLowerCase()} benchmark with high precision and low costs. It offers investors exposure to a diversified basket of securities with deep liquidity.`,
+            history: generatePriceHistory(price)
         };
     });
 };

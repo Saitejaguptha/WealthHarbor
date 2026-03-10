@@ -1,4 +1,5 @@
 import type { Stock, MarketCap } from '../types/stock';
+import { generatePriceHistory } from './historyUtils';
 
 export const SECTORS = [
     'Information Technology', 'Healthcare', 'Finance', 'Utilities', 'Real Estate',
@@ -37,7 +38,8 @@ export const generateRandomStocks = (count: number): Stock[] => {
             roce: parseFloat((10 + Math.random() * 40).toFixed(1)),
             debtToEquity: parseFloat(Math.random().toFixed(2)),
             fiftyTwoWeekHigh: parseFloat((price * (1 + Math.random() * 0.3)).toFixed(2)),
-            fiftyTwoWeekLow: parseFloat((price * (1 - Math.random() * 0.3)).toFixed(2))
+            fiftyTwoWeekLow: parseFloat((price * (1 - Math.random() * 0.3)).toFixed(2)),
+            history: generatePriceHistory(price)
         };
     });
 };

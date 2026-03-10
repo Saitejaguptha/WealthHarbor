@@ -2,6 +2,8 @@ import React, { useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { FiArrowLeft, FiActivity, FiPieChart, FiInfo, FiBriefcase, FiZap, FiBarChart2 } from 'react-icons/fi';
 import { getETFs } from '../utils/etfData';
+import PriceHistoryChart from '../components/common/PriceHistoryChart';
+import MetricInfo from '../components/common/MetricInfo';
 
 const ETFDetails: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -34,7 +36,7 @@ const ETFDetails: React.FC = () => {
                     </Link>
                     <div>
                         <div className="flex items-center gap-2 mb-1">
-                            <span className="px-3 py-1 bg-indigo-50 text-indigo-600 text-[10px] font-black rounded-lg uppercase tracking-widest">
+                            <span className="px-3 py-1 bg-indigo-600 text-white text-[10px] font-black rounded-lg uppercase tracking-widest">
                                 {etf.symbol}
                             </span>
                             <span className="text-indigo-900/40 text-sm font-bold uppercase tracking-widest">{etf.fundHouse}</span>
@@ -58,6 +60,15 @@ const ETFDetails: React.FC = () => {
                 </div>
             </div>
 
+            {/* Price History Chart */}
+            <div className="mb-8">
+                <PriceHistoryChart
+                    history={etf.history}
+                    color={etf.change >= 0 ? "#10B981" : "#F43F5E"}
+                    title={`${etf.symbol} Price History`}
+                />
+            </div>
+
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 {/* Main Analysis Column */}
                 <div className="lg:col-span-2 space-y-8">
@@ -71,11 +82,12 @@ const ETFDetails: React.FC = () => {
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div className="p-6 bg-indigo-50/50 rounded-3xl border border-indigo-50">
+                            <div className="p-6 bg-indigo-50/50 rounded-3xl border border-indigo-50 relative overflow-hidden">
                                 <FiZap className="text-indigo-400 mb-3 text-xl" />
                                 <p className="text-indigo-900/40 text-[10px] font-black uppercase tracking-widest mb-1">Tracking Error</p>
                                 <p className="text-3xl font-black text-indigo-950">{etf.trackingError}%</p>
                                 <p className="text-[10px] text-indigo-900/40 mt-1 italic">Efficiency in following the index</p>
+                                <MetricInfo metricKey="Tracking Error" />
                             </div>
                             <div className="p-6 bg-indigo-50/50 rounded-3xl border border-indigo-50">
                                 <FiActivity className="text-indigo-400 mb-3 text-xl" />
@@ -111,9 +123,10 @@ const ETFDetails: React.FC = () => {
                                 <span className="text-white/40 text-xs font-bold uppercase tracking-widest">AUM</span>
                                 <span className="text-xl font-black">₹{etf.aum}</span>
                             </div>
-                            <div className="flex justify-between items-center pb-4 border-b border-white/10">
+                            <div className="flex justify-between items-center pb-4 border-b border-white/10 relative">
                                 <span className="text-white/40 text-xs font-bold uppercase tracking-widest">Expense Ratio</span>
                                 <span className="text-xl font-black">{etf.expenseRatio}%</span>
+                                <MetricInfo metricKey="Expense Ratio" />
                             </div>
                             <div className="flex justify-between items-center pb-4 border-b border-white/10">
                                 <span className="text-white/40 text-xs font-bold uppercase tracking-widest">Rating</span>
