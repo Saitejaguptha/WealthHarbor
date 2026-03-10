@@ -35,12 +35,18 @@ const Commodities: React.FC = () => {
         const min = Math.min(...prices);
         const max = Math.max(...prices);
         const range = max - min;
-        const width = 120;
-        const height = 40;
+        const [width, setWidth] = useState(window.innerWidth < 640 ? 80 : 120);
+        const height = 30;
+
+        React.useEffect(() => {
+            const handleResize = () => setWidth(window.innerWidth < 640 ? 80 : 120);
+            window.addEventListener('resize', handleResize);
+            return () => window.removeEventListener('resize', handleResize);
+        }, []);
 
         const points = history.map((h, i) => {
             const x = (i / (history.length - 1)) * width;
-            const y = height - ((h.price - min) / range) * height;
+            const y = height - ((h.price - min) / (range || 1)) * height;
             return `${x},${y}`;
         }).join(' ');
 
@@ -49,7 +55,7 @@ const Commodities: React.FC = () => {
                 <polyline
                     fill="none"
                     stroke={color}
-                    strokeWidth="2.5"
+                    strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     points={points}
@@ -60,22 +66,22 @@ const Commodities: React.FC = () => {
     };
 
     return (
-        <div className="p-3 md:p-10 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-1000 space-y-6 md:space-y-12">
+        <div className="p-3 md:p-10 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-1000 space-y-4 md:space-y-12">
             {/* Header Section */}
-            <div className="bg-white/40 backdrop-blur-3xl border border-white/50 p-5 md:p-12 rounded-[2rem] md:rounded-[3.5rem] shadow-2xl shadow-indigo-100/30 flex flex-col xl:flex-row items-center justify-between gap-6 md:gap-8 relative overflow-hidden group">
-                <div className="absolute top-0 right-0 p-12 opacity-[0.03] scale-150 rotate-12 group-hover:rotate-0 transition-transform duration-1000">
-                    <FiGlobe className="text-[12rem] text-indigo-950" />
+            <div className="bg-white/40 backdrop-blur-3xl border border-white/50 p-4 md:p-12 rounded-[1.5rem] md:rounded-[3.5rem] shadow-2xl shadow-indigo-100/30 flex flex-col xl:flex-row items-center justify-between gap-4 md:gap-8 relative overflow-hidden group">
+                <div className="absolute top-0 right-0 p-8 md:p-12 opacity-[0.03] scale-100 md:scale-150 rotate-12 group-hover:rotate-0 transition-transform duration-1000">
+                    <FiGlobe className="text-[8rem] md:text-[12rem] text-indigo-950" />
                 </div>
 
-                <div className="text-center xl:text-left relative z-10">
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-indigo-50 text-indigo-600 text-[10px] md:text-xs font-black rounded-full mb-4 md:mb-6 tracking-widest uppercase">
-                        <FiActivity className="animate-pulse" /> Live Market Feed
+                <div className="text-center xl:text-left relative z-10 w-full">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-indigo-50 text-indigo-600 text-[9px] md:text-xs font-black rounded-full mb-3 md:mb-6 tracking-widest uppercase">
+                        <FiActivity className="animate-pulse" /> Live Feed
                     </div>
-                    <h1 className="text-4xl md:text-7xl font-black text-indigo-950 mb-4 tracking-tighter leading-tight md:leading-none">
+                    <h1 className="text-3xl md:text-7xl font-black text-indigo-950 mb-2 md:mb-4 tracking-tighter leading-tight">
                         Commodities <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-indigo-400">Hub</span>
                     </h1>
-                    <p className="text-indigo-900/60 font-medium text-sm md:text-lg max-w-xl">
-                        Monitor global energy, metals, and utility markets with real-time price tracking and volume analysis.
+                    <p className="text-indigo-900/60 font-medium text-[11px] md:text-lg max-w-xl mx-auto xl:mx-0">
+                        Monitor global energy, metals, and utility markets.
                     </p>
                 </div>
 
