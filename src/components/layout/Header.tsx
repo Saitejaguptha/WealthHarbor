@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { FiMenu } from 'react-icons/fi';
+import { FiMenu, FiBookmark } from 'react-icons/fi';
 
 interface HeaderProps {
     onMenuClick: () => void;
@@ -28,7 +28,16 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
                 </div>
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 md:gap-4">
+                <NavLink
+                    to="/watchlist"
+                    className={({ isActive }) =>
+                        `p-2 rounded-xl transition-all ${isActive ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200' : 'text-indigo-400 hover:bg-indigo-50 hover:text-indigo-600'}`
+                    }
+                    title="Watchlist"
+                >
+                    <FiBookmark className="h-5 w-5 md:h-6 md:w-6" />
+                </NavLink>
                 <div className="flex items-center gap-3">
                     <NavLink to="/profile">
                         <div className="h-8 w-8 rounded-full bg-indigo-100 border border-indigo-200 flex items-center justify-center text-indigo-600 overflow-hidden shadow-sm hover:ring-2 ring-indigo-300 transition-all cursor-pointer">

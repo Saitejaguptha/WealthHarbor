@@ -10,6 +10,20 @@ const CommodityDetails: React.FC = () => {
     const navigate = useNavigate();
     const commodity = useMemo(() => getCommodityById(id || ''), [id]);
 
+    const [currency] = React.useState<'INR' | 'USD'>(() => {
+        return (localStorage.getItem('wealthharbor_currency') as 'INR' | 'USD') || 'INR';
+    });
+
+    const formatPrice = (price: number) => {
+        const USD_CONVERSION = 0.012;
+        const adjustedPrice = currency === 'USD' ? price * USD_CONVERSION : price;
+        return adjustedPrice.toLocaleString(currency === 'INR' ? 'en-IN' : 'en-US', {
+            style: 'currency',
+            currency: currency,
+            maximumFractionDigits: currency === 'USD' ? 2 : 0
+        });
+    };
+
     if (!commodity) {
         return (
             <div className="flex flex-col items-center justify-center h-full p-10 text-center">
@@ -47,7 +61,7 @@ const CommodityDetails: React.FC = () => {
                         <p className="text-indigo-900/40 text-[10px] font-black uppercase tracking-widest mb-1 flex items-center justify-end">
                             Live Price ({commodity.unit})
                         </p>
-                        <span className="text-3xl font-black text-indigo-950">₹{commodity.currentPrice.toLocaleString()}</span>
+                        <span className="text-3xl font-black text-indigo-950">{formatPrice(commodity.currentPrice)}</span>
                         {/* Note: In Commodities, we use 'NAV' definition for price context as defined in glossary */}
                         <div className="absolute -top-4 -right-8">
                             <MetricInfo metricKey="NAV" />
@@ -83,14 +97,14 @@ const CommodityDetails: React.FC = () => {
                             <div className="p-6 bg-indigo-50/30 rounded-3xl border border-white">
                                 <span className="text-[10px] font-black text-indigo-900/40 uppercase tracking-widest block mb-2">Day Range</span>
                                 <div className="flex items-center justify-between">
-                                    <span className="font-bold text-indigo-950">₹{commodity.dayLow}</span>
+                                    <span className="font-bold text-indigo-950">{formatPrice(commodity.dayLow)}</span>
                                     <div className="flex-1 mx-4 h-1 bg-indigo-100 rounded-full overflow-hidden">
                                         <div
                                             className="h-full bg-indigo-600"
                                             style={{ width: `${((commodity.currentPrice - commodity.dayLow) / (commodity.dayHigh - commodity.dayLow)) * 100}%` }}
                                         />
                                     </div>
-                                    <span className="font-bold text-indigo-950">₹{commodity.dayHigh}</span>
+                                    <span className="font-bold text-indigo-950">{formatPrice(commodity.dayHigh)}</span>
                                 </div>
                             </div>
                             <div className="p-6 bg-indigo-50/30 rounded-3xl border border-white">

@@ -4,6 +4,8 @@ import { FiArrowLeft, FiActivity, FiPieChart, FiInfo, FiBriefcase, FiZap, FiBarC
 import { getETFs } from '../utils/etfData';
 import PriceHistoryChart from '../components/common/PriceHistoryChart';
 import MetricInfo from '../components/common/MetricInfo';
+import { addToWatchlist, removeFromWatchlist, isInWatchlist } from '../utils/watchlistUtils';
+import { FiPlus, FiCheck } from 'react-icons/fi';
 
 const ETFDetails: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -12,6 +14,33 @@ const ETFDetails: React.FC = () => {
     const etf = useMemo(() => {
         return etfs.find(e => e.id === id);
     }, [id, etfs]);
+
+    const [inWatchlist, setInWatchlist] = React.useState(false);
+
+    React.useEffect(() => {
+        if (etf) {
+            setInWatchlist(isInWatchlist(etf.id));
+        }
+    }, [etf]);
+
+    const toggleWatchlist = () => {
+        if (!etf) return;
+        if (inWatchlist) {
+            removeFromWatchlist(etf.id);
+            setInWatchlist(false);
+        } else {
+            addToWatchlist({
+                id: etf.id,
+                name: etf.name,
+                symbol: etf.symbol,
+                type: 'etf',
+                price: etf.price,
+                change: etf.change,
+                changePercent: etf.changePercent
+            });
+            setInWatchlist(true);
+        }
+    };
 
     if (!etf) {
         return (
@@ -144,8 +173,15 @@ const ETFDetails: React.FC = () => {
                             </div>
                         </div>
 
-                        <button className="w-full mt-10 py-4 bg-white text-indigo-900 font-black rounded-2xl hover:bg-indigo-50 transition-all active:scale-95 shadow-xl">
-                            Trade Now
+                        <button
+                            onClick={toggleWatchlist}
+                            className={`w-full mt-10 py-4 font-black rounded-2xl transition-all active:scale-95 shadow-xl flex items-center justify-center gap-2 ${inWatchlist
+                                    ? 'bg-emerald-500 text-white shadow-emerald-200'
+                                    : 'bg-white text-indigo-900 hover:bg-indigo-50'
+                                }`}
+                        >
+                            {inWatchlist ? <FiCheck /> : <FiPlus />}
+                            {inWatchlist ? 'In Watchlist' : 'Add to Watchlist'}
                         </button>
                     </div>
 

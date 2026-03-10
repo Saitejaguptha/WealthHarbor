@@ -67,7 +67,7 @@ const PriceHistoryChart: React.FC<PriceHistoryChartProps> = ({
             <div style={{ height: `${height}px` }} className="relative">
                 <svg
                     viewBox={`0 0 ${VIEW_WIDTH} ${VIEW_HEIGHT}`}
-                    className="w-full h-full cursor-crosshair touch-none"
+                    className="w-full h-full cursor-crosshair touch-pan-y"
                     preserveAspectRatio="none"
                     onMouseMove={handleMouseMove}
                     onMouseLeave={() => setHoveredPoint(null)}

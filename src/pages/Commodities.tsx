@@ -7,7 +7,14 @@ import { getCommodities } from '../utils/commodityData';
 const Commodities: React.FC = () => {
     const navigate = useNavigate();
     const [searchTerm, setSearchTerm] = useState('');
-    const [currency, setCurrency] = useState<'INR' | 'USD'>('INR');
+    const [currency, setCurrency] = useState<'INR' | 'USD'>(() => {
+        return (localStorage.getItem('wealthharbor_currency') as 'INR' | 'USD') || 'INR';
+    });
+
+    const handleCurrencyChange = (newCurrency: 'INR' | 'USD') => {
+        setCurrency(newCurrency);
+        localStorage.setItem('wealthharbor_currency', newCurrency);
+    };
     const [selectedCategory, setSelectedCategory] = useState<string>('All');
     const [commodities] = useState(() => getCommodities());
 
@@ -90,13 +97,13 @@ const Commodities: React.FC = () => {
                 <div className="flex flex-col items-center xl:items-end gap-6 relative z-10 w-full xl:w-auto">
                     <div className="bg-indigo-50 p-1.5 rounded-2xl flex items-center gap-1">
                         <button
-                            onClick={() => setCurrency('INR')}
+                            onClick={() => handleCurrencyChange('INR')}
                             className={`px-4 md:px-5 py-2 md:py-2.5 rounded-xl text-[10px] md:text-xs font-black transition-all uppercase tracking-widest ${currency === 'INR' ? 'bg-white text-indigo-600 shadow-sm' : 'text-indigo-900/40 hover:text-indigo-900'}`}
                         >
                             INR (₹)
                         </button>
                         <button
-                            onClick={() => setCurrency('USD')}
+                            onClick={() => handleCurrencyChange('USD')}
                             className={`px-4 md:px-5 py-2 md:py-2.5 rounded-xl text-[10px] md:text-xs font-black transition-all uppercase tracking-widest ${currency === 'USD' ? 'bg-white text-indigo-600 shadow-sm' : 'text-indigo-900/40 hover:text-indigo-900'}`}
                         >
                             USD ($)

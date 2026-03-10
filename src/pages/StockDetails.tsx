@@ -7,11 +7,39 @@ import {
 import { getStockBySymbol, refreshStocks } from '../utils/stockData';
 import PriceHistoryChart from '../components/common/PriceHistoryChart';
 import MetricInfo from '../components/common/MetricInfo';
+import { addToWatchlist, removeFromWatchlist, isInWatchlist } from '../utils/watchlistUtils';
+import { FiPlus, FiCheck } from 'react-icons/fi';
 
 const StockDetails: React.FC = () => {
     const { symbol } = useParams<{ symbol: string }>();
     const navigate = useNavigate();
     const stock = getStockBySymbol(symbol || '');
+    const [inWatchlist, setInWatchlist] = React.useState(false);
+
+    React.useEffect(() => {
+        if (stock) {
+            setInWatchlist(isInWatchlist(stock.symbol));
+        }
+    }, [stock]);
+
+    const toggleWatchlist = () => {
+        if (!stock) return;
+        if (inWatchlist) {
+            removeFromWatchlist(stock.symbol);
+            setInWatchlist(false);
+        } else {
+            addToWatchlist({
+                id: stock.symbol,
+                name: stock.name,
+                symbol: stock.symbol,
+                type: 'stock',
+                price: stock.price,
+                change: stock.change,
+                changePercent: stock.changePercent
+            });
+            setInWatchlist(true);
+        }
+    };
 
     if (!stock) {
         return (
@@ -64,16 +92,28 @@ const StockDetails: React.FC = () => {
                         <h1 className="text-2xl md:text-3xl font-black text-indigo-950 tracking-tight leading-tight">{stock.name}</h1>
                     </div>
                 </div>
-                <button
-                    onClick={() => {
-                        refreshStocks();
-                        window.location.reload();
-                    }}
-                    className="flex items-center justify-center gap-2 px-6 py-3 md:py-3 bg-indigo-50 text-indigo-600 font-bold rounded-xl md:rounded-2xl hover:bg-indigo-600 hover:text-white transition-all active:scale-95 shadow-sm text-sm"
-                >
-                    <FiRefreshCw className="shrink-0" />
-                    Re-Analyze
-                </button>
+                <div className="flex flex-wrap items-center gap-3">
+                    <button
+                        onClick={toggleWatchlist}
+                        className={`flex items-center gap-2 px-6 py-3 rounded-xl md:rounded-2xl font-bold transition-all active:scale-95 shadow-sm text-sm ${inWatchlist
+                                ? 'bg-emerald-50 text-emerald-600 border border-emerald-100'
+                                : 'bg-indigo-600 text-white hover:bg-indigo-700'
+                            }`}
+                    >
+                        {inWatchlist ? <FiCheck /> : <FiPlus />}
+                        {inWatchlist ? 'In Watchlist' : 'Add to Watchlist'}
+                    </button>
+                    <button
+                        onClick={() => {
+                            refreshStocks();
+                            window.location.reload();
+                        }}
+                        className="flex items-center justify-center gap-2 px-6 py-3 md:py-3 bg-indigo-50 text-indigo-600 font-bold rounded-xl md:rounded-2xl hover:bg-indigo-600 hover:text-white transition-all active:scale-95 shadow-sm text-sm"
+                    >
+                        <FiRefreshCw className="shrink-0" />
+                        Re-Analyze
+                    </button>
+                </div>
             </div>
 
             {/* Main Stats */}

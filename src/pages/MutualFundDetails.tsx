@@ -4,6 +4,8 @@ import { FiArrowLeft, FiPieChart, FiActivity, FiShield, FiBriefcase, FiPercent, 
 import { getMutualFunds } from '../utils/mutualFundData';
 import PriceHistoryChart from '../components/common/PriceHistoryChart';
 import MetricInfo from '../components/common/MetricInfo';
+import { addToWatchlist, removeFromWatchlist, isInWatchlist } from '../utils/watchlistUtils';
+import { FiPlus, FiCheck } from 'react-icons/fi';
 
 const MutualFundDetails: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -12,6 +14,33 @@ const MutualFundDetails: React.FC = () => {
     const fund = useMemo(() => {
         return funds.find(f => f.id === id);
     }, [id, funds]);
+
+    const [inWatchlist, setInWatchlist] = React.useState(false);
+
+    React.useEffect(() => {
+        if (fund) {
+            setInWatchlist(isInWatchlist(fund.id));
+        }
+    }, [fund]);
+
+    const toggleWatchlist = () => {
+        if (!fund) return;
+        if (inWatchlist) {
+            removeFromWatchlist(fund.id);
+            setInWatchlist(false);
+        } else {
+            addToWatchlist({
+                id: fund.id,
+                name: fund.name,
+                symbol: fund.id,
+                type: 'mutual-fund',
+                price: fund.nav,
+                change: fund.return1Y,
+                changePercent: fund.return1Y
+            });
+            setInWatchlist(true);
+        }
+    };
 
     if (!fund) {
         return (
@@ -181,8 +210,15 @@ const MutualFundDetails: React.FC = () => {
                             </div>
                         </div>
 
-                        <button className="w-full mt-10 py-4 bg-white text-indigo-900 font-black rounded-2xl hover:bg-indigo-50 transition-all active:scale-95 shadow-xl">
-                            Invest Now
+                        <button
+                            onClick={toggleWatchlist}
+                            className={`w-full mt-10 py-4 font-black rounded-2xl transition-all active:scale-95 shadow-xl flex items-center justify-center gap-2 ${inWatchlist
+                                ? 'bg-emerald-500 text-white shadow-emerald-200'
+                                : 'bg-white text-indigo-900 hover:bg-indigo-50'
+                                }`}
+                        >
+                            {inWatchlist ? <FiCheck /> : <FiPlus />}
+                            {inWatchlist ? 'In Watchlist' : 'Add to Watchlist'}
                         </button>
                     </div>
 

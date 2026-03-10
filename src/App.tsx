@@ -11,6 +11,7 @@ import GoldSilver from './pages/GoldSilver';
 import Commodities from './pages/Commodities';
 import CommodityDetails from './pages/CommodityDetails';
 import Profile from './pages/Profile';
+import Watchlist from './pages/Watchlist';
 import ScrollToTop from './components/common/ScrollToTop';
 
 // Placeholder Pages
@@ -46,6 +47,7 @@ function App() {
             <Route index element={<Commodities />} />
             <Route path=":id" element={<CommodityDetails />} />
           </Route>
+          <Route path="watchlist" element={<Watchlist />} />
           <Route path="profile" element={<Profile />} />
           <Route path="settings" element={<PagePlaceholder title="Settings" />} />
         </Route>
