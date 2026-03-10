@@ -60,9 +60,9 @@ const Commodities: React.FC = () => {
     };
 
     return (
-        <div className="p-4 md:p-10 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-1000 space-y-6 md:space-y-12">
+        <div className="p-3 md:p-10 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-1000 space-y-6 md:space-y-12">
             {/* Header Section */}
-            <div className="bg-white/40 backdrop-blur-3xl border border-white/50 p-6 md:p-12 rounded-[2.5rem] md:rounded-[3.5rem] shadow-2xl shadow-indigo-100/30 flex flex-col xl:flex-row items-center justify-between gap-6 md:gap-8 relative overflow-hidden group">
+            <div className="bg-white/40 backdrop-blur-3xl border border-white/50 p-5 md:p-12 rounded-[2rem] md:rounded-[3.5rem] shadow-2xl shadow-indigo-100/30 flex flex-col xl:flex-row items-center justify-between gap-6 md:gap-8 relative overflow-hidden group">
                 <div className="absolute top-0 right-0 p-12 opacity-[0.03] scale-150 rotate-12 group-hover:rotate-0 transition-transform duration-1000">
                     <FiGlobe className="text-[12rem] text-indigo-950" />
                 </div>

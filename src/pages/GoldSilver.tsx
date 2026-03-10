@@ -149,8 +149,8 @@ const GoldSilver: React.FC = () => {
     };
 
     return (
-        <div className="p-4 md:p-10 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-1000 space-y-6 md:space-y-12">
-            <div className="bg-white/40 backdrop-blur-xl border border-white p-6 md:p-8 rounded-[2rem] md:rounded-[3rem] shadow-xl shadow-indigo-100/30 flex flex-col xl:flex-row items-center justify-between gap-6 md:gap-8">
+        <div className="p-3 md:p-10 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-1000 space-y-6 md:space-y-12">
+            <div className="bg-white/40 backdrop-blur-xl border border-white p-5 md:p-8 rounded-[1.75rem] md:rounded-[3rem] shadow-xl shadow-indigo-100/30 flex flex-col xl:flex-row items-center justify-between gap-6 md:gap-8">
                 <div className="text-center xl:text-left">
                     <h1 className="text-4xl md:text-6xl font-black text-indigo-950 mb-2 tracking-tighter">Gold & Silver</h1>
                     <p className="text-indigo-900/60 font-medium text-xs md:text-base px-4 xl:px-0">Historical tracking and live rates</p>

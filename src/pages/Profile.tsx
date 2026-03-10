@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FiUser, FiCalendar, FiLock, FiSave, FiEdit2, FiCheck } from 'react-icons/fi';
+import { FiUser, FiLock, FiSave, FiEdit2, FiCheck } from 'react-icons/fi';
 
 const Profile: React.FC = () => {
     const [isSaving, setIsSaving] = useState(false);
@@ -30,10 +30,10 @@ const Profile: React.FC = () => {
     };
 
     return (
-        <div className="p-4 md:p-10 max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-1000 space-y-6 md:space-y-10">
-            <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8 mb-4">
+        <div className="p-3 md:p-10 max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-1000 space-y-6 md:space-y-10">
+            <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 mb-4">
                 <div className="relative group">
-                    <div className="h-24 w-24 md:h-40 md:w-40 rounded-full bg-indigo-100 border-4 border-white flex items-center justify-center text-indigo-600 overflow-hidden shadow-2xl ring-4 ring-indigo-50/50 group-hover:ring-indigo-100 transition-all">
+                    <div className="h-20 w-20 md:h-40 md:w-40 rounded-full bg-indigo-100 border-4 border-white flex items-center justify-center text-indigo-600 overflow-hidden shadow-2xl ring-4 ring-indigo-50/50 group-hover:ring-indigo-100 transition-all">
                         <img
                             src="https://api.dicebear.com/7.x/avataaars/svg?seed=Lucky"
                             alt="Profile"
@@ -42,14 +42,14 @@ const Profile: React.FC = () => {
                     </div>
                 </div>
                 <div className="text-center md:text-left">
-                    <h1 className="text-3xl md:text-5xl font-black text-indigo-950 tracking-tighter mb-2">User Profile</h1>
-                    <p className="text-indigo-900/60 font-medium text-sm md:text-base">Manage your personal information and security</p>
+                    <h1 className="text-3xl md:text-5xl font-black text-indigo-950 tracking-tighter mb-1">User Profile</h1>
+                    <p className="text-indigo-900/60 font-medium text-[10px] md:text-base px-4 md:px-0">Manage your personal information and security</p>
                 </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                 {/* Personal Information */}
-                <div className="bg-white/70 backdrop-blur-xl border border-white p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] shadow-xl shadow-indigo-100/30 space-y-6 md:space-y-8">
+                <div className="bg-white/70 backdrop-blur-xl border border-white p-5 md:p-8 rounded-[1.75rem] md:rounded-[2.5rem] shadow-xl shadow-indigo-100/30 space-y-6 md:space-y-8">
                     <div className="flex items-center gap-3 pb-4 border-b border-indigo-50">
                         <div className="p-2.5 bg-indigo-600 text-white rounded-xl md:rounded-2xl shadow-lg shadow-indigo-600/20">
                             <FiUser className="text-lg md:text-xl" />
@@ -105,7 +105,7 @@ const Profile: React.FC = () => {
                 </div>
 
                 {/* Security / Password */}
-                <div className="bg-white/70 backdrop-blur-xl border border-white p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] shadow-xl shadow-indigo-100/30 space-y-6 md:space-y-8 flex flex-col justify-between">
+                <div className="bg-white/70 backdrop-blur-xl border border-white p-5 md:p-8 rounded-[1.75rem] md:rounded-[2.5rem] shadow-xl shadow-indigo-100/30 space-y-6 md:space-y-8 flex flex-col justify-between">
                     <div>
                         <div className="flex items-center gap-3 pb-4 border-b border-indigo-50 mb-6 md:mb-8">
                             <div className="p-2.5 bg-indigo-600 text-white rounded-xl md:rounded-2xl shadow-lg shadow-indigo-600/20">
