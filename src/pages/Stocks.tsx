@@ -28,7 +28,7 @@ const Stocks: React.FC = () => {
     }, [searchTerm, selectedCap, selectedSector, allStocks]);
 
     return (
-        <div className="p-8 max-w-7xl mx-auto animate-in fade-in duration-700">
+        <div className="p-4 md:p-8 max-w-7xl mx-auto animate-in fade-in duration-700">
             <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
                 <div>
                     <h1 className="text-4xl font-black text-indigo-950 mb-2 tracking-tight">Market Stocks</h1>

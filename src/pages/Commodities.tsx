@@ -60,7 +60,7 @@ const Commodities: React.FC = () => {
     };
 
     return (
-        <div className="p-6 md:p-10 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-1000 space-y-8 md:space-y-12">
+        <div className="p-4 md:p-10 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-1000 space-y-8 md:space-y-12">
             {/* Header Section */}
             <div className="bg-white/40 backdrop-blur-3xl border border-white/50 p-8 md:p-12 rounded-[2.5rem] md:rounded-[3.5rem] shadow-2xl shadow-indigo-100/30 flex flex-col xl:flex-row items-center justify-between gap-8 relative overflow-hidden group">
                 <div className="absolute top-0 right-0 p-12 opacity-[0.03] scale-150 rotate-12 group-hover:rotate-0 transition-transform duration-1000">
@@ -129,8 +129,8 @@ const Commodities: React.FC = () => {
                             key={cat}
                             onClick={() => setSelectedCategory(cat)}
                             className={`px-5 py-2.5 rounded-full text-xs font-black transition-all uppercase tracking-widest whitespace-nowrap ${selectedCategory === cat
-                                    ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200 shadow-offset-y-2'
-                                    : 'text-indigo-900/40 hover:text-indigo-600 hover:bg-indigo-50'
+                                ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200 shadow-offset-y-2'
+                                : 'text-indigo-900/40 hover:text-indigo-600 hover:bg-indigo-50'
                                 }`}
                         >
                             {cat}

@@ -9,6 +9,7 @@ import ETFs from './pages/ETFs';
 import ETFDetails from './pages/ETFDetails';
 import GoldSilver from './pages/GoldSilver';
 import Commodities from './pages/Commodities';
+import Profile from './pages/Profile';
 import ScrollToTop from './components/common/ScrollToTop';
 
 // Placeholder Pages
@@ -41,7 +42,7 @@ function App() {
           </Route>
           <Route path="gold-silver" element={<GoldSilver />} />
           <Route path="commodities" element={<Commodities />} />
-          <Route path="profile" element={<PagePlaceholder title="User Profile" />} />
+          <Route path="profile" element={<Profile />} />
           <Route path="settings" element={<PagePlaceholder title="Settings" />} />
         </Route>
         <Route path="*" element={<ErrorPage />} />
