@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { FiMenu, FiBookmark, FiActivity, FiGlobe } from 'react-icons/fi';
+import { FiMenu, FiBookmark, FiGlobe } from 'react-icons/fi';
 
 interface HeaderProps {
     onMenuClick: () => void;
@@ -39,26 +39,15 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
                     <FiBookmark className="h-5 w-5 md:h-6 md:w-6" />
                 </NavLink>
                 
-                {/* Market Overview Link */}
-                <NavLink
-                    to="/market-overview"
-                    className={({ isActive }) =>
-                        `p-2 rounded-xl transition-all ${isActive ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200' : 'text-indigo-400 hover:bg-indigo-50 hover:text-indigo-600 flex items-center justify-center hover:shadow-sm'}`
-                    }
-                    title="Market Overview"
-                >
-                    <FiGlobe className="h-5 w-5 md:h-6 md:w-6" />
-                </NavLink>
-
                 {/* Market Details Link */}
                 <NavLink
                     to="/market-analysis"
                     className={({ isActive }) =>
                         `p-2 rounded-xl transition-all ${isActive ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200' : 'text-indigo-400 hover:bg-indigo-50 hover:text-indigo-600 flex items-center justify-center hover:shadow-sm'}`
                     }
-                    title="Market Analysis"
+                    title="Market Overview"
                 >
-                    <FiActivity className="h-5 w-5 md:h-6 md:w-6" />
+                    <FiGlobe className="h-5 w-5 md:h-6 md:w-6" />
                 </NavLink>
 
                 <div className="flex items-center gap-3">

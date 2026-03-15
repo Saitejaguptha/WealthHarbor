@@ -37,7 +37,7 @@ const NewsDetails: React.FC = () => {
     });
 
     return (
-        <div className="p-4 md:p-8 max-w-4xl mx-auto animate-fade-in-up">
+        <div className="p-4 md:p-8 max-w-7xl mx-auto animate-fade-in-up">
             <button 
                 onClick={() => navigate(-1)}
                 className="flex items-center gap-2 text-indigo-600 font-bold mb-8 hover:text-indigo-800 transition-colors group"

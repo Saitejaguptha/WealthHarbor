@@ -14,7 +14,8 @@ import Profile from './pages/Profile';
 import Watchlist from './pages/Watchlist';
 import NewsDetails from './pages/NewsDetails';
 import MarketAnalysis from './pages/MarketAnalysis';
-import MarketOverview from './pages/MarketOverview';
+import Indices from './pages/Indices';
+import IndexDetails from './pages/IndexDetails';
 import ScrollToTop from './components/common/ScrollToTop';
 
 // Placeholder Pages
@@ -37,8 +38,9 @@ function App() {
             <Route index element={<Stocks />} />
             <Route path=":symbol" element={<StockDetails />} />
           </Route>
-          <Route path="market-overview" element={<MarketOverview />} />
           <Route path="market-analysis" element={<MarketAnalysis />} />
+          <Route path="indices" element={<Indices />} />
+          <Route path="index-details/:name" element={<IndexDetails />} />
           <Route path="mutual-funds">
             <Route index element={<MutualFunds />} />
             <Route path=":id" element={<MutualFundDetails />} />

@@ -22,7 +22,7 @@ const dummyResponses = [
 const ChatBot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { id: '1', text: "Welcome! I'm your News & Market Update Assistant. Ask me for the latest news on global events, Fed meetings, or market trends!", sender: 'bot' }
+    { id: '1', text: "Welcome! I'm WealthHarbor Intelligence. Ask me for the latest news on global events, Fed meetings, or market trends!", sender: 'bot' }
   ]);
   const [input, setInput] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -77,14 +77,14 @@ const ChatBot: React.FC = () => {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed inset-0 sm:inset-auto sm:bottom-6 sm:right-6 z-50 bg-white sm:rounded-2xl shadow-2xl flex flex-col w-full sm:w-96 h-[100dvh] sm:h-[30rem] border-0 sm:border border-gray-100 overflow-hidden animate-fade-in-up">
+        <div className="fixed bottom-[5.5rem] right-4 left-4 sm:left-auto sm:bottom-6 sm:right-6 z-50 bg-white rounded-3xl sm:rounded-2xl shadow-2xl flex flex-col w-auto sm:w-96 h-[70vh] sm:h-[30rem] border border-gray-100 overflow-hidden animate-fade-in-up">
           {/* Header */}
           <div className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-4 flex justify-between items-center w-full shadow-md z-10">
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
                 <BsChatDots size={18} />
               </div>
-              <h3 className="font-semibold text-lg">News Bot</h3>
+              <h3 className="font-semibold text-lg">WealthHarbor</h3>
             </div>
             <button 
               onClick={() => setIsOpen(false)}
