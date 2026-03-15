@@ -21,7 +21,6 @@ const ForgotPassword: React.FC = () => {
         const users = JSON.parse(localStorage.getItem('wealthharbor_users') || '[]');
         const user = users.find((u: any) => {
             if (verifyType === 'email') return u.email.toLowerCase() === verifyValue.toLowerCase();
-            if (verifyType === 'dob') return u.dob === verifyValue;
             if (verifyType === 'username') return u.username.toLowerCase() === verifyValue.toLowerCase();
             return false;
         });
@@ -63,21 +62,21 @@ const ForgotPassword: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[#F8FAFF] flex items-center justify-center p-0 md:p-4">
-            <div className="w-full md:max-w-md h-screen md:h-auto bg-white md:rounded-[2.5rem] shadow-2xl shadow-indigo-100 p-6 md:p-12 relative overflow-y-auto">
+        <div className="min-h-screen bg-[#F8FAFF] flex items-center justify-center">
+            <div className="w-full min-h-screen bg-white flex flex-col items-center justify-center p-6 md:p-12 relative overflow-y-auto animate-in fade-in duration-500">
                 <Link to="/login" className="absolute left-8 top-8 text-indigo-400 hover:text-indigo-600 transition-colors">
                     <FiArrowLeft size={24} />
                 </Link>
 
-                <div className="text-center mb-10 mt-4">
-                    <h1 className="text-3xl font-black text-indigo-950 tracking-tighter mb-2 uppercase">Reset Password</h1>
-                    <p className="text-indigo-900/40 font-bold text-xs uppercase tracking-widest">
+                <div className="text-center mb-10 mt-4 w-full max-w-sm">
+                    <h1 className="text-4xl font-black text-indigo-950 tracking-tighter mb-3 uppercase">Reset Password</h1>
+                    <p className="text-indigo-900/40 font-bold text-sm uppercase tracking-widest">
                         {step === 1 ? 'Verify your identity to proceed' : 'Set your new secure password'}
                     </p>
                 </div>
 
                 {step === 1 ? (
-                    <form onSubmit={handleVerify} className="space-y-6">
+                    <form onSubmit={handleVerify} className="space-y-6 w-full max-w-sm">
                         <div className="space-y-2">
                             <label className="text-xs font-black text-indigo-900/40 uppercase tracking-widest ml-1">Verification Method</label>
                             <select 
@@ -89,26 +88,24 @@ const ForgotPassword: React.FC = () => {
                                 className="w-full px-6 py-4 bg-indigo-50/50 border-2 border-transparent focus:border-indigo-500 rounded-2xl outline-none transition-all font-bold text-indigo-950"
                             >
                                 <option value="email">Email Address</option>
-                                <option value="dob">Date of Birth</option>
                                 <option value="username">Username</option>
                             </select>
                         </div>
 
                         <div className="space-y-2">
                             <label className="text-xs font-black text-indigo-900/40 uppercase tracking-widest ml-1">
-                                {verifyType === 'email' ? 'Enter Email' : verifyType === 'dob' ? 'Enter Date of Birth' : 'Enter Username'}
+                                {verifyType === 'email' ? 'Enter Email' : 'Enter Username'}
                             </label>
                             <div className="relative group">
                                 {verifyType === 'email' && <FiMail className="absolute left-5 top-1/2 -translate-y-1/2 text-indigo-300" />}
-                                {verifyType === 'dob' && <FiCalendar className="absolute left-5 top-1/2 -translate-y-1/2 text-indigo-300" />}
                                 {verifyType === 'username' && <FiUser className="absolute left-5 top-1/2 -translate-y-1/2 text-indigo-300" />}
                                 <input
-                                    type={verifyType === 'dob' ? 'date' : 'text'}
+                                    type="text"
                                     required
                                     value={verifyValue}
                                     onChange={(e) => setVerifyValue(e.target.value)}
                                     className="w-full pl-14 pr-6 py-4 bg-white border-2 border-indigo-50 rounded-2xl focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all font-bold text-indigo-950 placeholder:text-indigo-200"
-                                    placeholder={verifyType === 'email' ? 'example@mail.com' : verifyType === 'dob' ? '' : 'your_username'}
+                                    placeholder={verifyType === 'email' ? 'example@mail.com' : 'your_username'}
                                 />
                             </div>
                         </div>
@@ -121,7 +118,7 @@ const ForgotPassword: React.FC = () => {
                         </button>
                     </form>
                 ) : (
-                    <form onSubmit={handleReset} className="space-y-6">
+                    <form onSubmit={handleReset} className="space-y-6 w-full max-w-sm">
                         <div className="space-y-2">
                             <label className="text-xs font-black text-indigo-900/40 uppercase tracking-widest ml-1">New Password</label>
                             <div className="relative group">

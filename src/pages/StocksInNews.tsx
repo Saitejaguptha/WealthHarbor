@@ -1,68 +1,22 @@
 import React, { useState } from 'react';
 import { FiSearch, FiFileText, FiClock, FiArrowRight } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
+import { getNews } from '../utils/newsData';
 import PageHeader from '../components/common/PageHeader';
 
 const StocksInNews: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const navigate = useNavigate();
 
-    const newsItems = [
-        {
-            id: 1,
-            title: "Reliance Invested in Ambuja Cement",
-            description: "Reliance Industries has announced a strategic investment in Ambuja Cement to bolster its presence in the construction materials sector.",
-            time: "2 hours ago",
-            category: "Acquisition",
-            impact: "Positive",
-            symbol: "RELIANCE"
-        },
-        {
-            id: 2,
-            title: "TATA Motors Q3 Results",
-            description: "TATA Motors reported a significant surge in quarterly profits, driven by strong sales in the electric vehicle segment.",
-            time: "4 hours ago",
-            category: "Earnings",
-            impact: "Very Positive",
-            symbol: "TATAMOTORS"
-        },
-        {
-            id: 3,
-            title: "HDFC Bank Expansion Plans",
-            description: "HDFC Bank unveils plans to open 500 new branches across rural India to increase its retail footprint.",
-            time: "6 hours ago",
-            category: "Expansion",
-            impact: "Neutral",
-            symbol: "HDFCBANK"
-        },
-        {
-            id: 4,
-            title: "Infosys Secures Multi-Million Dollar Deal",
-            description: "Infosys has bagged a major digital transformation contract from a leading European telecommunications provider.",
-            time: "8 hours ago",
-            category: "Deal",
-            impact: "Positive",
-            symbol: "INFY"
-        },
-        {
-            id: 5,
-            title: "Adani Enterprises Debt Reduction",
-            description: "Adani Enterprises shares rise as the group continues its aggressive debt reduction strategy ahead of schedule.",
-            time: "10 hours ago",
-            category: "Financials",
-            impact: "Positive",
-            symbol: "ADANIENT"
-        },
-        {
-            id: 6,
-            title: "Zomato Acquires Quick Commerce Startup",
-            description: "Zomato strengthens its Blinkit division by acquiring a specialized logistics startup for faster deliveries.",
-            time: "12 hours ago",
-            category: "M&A",
-            impact: "Positive",
-            symbol: "ZOMATO"
-        }
-    ];
+    const newsItems = getNews().map(news => ({
+        id: news.id,
+        title: news.title,
+        description: news.summary,
+        time: new Date(news.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        category: news.category,
+        impact: news.impact || 'Neutral',
+        symbol: news.source.split(' ')[0].toUpperCase() // Using source first word as placeholder symbol
+    }));
 
     const filteredNews = newsItems.filter(news =>
         news.title.toLowerCase().includes(searchTerm.toLowerCase()) ||

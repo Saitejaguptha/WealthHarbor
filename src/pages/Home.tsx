@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import Sidebar from '../features/navigation/components/Sidebar';
-import Footer from '../components/layout/Footer';
 import ChatBot from '../components/ChatBot';
 
 const Home: React.FC = () => {
@@ -17,7 +16,6 @@ const Home: React.FC = () => {
                     <Outlet />
                 </main>
             </div>
-            <Footer />
             <ChatBot />
         </div>
     );

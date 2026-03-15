@@ -69,6 +69,36 @@ export const mockNews: NewsArticle[] = [
     source: "Business Standard",
     category: "Markets",
     impact: 'Medium'
+  },
+  {
+    id: "news-gold-5",
+    title: "Gold Prices Surge to Record Highs Amid Global Economic Uncertainty",
+    summary: "Spot gold hit a new all-time high as investors seek safety in the precious metal during volatile market conditions.",
+    content: [
+      "Gold prices have broken through major resistance levels today, reaching a record high of over ₹75,000 per 10 grams in the domestic market.",
+      "The surge is attributed to a combination of geopolitical tensions in the Middle East and expectations that major central banks might pivot toward rate cuts earlier than anticipated.",
+      "Domestic jewelry demand has seen a temporary dip due to the high prices, but investment demand via Sovereign Gold Bonds and Gold ETFs continues to stay robust.",
+      "Financial advisors suggest that while the long-term outlook for gold remains positive, investors should be cautious of short-term pullbacks and consider staggered investments."
+    ],
+    date: "2026-03-11T08:30:00Z",
+    source: "Bloomberg Quint",
+    category: "Crypto", // Mock category mapping for diversity
+    impact: 'High'
+  },
+  {
+    id: "news-oil-6",
+    title: "Crude Oil Stabilizes as Global Demand Outlook Projects Growth",
+    summary: "Oil prices held steady today as OPEC+ maintains its production cut strategy while global demand remains resilient.",
+    content: [
+      "Brent crude oil futures settled at $85 per barrel today, as the market balances supply constraints with recovering industrial demand from major economies like China and India.",
+      "OPEC+ leaders have reiterated their commitment to maintaining production ceilings to prevent a supply glut, even as non-OPEC production from the US continues to hit record levels.",
+      "For the Indian economy, these levels are manageable, but further upside could weigh on the current account deficit and fuel inflation.",
+      "Energy sector stocks in the Indian market, particularly upstream companies like ONGC, have seen positive momentum as realizations remain high."
+    ],
+    date: "2026-03-10T14:20:00Z",
+    source: "Reuters Business",
+    category: "Geopolitics",
+    impact: 'Medium'
   }
 ];
 

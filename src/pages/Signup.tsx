@@ -66,17 +66,17 @@ const Signup: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen bg-indigo-50/30 flex items-center justify-center p-4">
-            <div className="bg-white/70 backdrop-blur-xl border border-white p-6 md:p-8 rounded-[2.5rem] shadow-2xl shadow-indigo-100/50 w-full max-w-md animate-in fade-in zoom-in duration-500">
-                <div className="text-center mb-8">
-                    <div className="w-16 h-16 bg-indigo-600 rounded-2xl flex items-center justify-center text-white text-3xl mx-auto mb-4 shadow-lg shadow-indigo-200">
+        <div className="min-h-screen bg-indigo-50/30 flex items-center justify-center">
+            <div className="bg-white min-h-screen w-full flex flex-col items-center justify-center p-6 md:p-12 animate-in fade-in duration-500 overflow-y-auto">
+                <div className="text-center mb-8 w-full max-w-lg">
+                    <div className="w-20 h-20 bg-indigo-600 rounded-[2rem] flex items-center justify-center text-white text-4xl mx-auto mb-6 shadow-2xl shadow-indigo-200">
                         <FiShield />
                     </div>
-                    <h1 className="text-3xl font-black text-indigo-950 tracking-tight">Create Account</h1>
-                    <p className="text-indigo-900/40 text-sm font-bold uppercase tracking-widest mt-1">Join WealthHarbor</p>
+                    <h1 className="text-4xl font-black text-indigo-950 tracking-tight">Create Account</h1>
+                    <p className="text-indigo-900/40 text-sm font-bold uppercase tracking-widest mt-2">Join WealthHarbor</p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4 w-full max-w-lg">
                     <div className="space-y-1">
                         <div className="relative group">
                             <FiUser className="absolute left-4 top-1/2 -translate-y-1/2 text-indigo-300 group-focus-within:text-indigo-600 transition-colors" />

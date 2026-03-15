@@ -17,6 +17,9 @@ const Notifications: React.FC = () => {
 
     useEffect(() => {
         loadNotifications();
+        if (userEmail) {
+            markNotificationsAsRead(userEmail);
+        }
         const handleUpdate = () => loadNotifications();
         window.addEventListener('wealthharbor_notifications_updated', handleUpdate);
         return () => window.removeEventListener('wealthharbor_notifications_updated', handleUpdate);
