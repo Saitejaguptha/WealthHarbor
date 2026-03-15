@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { FiArrowRight, FiClock, FiActivity, FiGlobe, FiTrendingUp, FiTrendingDown, FiPieChart } from 'react-icons/fi';
+import { FiArrowRight, FiClock, FiActivity, FiGlobe, FiPieChart } from 'react-icons/fi';
 import { getNews } from '../utils/newsData';
 
 const mockMovers = [
