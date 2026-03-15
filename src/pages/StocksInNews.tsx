@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { FiSearch, FiFileText, FiClock, FiArrowRight } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
 import PageHeader from '../components/common/PageHeader';
 
 const StocksInNews: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState('');
+    const navigate = useNavigate();
 
     const newsItems = [
         {
@@ -130,7 +132,10 @@ const StocksInNews: React.FC = () => {
                                 {news.description}
                             </p>
 
-                            <button className="flex items-center gap-2 text-indigo-600 font-black text-xs uppercase tracking-widest hover:gap-4 transition-all group/btn">
+                            <button 
+                                onClick={() => navigate(`/news/${news.id}`)}
+                                className="flex items-center gap-2 text-indigo-600 font-black text-xs uppercase tracking-widest hover:gap-4 transition-all group/btn"
+                            >
                                 Read Full Story <FiArrowRight className="group-hover/btn:translate-x-1 transition-transform" />
                             </button>
                         </div>

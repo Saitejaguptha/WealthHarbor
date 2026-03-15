@@ -201,9 +201,13 @@ const MutualFundDetails: React.FC = () => {
                                 <span className="text-xl font-black">₹{fund.aum}</span>
                             </div>
                             <div className="flex justify-between items-center pb-4 border-b border-white/10 relative">
-                                <span className="text-white/40 text-xs font-bold uppercase tracking-widest">Expense Ratio</span>
+                                <div className="flex items-center gap-1">
+                                    <span className="text-white/40 text-xs font-bold uppercase tracking-widest">Expense Ratio</span>
+                                    <div className="relative h-4 w-4">
+                                        <MetricInfo metricKey="Expense Ratio" />
+                                    </div>
+                                </div>
                                 <span className="text-xl font-black">{fund.expenseRatio}%</span>
-                                <MetricInfo metricKey="Expense Ratio" />
                             </div>
                             <div className="flex justify-between items-center">
                                 <span className="text-white/40 text-xs font-bold uppercase tracking-widest">Rating</span>
@@ -235,9 +239,13 @@ const MutualFundDetails: React.FC = () => {
 
                         <div className="space-y-6">
                             <div className="relative overflow-hidden group">
-                                <p className="text-indigo-900/40 text-[9px] font-black uppercase tracking-widest mb-1 underline decoration-indigo-200 decoration-2 underline-offset-4">Exit Load</p>
+                                <div className="flex items-center gap-1">
+                                    <p className="text-indigo-900/40 text-[9px] font-black uppercase tracking-widest mb-1 underline decoration-indigo-200 decoration-2 underline-offset-4">Exit Load</p>
+                                    <div className="relative h-3 w-3 -mt-1">
+                                        <MetricInfo metricKey="Exit Load" />
+                                    </div>
+                                </div>
                                 <p className="text-sm font-bold text-indigo-950">{fund.exitLoad}</p>
-                                <MetricInfo metricKey="Exit Load" />
                             </div>
                             <div>
                                 <p className="text-indigo-900/40 text-[9px] font-black uppercase tracking-widest mb-1 underline decoration-indigo-200 decoration-2 underline-offset-4">Stamp Duty</p>

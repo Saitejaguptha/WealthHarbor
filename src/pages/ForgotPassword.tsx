@@ -63,8 +63,8 @@ const ForgotPassword: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[#F8FAFF] flex items-center justify-center p-4">
-            <div className="w-full max-w-md bg-white rounded-[2.5rem] shadow-2xl shadow-indigo-100 p-6 md:p-12 relative overflow-hidden">
+        <div className="min-h-screen bg-[#F8FAFF] flex items-center justify-center p-0 md:p-4">
+            <div className="w-full md:max-w-md h-screen md:h-auto bg-white md:rounded-[2.5rem] shadow-2xl shadow-indigo-100 p-6 md:p-12 relative overflow-y-auto">
                 <Link to="/login" className="absolute left-8 top-8 text-indigo-400 hover:text-indigo-600 transition-colors">
                     <FiArrowLeft size={24} />
                 </Link>

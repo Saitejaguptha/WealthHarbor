@@ -96,9 +96,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                     </div>
 
                     <div className="mt-10 pt-6 border-t border-indigo-100">
-                        <div className="font-bold text-indigo-900 text-[10px] tracking-widest uppercase opacity-40 px-4 mb-4">
-                            Stocks in News
-                        </div>
                         <div className="space-y-4 px-2">
                             <div className="bg-white/50 p-4 rounded-2xl border border-indigo-50 hover:bg-white transition-all group cursor-default">
                                 <div className="flex items-start gap-3">

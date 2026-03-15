@@ -75,7 +75,7 @@ const CommodityDetails: React.FC = () => {
     }
 
     return (
-        <div className="p-8 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <div className="p-3 md:p-8 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700">
             {/* Header */}
             <div className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div className="flex items-center gap-4">
@@ -108,15 +108,16 @@ const CommodityDetails: React.FC = () => {
                         {inWatchlist ? 'In Watchlist' : 'Add to Watchlist'}
                     </button>
                     <div className="h-12 w-px bg-indigo-100 mx-2 hidden md:block" />
-                    <div className="text-right relative">
-                        <p className="text-indigo-900/40 text-[10px] font-black uppercase tracking-widest mb-1 flex items-center justify-end">
-                            Live Price ({commodity.unit})
-                        </p>
-                        <span className="text-3xl font-black text-indigo-950">{formatPrice(commodity.currentPrice)}</span>
-                        {/* Note: In Commodities, we use 'NAV' definition for price context as defined in glossary */}
-                        <div className="absolute -top-4 -right-8">
-                            <MetricInfo metricKey="NAV" />
+                    <div className="text-right">
+                        <div className="flex items-center justify-end gap-1 mb-1">
+                            <p className="text-indigo-900/40 text-[10px] font-black uppercase tracking-widest">
+                                Live Price ({commodity.unit})
+                            </p>
+                            <div className="relative h-3 w-3">
+                                <MetricInfo metricKey="NAV" />
+                            </div>
                         </div>
+                        <span className="text-2xl md:text-3xl font-black text-indigo-950">{formatPrice(commodity.currentPrice)}</span>
                     </div>
                     <div className="h-12 w-px bg-indigo-100 mx-2 hidden md:block" />
                     <div className="text-right">

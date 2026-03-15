@@ -27,6 +27,7 @@ const Commodities: React.FC = () => {
 
     const filteredCommodities = useMemo(() => {
         return commodities.filter(c => {
+            if (c.name.toLowerCase().includes('gold') || c.name.toLowerCase().includes('silver')) return false;
             const matchesSearch = c.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                 c.symbol.toLowerCase().includes(searchTerm.toLowerCase());
             const matchesCategory = selectedCategory === 'All' || c.category === selectedCategory;

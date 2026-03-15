@@ -70,10 +70,10 @@ const MetricInfo: React.FC<MetricInfoProps> = ({ metricKey }) => {
                     e.stopPropagation();
                     setIsOpen(true);
                 }}
-                className="absolute top-4 right-4 text-amber-400 hover:text-amber-500 hover:scale-110 transition-all p-1 z-10"
+                className="absolute inset-0 flex items-center justify-center text-amber-400 hover:text-amber-500 hover:scale-110 transition-all p-1 z-10"
                 title={`What is ${metricKey}?`}
             >
-                <FiStar className="text-xl fill-amber-400/20" />
+                <FiStar className="text-xs md:text-sm fill-amber-400/20" />
             </button>
 
             {isOpen && createPortal(modalContent, document.body)}

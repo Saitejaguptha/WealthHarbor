@@ -158,9 +158,13 @@ const ETFDetails: React.FC = () => {
                                 <span className="text-xl font-black">₹{etf.aum}</span>
                             </div>
                             <div className="flex justify-between items-center pb-4 border-b border-white/10 relative">
-                                <span className="text-white/40 text-xs font-bold uppercase tracking-widest">Expense Ratio</span>
+                                <div className="flex items-center gap-1">
+                                    <span className="text-white/40 text-xs font-bold uppercase tracking-widest">Expense Ratio</span>
+                                    <div className="relative h-4 w-4">
+                                        <MetricInfo metricKey="Expense Ratio" />
+                                    </div>
+                                </div>
                                 <span className="text-xl font-black">{etf.expenseRatio}%</span>
-                                <MetricInfo metricKey="Expense Ratio" />
                             </div>
                             <div className="flex justify-between items-center pb-4 border-b border-white/10">
                                 <span className="text-white/40 text-xs font-bold uppercase tracking-widest">Rating</span>

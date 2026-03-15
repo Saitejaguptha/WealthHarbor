@@ -233,7 +233,7 @@ const Profile: React.FC = () => {
                                 <button
                                     type="submit"
                                     disabled={isSaving}
-                                    className={`flex-[2] py-4 rounded-2xl font-black flex items-center justify-center gap-3 transition-all duration-300 shadow-lg ${isSaved
+                                    className={`flex-1 py-4 rounded-2xl font-black flex items-center justify-center gap-3 transition-all duration-300 shadow-lg ${isSaved
                                         ? 'bg-emerald-500 text-white shadow-emerald-200'
                                         : 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-indigo-200 hover:shadow-indigo-300 active:scale-95'
                                         }`}

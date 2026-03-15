@@ -43,7 +43,7 @@ const Indices: React.FC = () => {
                                 onClick={() => setExchange(ex as any)}
                                 className={`flex-1 lg:flex-none px-8 py-2.5 rounded-xl text-xs font-black tracking-widest transition-all duration-300 ${
                                     exchange === ex 
-                                    ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200 scale-105' 
+                                    ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200' 
                                     : 'text-indigo-900/40 hover:text-indigo-600 hover:bg-white/50'
                                 }`}
                             >

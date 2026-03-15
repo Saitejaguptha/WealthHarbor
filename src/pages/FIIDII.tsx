@@ -39,7 +39,7 @@ const FIIDII: React.FC = () => {
     const [data] = useState<FIIData[]>(generateData());
 
     return (
-        <div className="p-4 md:p-8 max-w-6xl mx-auto animate-in fade-in duration-700">
+        <div className="p-3 md:p-8 max-w-6xl mx-auto animate-in fade-in duration-700">
             <PageHeader
                 title="FII & DII Activity"
                 description="Daily net purchase/sell activity of Institutional Investors in the Indian market"
@@ -93,36 +93,36 @@ const FIIDII: React.FC = () => {
                 <div className="overflow-x-auto">
                     <table className="w-full text-left border-collapse">
                         <thead>
-                            <tr className="bg-indigo-50/50 text-indigo-900/40 text-[10px] font-black uppercase tracking-widest">
-                                <th className="px-8 py-6">Date</th>
-                                <th className="px-8 py-6">FII Net (Cr)</th>
-                                <th className="px-8 py-6">DII Net (Cr)</th>
-                                <th className="px-8 py-6">Total Net (Cr)</th>
+                            <tr className="bg-indigo-50/50 text-indigo-900/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">
+                                <th className="px-4 md:px-8 py-4 md:py-6">Date</th>
+                                <th className="px-4 md:px-8 py-4 md:py-6">FII (Cr)</th>
+                                <th className="px-4 md:px-8 py-4 md:py-6">DII (Cr)</th>
+                                <th className="px-4 md:px-8 py-4 md:py-6">Total (Cr)</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-indigo-50/50">
                             {data.map((row: FIIData, idx: number) => (
                                 <tr key={idx} className="hover:bg-indigo-50/30 transition-colors group">
-                                    <td className="px-8 py-5">
-                                        <div className="flex items-center gap-3">
-                                            <FiCalendar className="text-indigo-300 group-hover:text-indigo-600 transition-colors" />
-                                            <span className="font-bold text-indigo-950">{row.date}</span>
+                                    <td className="px-4 md:px-8 py-4 md:py-5">
+                                        <div className="flex items-center gap-2 md:gap-3">
+                                            <FiCalendar className="text-indigo-300 group-hover:text-indigo-600 transition-colors shrink-0" />
+                                            <span className="font-bold text-indigo-950 text-xs md:text-base whitespace-nowrap">{row.date}</span>
                                         </div>
                                     </td>
-                                    <td className={`px-8 py-5 font-black ${row.fiiNet >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
+                                    <td className={`px-4 md:px-8 py-4 md:py-5 font-black text-xs md:text-base ${row.fiiNet >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
                                         <div className="flex items-center gap-2">
-                                            {row.fiiNet >= 0 ? <FiTrendingUp /> : <FiTrendingDown />}
+                                            {row.fiiNet >= 0 ? <FiTrendingUp className="shrink-0" /> : <FiTrendingDown className="shrink-0" />}
                                             {row.fiiNet > 0 ? '+' : ''}{row.fiiNet.toLocaleString()}
                                         </div>
                                     </td>
-                                    <td className={`px-8 py-5 font-black ${row.diiNet >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
+                                    <td className={`px-4 md:px-8 py-4 md:py-5 font-black text-xs md:text-base ${row.diiNet >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
                                         <div className="flex items-center gap-2">
-                                            {row.diiNet >= 0 ? <FiTrendingUp /> : <FiTrendingDown />}
+                                            {row.diiNet >= 0 ? <FiTrendingUp className="shrink-0" /> : <FiTrendingDown className="shrink-0" />}
                                             {row.diiNet > 0 ? '+' : ''}{row.diiNet.toLocaleString()}
                                         </div>
                                     </td>
-                                    <td className={`px-8 py-5 font-black ${row.totalNet >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
-                                        <div className="px-4 py-1.5 rounded-xl bg-white border border-indigo-50 shadow-sm inline-block">
+                                    <td className={`px-4 md:px-8 py-4 md:py-5 font-black text-xs md:text-base ${row.totalNet >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
+                                        <div className="px-3 md:px-4 py-1.5 rounded-xl bg-white border border-indigo-50 shadow-sm inline-block whitespace-nowrap">
                                             {row.totalNet > 0 ? '+' : ''}{row.totalNet.toLocaleString()}
                                         </div>
                                     </td>

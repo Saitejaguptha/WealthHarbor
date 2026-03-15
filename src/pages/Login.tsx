@@ -3,6 +3,7 @@ import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../features/auth/AuthContext';
 import { toast } from 'react-hot-toast';
 import { FiMail, FiLock, FiLogIn, FiArrowRight } from 'react-icons/fi';
+import { addNotification } from '../utils/watchlistUtils';
 
 const Login: React.FC = () => {
     const [formData, setFormData] = useState({
@@ -26,9 +27,11 @@ const Login: React.FC = () => {
         const success = login(formData.email, formData.password);
 
         if (success) {
+            addNotification(formData.email, 'Successful login detected. Welcome back!');
             toast.success('Logged in successfully!');
             navigate(from, { replace: true });
         } else {
+            addNotification(formData.email, 'Failed login attempt detected for this email address.');
             toast.error('Invalid credentials. Redirecting to Signup...');
             setTimeout(() => navigate('/signup'), 2000);
         }

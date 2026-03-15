@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
+import { addNotification } from '../../utils/watchlistUtils';
 
 interface User {
   username: string;
@@ -61,6 +62,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   const logout = () => {
+    if (user?.email) {
+      addNotification(user.email, 'You have been logged out successfully. See you soon!');
+    }
     setUser(null);
     localStorage.removeItem('wealthharbor_session');
   };
