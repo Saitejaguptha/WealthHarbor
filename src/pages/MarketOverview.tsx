@@ -18,7 +18,7 @@ const mockMovers = [
 
 const MarketOverview: React.FC = () => {
     return (
-        <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto animate-in fade-in duration-700 w-full overflow-hidden">
+        <div className="p-4 sm:p-6 lg:p-8 pb-24 lg:pb-32 max-w-7xl mx-auto animate-in fade-in duration-700 w-full">
             {/* Header Section */}
             <div className="mb-8 lg:mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4 lg:gap-6">
                 <div>
