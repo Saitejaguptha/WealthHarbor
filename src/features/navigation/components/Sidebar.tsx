@@ -6,6 +6,7 @@ import {
     FiPieChart,
     FiDatabase,
     FiLayers,
+    FiActivity,
     FiX
 } from 'react-icons/fi';
 import { NAV_ITEMS } from '../../../constants/navigation';
@@ -19,6 +20,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
     const getIcon = (name: string) => {
         switch (name) {
             case 'Stocks': return <FiTrendingUp />;
+            case 'Market Overview': return <FiActivity />;
             case 'Mutual Fund': return <FiBriefcase />;
             case 'ETF': return <FiPieChart />;
             case 'Gold & Silver': return <FiLayers />;

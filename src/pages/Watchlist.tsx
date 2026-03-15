@@ -71,12 +71,12 @@ const Watchlist: React.FC = () => {
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
                 {watchlist.map((item) => (
                     <div
                         key={item.id}
                         onClick={() => navigate(getNavigationPath(item))}
-                        className="bg-white/70 backdrop-blur-xl border border-indigo-50 p-6 rounded-[2rem] shadow-xl shadow-indigo-100/20 hover:shadow-2xl hover:shadow-indigo-200/40 transition-all group cursor-pointer relative overflow-hidden"
+                        className="bg-white/70 backdrop-blur-xl border border-indigo-50 p-6 rounded-[2rem] shadow-xl shadow-indigo-100/20 hover:shadow-2xl hover:shadow-indigo-300/40 hover:-translate-y-2 hover:border-indigo-200 transition-all duration-300 group cursor-pointer relative overflow-hidden"
                     >
                         <div className="absolute top-0 right-0 p-4 opacity-[0.03] scale-150 rotate-12 group-hover:rotate-0 transition-transform duration-700">
                             <FiActivity className="text-8xl text-indigo-950" />
@@ -93,9 +93,10 @@ const Watchlist: React.FC = () => {
                                 </div>
                                 <button
                                     onClick={(e) => handleRemove(e, item.id)}
-                                    className="p-2 text-rose-300 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors"
+                                    className="p-2 text-rose-300 hover:text-white hover:bg-rose-500 rounded-lg hover:shadow-md hover:shadow-rose-500/30 transition-all active:scale-90"
+                                    title="Remove from Watchlist"
                                 >
-                                    <FiTrash2 />
+                                    <FiTrash2 className="transition-transform group-hover/btn:scale-110" />
                                 </button>
                             </div>
 
@@ -112,8 +113,8 @@ const Watchlist: React.FC = () => {
                                 )}
                             </div>
 
-                            <div className="mt-6 pt-4 border-t border-indigo-50 flex items-center justify-end text-indigo-600 text-xs font-black uppercase tracking-widest group-hover:gap-2 transition-all">
-                                View Details <FiArrowRight className="ml-1" />
+                            <div className="mt-6 pt-4 border-t border-indigo-50 flex items-center justify-end text-indigo-600 text-xs font-black uppercase tracking-widest group-hover:gap-2 group-hover:text-indigo-700 transition-all">
+                                View Details <FiArrowRight className="ml-1 transition-transform group-hover:translate-x-1" />
                             </div>
                         </div>
                     </div>

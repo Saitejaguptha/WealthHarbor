@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import Sidebar from '../features/navigation/components/Sidebar';
 import Footer from '../components/layout/Footer';
+import ChatBot from '../components/ChatBot';
 
 const Home: React.FC = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -12,11 +13,12 @@ const Home: React.FC = () => {
             <Header onMenuClick={() => setSidebarOpen(true)} />
             <div className="flex flex-1 overflow-hidden relative">
                 <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-                <main className="flex flex-1 flex-col overflow-y-auto overflow-x-hidden bg-white/50 backdrop-blur-sm hide-scrollbar w-full">
+                <main className="flex flex-1 flex-col overflow-y-auto overflow-x-hidden bg-white/50 backdrop-blur-sm w-full">
                     <Outlet />
                 </main>
             </div>
             <Footer />
+            <ChatBot />
         </div>
     );
 };
