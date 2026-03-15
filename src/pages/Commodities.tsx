@@ -75,7 +75,7 @@ const Commodities: React.FC = () => {
     };
 
     return (
-        <div className="p-3 md:p-10 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-1000 space-y-4 md:space-y-12">
+        <div className="p-3 md:p-10 pb-24 lg:pb-32 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-1000 space-y-4 md:space-y-12">
             {/* Header Section */}
             <div className="bg-white/40 backdrop-blur-3xl border border-white/50 p-4 md:p-12 rounded-[1.5rem] md:rounded-[3.5rem] shadow-2xl shadow-indigo-100/30 flex flex-col xl:flex-row items-center justify-between gap-4 md:gap-8 relative overflow-hidden group">
                 <div className="absolute top-0 right-0 p-8 md:p-12 opacity-[0.03] scale-100 md:scale-150 rotate-12 group-hover:rotate-0 transition-transform duration-1000">
@@ -160,7 +160,7 @@ const Commodities: React.FC = () => {
                     filteredCommodities.map((item) => (
                         <div
                             key={item.id}
-                            className="bg-white/70 backdrop-blur-xl border border-white p-5 md:p-8 rounded-[2rem] md:rounded-[2.5rem] shadow-xl shadow-indigo-100/50 hover:shadow-2xl hover:shadow-indigo-200/50 transition-all duration-500 group relative flex flex-col justify-between min-h-[300px] md:min-h-[350px] overflow-hidden"
+                            className="bg-white/70 backdrop-blur-xl border border-white p-5 md:p-8 rounded-[2rem] md:rounded-[2.5rem] shadow-xl shadow-indigo-100/50 hover:shadow-2xl hover:shadow-indigo-200/50 transition-all duration-500 group relative flex flex-col justify-between overflow-hidden"
                         >
                             <div className="absolute -top-4 -right-4 w-40 h-40 bg-indigo-50/50 rounded-full blur-3xl group-hover:bg-indigo-100/50 transition-colors" />
 
