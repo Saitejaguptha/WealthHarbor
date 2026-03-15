@@ -5,5 +5,6 @@ export const NAV_ITEMS = [
     { name: 'ETF', path: '/etfs' },
     { name: 'Gold & Silver', path: '/gold-silver' },
     { name: 'Commodities', path: '/commodities' },
-    { name: 'Stocks in News', path: '/stocks-in-news' }
+    { name: 'Stocks in News', path: '/stocks-in-news' },
+    { name: 'FII & DII Data', path: '/fii-dii' }
 ];

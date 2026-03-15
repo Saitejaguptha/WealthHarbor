@@ -24,6 +24,7 @@ import IndexDetails from './pages/IndexDetails';
 import StocksInNews from './pages/StocksInNews';
 import Notifications from './pages/Notifications';
 import ForgotPassword from './pages/ForgotPassword';
+import FIIDII from './pages/FIIDII';
 import ScrollToTop from './components/common/ScrollToTop';
 
 // Placeholder Pages
@@ -73,6 +74,7 @@ function App() {
             <Route path="notifications" element={<Notifications />} />
             <Route path="stocks-in-news" element={<StocksInNews />} />
             <Route path="news/:id" element={<NewsDetails />} />
+            <Route path="fii-dii" element={<FIIDII />} />
             <Route path="settings" element={<PagePlaceholder title="Settings" />} />
           </Route>
           <Route path="*" element={<ErrorPage />} />

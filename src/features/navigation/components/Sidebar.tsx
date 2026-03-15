@@ -10,7 +10,8 @@ import {
     FiX,
     FiLogOut,
     FiFileText,
-    FiBell
+    FiBell,
+    FiBarChart2
 } from 'react-icons/fi';
 import { useAuth } from '../../auth/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -40,6 +41,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
             case 'Commodities': return <FiDatabase />;
             case 'Notifications': return <FiBell />;
             case 'Stocks in News': return <FiActivity />;
+            case 'FII & DII Data': return <FiBarChart2 />;
             default: return null;
         }
     };
