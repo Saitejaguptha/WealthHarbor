@@ -32,13 +32,14 @@ export const generateCommodityHistory = (basePrice: number, baseVolume: number, 
 };
 
 const COMMODITY_CONFIGS = [
-    { id: 'oil', name: 'Crude Oil', symbol: 'CL', unit: 'Barrel', currency: 'INR', category: 'Energy', basePrice: 6515.50, baseVolume: 350000, icon: '🛢️', color: '#0F172A' },
-    { id: 'gas', name: 'Natural Gas', symbol: 'NG', unit: 'MMBtu', currency: 'INR', category: 'Energy', basePrice: 153.85, baseVolume: 150000, icon: '🔥', color: '#3B82F6' },
-    { id: 'zinc', name: 'Zinc', symbol: 'ZN', unit: 'Tonne', currency: 'INR', category: 'Metals', basePrice: 203350.00, baseVolume: 8000, icon: '⛓️', color: '#64748B' },
-    { id: 'copper', name: 'Copper', symbol: 'HG', unit: 'KG', currency: 'INR', category: 'Metals', basePrice: 715.88, baseVolume: 25000, icon: '🔌', color: '#D97706' },
-    { id: 'alu', name: 'Aluminium', symbol: 'AL', unit: 'Tonne', currency: 'INR', category: 'Metals', basePrice: 182600.00, baseVolume: 15000, icon: '🧊', color: '#CBD5E1' },
-    { id: 'elec', name: 'Electricity', symbol: 'EL', unit: 'MWh', currency: 'INR', category: 'Utilities', basePrice: 3750.20, baseVolume: 500000, icon: '⚡', color: '#FCD34D' },
-    { id: 'nick', name: 'Nickel', symbol: 'NI', unit: 'Tonne', currency: 'INR', category: 'Metals', basePrice: 1452500.00, baseVolume: 3000, icon: '🔩', color: '#475569' }
+    { id: 'gold', name: 'Gold', symbol: 'GOLD', unit: '10g', currency: 'INR', category: 'Metals', basePrice: 62540.00, baseVolume: 5000, icon: '✨', color: '#F59E0B' },
+    { id: 'silver', name: 'Silver', symbol: 'SILVER', unit: 'KG', currency: 'INR', category: 'Metals', basePrice: 71230.00, baseVolume: 12000, icon: '🥈', color: '#94A3B8' },
+    { id: 'oil', name: 'Crude Oil', symbol: 'CRUDEOIL', unit: 'Barrel', currency: 'INR', category: 'Energy', basePrice: 6515.50, baseVolume: 350000, icon: '🛢️', color: '#0F172A' },
+    { id: 'gas', name: 'Natural Gas', symbol: 'NATGAS', unit: 'MMBtu', currency: 'INR', category: 'Energy', basePrice: 153.85, baseVolume: 150000, icon: '🔥', color: '#3B82F6' },
+    { id: 'zinc', name: 'Zinc', symbol: 'ZINC', unit: 'Tonne', currency: 'INR', category: 'Metals', basePrice: 203350.00, baseVolume: 8000, icon: '⛓️', color: '#64748B' },
+    { id: 'copper', name: 'Copper', symbol: 'COPPER', unit: 'KG', currency: 'INR', category: 'Metals', basePrice: 715.88, baseVolume: 25000, icon: '🔌', color: '#D97706' },
+    { id: 'alu', name: 'Aluminium', symbol: 'ALUMINI', unit: 'Tonne', currency: 'INR', category: 'Metals', basePrice: 182600.00, baseVolume: 15000, icon: '🧊', color: '#CBD5E1' },
+    { id: 'nick', name: 'Nickel', symbol: 'NICKEL', unit: 'Tonne', currency: 'INR', category: 'Metals', basePrice: 1452500.00, baseVolume: 3000, icon: '🔩', color: '#475569' }
 ] as const;
 
 export const getCommodities = (): CommodityData[] => {

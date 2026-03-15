@@ -12,7 +12,7 @@ const MarketAnalysis: React.FC = () => {
             <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
                 <div>
                     <h1 className="text-4xl font-black text-indigo-950 mb-2 tracking-tight">Market Analysis</h1>
-                    <p className="text-indigo-900/60 font-medium">Stay updated with the latest events impacting global markets</p>
+                    <p className="text-indigo-900/60 font-medium">Stay updated with the latest events impacting Indian markets</p>
                 </div>
             </div>
 
@@ -28,14 +28,14 @@ const MarketAnalysis: React.FC = () => {
                 </div>
                 <div className="bg-white border-2 border-indigo-50 rounded-3xl p-6 shadow-sm">
                     <div className="flex items-center gap-3 mb-4 text-indigo-400">
-                        <span className="font-bold tracking-widest uppercase text-xs text-indigo-900/40">VIX Volatility Index</span>
+                        <span className="font-bold tracking-widest uppercase text-xs text-indigo-900/40">India VIX Volatility</span>
                     </div>
-                    <div className="text-3xl font-black text-indigo-950 mb-1">14.20</div>
-                    <p className="text-sm text-emerald-600 font-bold">-0.45 (-3.07%) today</p>
+                    <div className="text-3xl font-black text-indigo-950 mb-1">15.45</div>
+                    <p className="text-sm text-emerald-600 font-bold">-0.85 (-5.21%) today</p>
                 </div>
                 <div className="bg-white border-2 border-indigo-50 rounded-3xl p-6 shadow-sm">
                     <div className="flex items-center gap-3 mb-4 text-indigo-400">
-                        <span className="font-bold tracking-widest uppercase text-xs text-indigo-900/40">Global Top Gainer Sector</span>
+                        <span className="font-bold tracking-widest uppercase text-xs text-indigo-900/40">Domestic Top Gainer Sector</span>
                     </div>
                     <div className="text-3xl font-black text-indigo-950 mb-1">Technology</div>
                     <p className="text-sm text-emerald-600 font-bold">+2.4% Average Growth</p>

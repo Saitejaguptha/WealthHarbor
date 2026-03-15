@@ -2,18 +2,18 @@ import React from 'react';
 import { FiTrendingUp, FiTrendingDown, FiGlobe, FiActivity } from 'react-icons/fi';
 
 const mockIndices = [
-    { name: 'S&P 500', value: '5,026.61', change: '+1.12%', points: '+55.70', isPositive: true },
-    { name: 'NASDAQ', value: '15,906.17', change: '+1.74%', points: '+276.54', isPositive: true },
-    { name: 'Dow Jones', value: '38,655.42', change: '-0.35%', points: '-135.21', isPositive: false },
-    { name: 'Russell 2000', value: '1,992.00', change: '+0.89%', points: '+17.43', isPositive: true }
+    { name: 'Nifty 50', value: '22,419.55', change: '+0.72%', points: '+161.40', isPositive: true },
+    { name: 'BSE Sensex', value: '73,903.91', change: '+0.86%', points: '+630.16', isPositive: true },
+    { name: 'Nifty Bank', value: '47,286.90', change: '-0.15%', points: '-72.30', isPositive: false },
+    { name: 'Nifty IT', value: '37,120.45', change: '+1.45%', points: '+532.10', isPositive: true }
 ];
 
 const mockMovers = [
-    { symbol: 'NVDA', company: 'NVIDIA Corp', price: '$726.13', change: '+6.2%', isPositive: true, volume: '45.2M' },
-    { symbol: 'META', company: 'Meta Platforms', price: '$468.11', change: '+4.1%', isPositive: true, volume: '22.1M' },
-    { symbol: 'TSLA', company: 'Tesla Inc', price: '$188.13', change: '-3.2%', isPositive: false, volume: '112.4M' },
-    { symbol: 'AAPL', company: 'Apple Inc', price: '$182.52', change: '-1.5%', isPositive: false, volume: '56.8M' },
-    { symbol: 'AMD', company: 'Advanced Micro', price: '$173.87', change: '+2.8%', isPositive: true, volume: '68.3M' }
+    { symbol: 'RELIANCE', company: 'Reliance Industries', price: '₹2,985.40', change: '+1.2%', isPositive: true, volume: '4.5M' },
+    { symbol: 'HDFCBANK', company: 'HDFC Bank Ltd', price: '₹1,442.20', change: '-0.8%', isPositive: false, volume: '18.2M' },
+    { symbol: 'TCS', company: 'Tata Consultancy', price: '₹4,120.15', change: '+2.4%', isPositive: true, volume: '2.1M' },
+    { symbol: 'ICICIBANK', company: 'ICICI Bank Ltd', price: '₹1,085.60', change: '+1.5%', isPositive: true, volume: '12.4M' },
+    { symbol: 'INFY', company: 'Infosys Ltd', price: '₹1,620.35', change: '-1.1%', isPositive: false, volume: '6.8M' }
 ];
 
 const MarketOverview: React.FC = () => {
@@ -36,8 +36,8 @@ const MarketOverview: React.FC = () => {
                     <div className="flex items-center gap-2">
                         <FiGlobe className="text-indigo-400 text-xl" />
                         <div>
-                            <h3 className="font-bold text-indigo-950 text-sm leading-tight">US Markets</h3>
-                            <p className="text-indigo-900/40 text-[10px] font-bold uppercase tracking-widest">Updated 2m ago</p>
+                            <h3 className="font-bold text-indigo-950 text-sm leading-tight">Indian Markets</h3>
+                            <p className="text-indigo-900/40 text-[10px] font-bold uppercase tracking-widest">Updated 1m ago</p>
                         </div>
                     </div>
                     <div className="h-8 w-px bg-indigo-50"></div>
@@ -53,7 +53,7 @@ const MarketOverview: React.FC = () => {
                 {/* Left Column: Major Indices */}
                 <div className="lg:col-span-2 space-y-6">
                     <h2 className="text-xl font-bold text-indigo-950 flex items-center gap-2">
-                        <FiGlobe className="text-indigo-400" /> Major Global Indices
+                        <FiGlobe className="text-indigo-400" /> Major Indian Indices
                     </h2>
                     
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">

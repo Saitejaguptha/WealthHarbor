@@ -11,63 +11,63 @@ export interface NewsArticle {
 
 export const mockNews: NewsArticle[] = [
   {
-    id: "news-iran-usa-1",
-    title: "Escalating Tensions Between Iran and the USA Impact Global Oil Prices",
-    summary: "Recent geopolitical events in the Middle East have caused a surge in crude oil futures.",
+    id: "news-rbi-1",
+    title: "RBI Holds Repo Rate at 6.5%, Maintains 'Withdrawal of Accommodation' Stance",
+    summary: "The Monetary Policy Committee voted to keep interest rates unchanged to ensure inflation aligns with the target.",
     content: [
-      "In the wake of recent developments, tensions between Iran and the United States have reached a new high, immediately sending ripples through global energy markets.",
-      "Brent crude oil futures spiked by 4% early Monday morning as traders reacted to the potential for supply chain disruptions in the Strait of Hormuz, a critical chokepoint for global oil shipments.",
-      "Market analysts are warning that prolonged uncertainty could lead to sustained higher energy costs, filtering down to consumer prices and complicating central banks' efforts to tame inflation.",
-      "Diplomatic efforts are reportedly underway, but the situation remains highly fluid. Energy sector stocks (XLE) advanced notably on the news."
+      "The Reserve Bank of India (RBI) Governor Shaktikanta Das announced today that the Monetary Policy Committee (MPC) has decided to keep the repo rate unchanged at 6.5%.",
+      "The decision was driven by the need to balance economic growth with price stability. The Governor noted that while CPI inflation is on a downward trajectory, the board remains vigilant regarding food price shocks.",
+      "Analysts at major Indian brokerages had largely expected this outcome, citing the global trend of 'higher-for-longer' interest rates and the RBI's focus on reaching the 4% inflation target.",
+      "Bank stocks showed a mixed reaction, with HDFC Bank and ICICI Bank ending the session slightly lower, while public sector lenders like SBI managed to stay in the green."
     ],
-    date: "2026-03-15T08:30:00Z",
-    source: "Global Finance Chronicle",
-    category: "Geopolitics",
-    impact: 'High'
-  },
-  {
-    id: "news-fed-meeting-2",
-    title: "Federal Reserve Holds Rates Steady, Hints at Potential Cuts",
-    summary: "The Fed concluded its latest policy meeting without changing the baseline interest rate but signaled optimism.",
-    content: [
-      "The Federal Reserve concluded its highly anticipated two-day policy meeting today, announcing its decision to hold its benchmark interest rate steady in the current target range.",
-      "During the press conference, the Fed Chair noted that while inflation has significantly cooled from its peak, the central bank is waiting for \"more convincing evidence\" that price growth is sustainably returning to the 2% target.",
-      "Despite the hold, the updated \"dot plot\" of economic projections indicated a consensus among committee members for at least one, and possibly two, rate cuts before the end of the year, assuming economic data continues its current trajectory.",
-      "Equity markets largely took the news in stride, with the S&P 500 ending the session slightly higher as investors priced in the slightly dovish tone."
-    ],
-    date: "2026-03-14T14:00:00Z",
-    source: "Market Watchtower",
+    date: "2026-03-15T11:30:00Z",
+    source: "Economic Times India",
     category: "Economy",
     impact: 'High'
   },
   {
-    id: "news-gold-record-3",
-    title: "Gold Hits Record High Amidst Global Uncertainty",
-    summary: "Refuge demand drives precious metals to unprecedented valuations.",
+    id: "news-sebi-t0-2",
+    title: "SEBI Introduces T+0 Settlement for Select Stocks in Indian Markets",
+    summary: "The market regulator is pushing for same-day settlement to enhance liquidity and efficiency.",
     content: [
-      "Gold prices broke through previous resistance levels today to establish a new all-time high, driven by a combination of retail buying, central bank accumulation, and institutional hedging.",
-      "The surge in the precious metal's value is largely attributed to its traditional role as a safe-haven asset during times of geopolitical strife and economic uncertainty.",
-      "Silver and platinum also saw sympathetic rallies, though gold remains the clear standout performer in the commodities sector this quarter.",
-      "Analysts suggest that if current macroeconomic conditions persist, gold could see further upside before establishing a new consolidation range."
+      "The Securities and Exchange Board of India (SEBI) has officially kicked off the pilot project for T+0 settlement cycles for a limited universe of 25 stocks.",
+      "This move follows the successful transition to T+1 settlement last year, making India one of the few large markets moving toward instantaneous settlements.",
+      "Regulators believe this will unlock collateral and significantly reduce credit risk in the equity ecosystem. However, small brokers have raised concerns about the technological costs of such a rapid transition.",
+      "The initial pilot includes blue-chip stocks like Reliance, TCS, and ITC. Market participants will monitor the volumes and efficiency of this move closely over the next month."
     ],
-    date: "2026-03-13T09:15:00Z",
-    source: "Commodity Insights",
+    date: "2026-03-14T09:00:00Z",
+    source: "Mint",
     category: "Markets",
+    impact: 'High'
+  },
+  {
+    id: "news-tech-ai-3",
+    title: "India's Tech Giants Invest Heavily in Sovereign AI Infrastructure",
+    summary: "TCS and Infosys lead the charge in establishing localized LLMs and data sovereign compute clusters.",
+    content: [
+      "Leading Indian IT services firms are pivoting their strategies toward building 'Sovereign AI' solutions for the domestic and Middle Eastern markets.",
+      "TCS recently announced a multi-crore investment into a new center of excellence focused on developing Large Language Models (LLMs) trained on Indic languages.",
+      "This shift comes as the Indian government continues to emphasize data localization and the development of indigenous tech stacks.",
+      "Industry experts believe this could open up massive new revenue streams in the public sector and regulated industries like Healthcare and Defense."
+    ],
+    date: "2026-03-13T10:15:00Z",
+    source: "The Tech Pulse",
+    category: "Tech",
     impact: 'Medium'
   },
   {
-    id: "news-tech-ai-4",
-    title: "Major Tech Firms Ramp Up AI Infrastructure Deals",
-    summary: "Semiconductor demands reach fever pitch as cloud providers expand data centers.",
+    id: "news-budget-expect-4",
+    title: "Markets Rally on Pre-Budget Optimism and Capital Expenditure Hopes",
+    summary: "Nifty 50 touches new lifetime highs as investors anticipate continued focus on infrastructure.",
     content: [
-      "The race for dominance in Artificial Intelligence is fueling a massive capital expenditure cycle among the world's largest technology companies.",
-      "Recent SEC filings reveal multibillion-dollar commitments to expand data center footprints and procure the latest generation of heavy-compute GPUs.",
-      "This infrastructure build-out is providing a massive tailwind for semiconductor manufacturers, power management companies, and specialized cooling providers.",
-      "However, some industry watchers are beginning to question the timeline for realizing a return on these massive investments."
+      "The Indian equity indices reached new milestones today, with the Nifty 50 crossing the critical 22,500 mark during intra-day trading.",
+      "The rally is largely fueled by expectations that the upcoming Union Budget will maintain its aggressive stance on capital expenditure, particularly in the Railway and Defense sectors.",
+      "Domestic institutional investors (DIIs) have been strong buyers, offsetting the sporadic outflows from foreign portfolio investors (FPIs).",
+      "Construction and Metal stocks were the top gainers, with companies like L&T and Tata Steel leading the charge."
     ],
-    date: "2026-03-12T11:45:00Z",
-    source: "Silicon Valley Daily",
-    category: "Tech",
+    date: "2026-03-12T15:45:00Z",
+    source: "Business Standard",
+    category: "Markets",
     impact: 'Medium'
   }
 ];
