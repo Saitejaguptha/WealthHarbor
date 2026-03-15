@@ -1,12 +1,15 @@
-import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { FiMenu, FiBookmark, FiGlobe } from 'react-icons/fi';
+import { useAuth } from '../../features/auth/AuthContext';
+import NotificationBar from './NotificationBar';
 
 interface HeaderProps {
     onMenuClick: () => void;
 }
 
 const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
+    const { user } = useAuth();
+
     return (
         <header className="h-[60px] bg-white flex items-center justify-between px-4 md:px-6 border-b border-indigo-100 shrink-0 shadow-sm z-50 sticky top-0">
             <div className="flex items-center gap-4">
@@ -24,7 +27,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
 
             <div className="flex-1 flex justify-center">
                 <div className="text-sm md:text-base font-medium text-indigo-900/60 hidden sm:block">
-                    Welcome back, <span className="font-bold text-indigo-600">User!</span>
+                    Welcome back, <span className="font-bold text-indigo-600">{user?.username || 'User'}!</span>
                 </div>
             </div>
 
@@ -50,11 +53,13 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
                     <FiGlobe className="h-5 w-5 md:h-6 md:w-6" />
                 </NavLink>
 
+                <NotificationBar />
+
                 <div className="flex items-center gap-3">
-                    <NavLink to="/profile">
+                    <NavLink to="/profile" title="Profile">
                         <div className="h-8 w-8 rounded-full bg-indigo-100 border border-indigo-200 flex items-center justify-center text-indigo-600 overflow-hidden shadow-sm hover:ring-2 ring-indigo-300 transition-all cursor-pointer">
                             <img
-                                src="https://api.dicebear.com/7.x/avataaars/svg?seed=Lucky"
+                                src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.username || 'Lucky'}`}
                                 alt="Profile"
                                 className="h-full w-full object-cover"
                             />

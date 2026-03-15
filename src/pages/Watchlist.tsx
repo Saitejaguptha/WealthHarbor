@@ -2,19 +2,27 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FiTrendingUp, FiTrendingDown, FiTrash2, FiArrowRight, FiBookmark, FiActivity } from 'react-icons/fi';
 import { getWatchlist, removeFromWatchlist, type WatchlistItem } from '../utils/watchlistUtils';
+import { useAuth } from '../features/auth/AuthContext';
 
 const Watchlist: React.FC = () => {
     const navigate = useNavigate();
+    const { user } = useAuth();
     const [watchlist, setWatchlist] = useState<WatchlistItem[]>([]);
 
+    const userEmail = user?.email || '';
+
     useEffect(() => {
-        setWatchlist(getWatchlist());
-    }, []);
+        if (userEmail) {
+            setWatchlist(getWatchlist(userEmail));
+        }
+    }, [userEmail]);
 
     const handleRemove = (e: React.MouseEvent, id: string) => {
         e.stopPropagation();
-        removeFromWatchlist(id);
-        setWatchlist(getWatchlist());
+        if (userEmail) {
+            removeFromWatchlist(userEmail, id);
+            setWatchlist(getWatchlist(userEmail));
+        }
     };
 
     const getTypeColor = (type: string) => {
@@ -72,7 +80,7 @@ const Watchlist: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
-                {watchlist.map((item) => (
+                {watchlist.map((item: WatchlistItem) => (
                     <div
                         key={item.id}
                         onClick={() => navigate(getNavigationPath(item))}

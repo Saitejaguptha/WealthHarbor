@@ -19,10 +19,10 @@ const PageHeader: React.FC<PageHeaderProps> = ({
         <div className="animate-in fade-in duration-700">
             <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
                 <div>
-                    <h1 className="text-4xl font-black text-indigo-950 mb-2 tracking-tight flex items-center gap-3">
+                    <h1 className="text-3xl md:text-4xl font-black text-indigo-950 mb-2 tracking-tight flex items-center gap-3">
                         {title}
                     </h1>
-                    <p className="text-indigo-900/60 font-medium">{description}</p>
+                    <p className="text-sm md:text-base text-indigo-900/60 font-medium">{description}</p>
                 </div>
                 {onRefresh && (
                     <button

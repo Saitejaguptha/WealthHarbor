@@ -7,8 +7,13 @@ import {
     FiDatabase,
     FiLayers,
     FiActivity,
-    FiX
+    FiX,
+    FiLogOut,
+    FiFileText,
+    FiBell
 } from 'react-icons/fi';
+import { useAuth } from '../../auth/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import { NAV_ITEMS } from '../../../constants/navigation';
 
 interface SidebarProps {
@@ -17,6 +22,14 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
+    const { logout } = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout();
+        navigate('/login');
+    };
+
     const getIcon = (name: string) => {
         switch (name) {
             case 'Stocks': return <FiTrendingUp />;
@@ -25,6 +38,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
             case 'ETF': return <FiPieChart />;
             case 'Gold & Silver': return <FiLayers />;
             case 'Commodities': return <FiDatabase />;
+            case 'Notifications': return <FiBell />;
+            case 'Stocks in News': return <FiActivity />;
             default: return null;
         }
     };
@@ -77,6 +92,47 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                             </NavLink>
                         ))}
                     </div>
+
+                    <div className="mt-10 pt-6 border-t border-indigo-100">
+                        <div className="font-bold text-indigo-900 text-[10px] tracking-widest uppercase opacity-40 px-4 mb-4">
+                            Stocks in News
+                        </div>
+                        <div className="space-y-4 px-2">
+                            <div className="bg-white/50 p-4 rounded-2xl border border-indigo-50 hover:bg-white transition-all group cursor-default">
+                                <div className="flex items-start gap-3">
+                                    <div className="p-2 bg-indigo-50 text-indigo-600 rounded-xl group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                                        <FiFileText />
+                                    </div>
+                                    <div className="flex-1">
+                                        <p className="text-[11px] font-bold text-indigo-950 leading-tight">Reliance Invested in Ambuja Cement</p>
+                                        <p className="text-[9px] text-indigo-900/40 mt-1 font-medium italic">2 hours ago</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="bg-white/50 p-4 rounded-2xl border border-indigo-50 hover:bg-white transition-all group cursor-default">
+                                <div className="flex items-start gap-3">
+                                    <div className="p-2 bg-indigo-50 text-indigo-600 rounded-xl group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                                        <FiFileText />
+                                    </div>
+                                    <div className="flex-1">
+                                        <p className="text-[11px] font-bold text-indigo-950 leading-tight">TATA Motors Q3 Results</p>
+                                        <p className="text-[9px] text-indigo-900/40 mt-1 font-medium italic">4 hours ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="p-5 mt-auto border-t border-indigo-100">
+                    <button
+                        onClick={handleLogout}
+                        className="w-full flex items-center gap-3 px-4 py-3 text-sm font-bold text-rose-600 hover:bg-rose-50 rounded-xl transition-all group"
+                    >
+                        <FiLogOut className="text-lg group-hover:rotate-12 transition-transform" />
+                        <span>Logout Account</span>
+                    </button>
                 </div>
             </aside>
         </>

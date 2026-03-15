@@ -1,4 +1,9 @@
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
+import { AuthProvider } from './features/auth/AuthContext';
+import ProtectedRoute from './components/auth/ProtectedRoute';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 import Home from './pages/Home';
 import ErrorPage from './pages/ErrorPage';
 import Stocks from './pages/Stocks';
@@ -16,6 +21,9 @@ import NewsDetails from './pages/NewsDetails';
 import MarketAnalysis from './pages/MarketAnalysis';
 import Indices from './pages/Indices';
 import IndexDetails from './pages/IndexDetails';
+import StocksInNews from './pages/StocksInNews';
+import Notifications from './pages/Notifications';
+import ForgotPassword from './pages/ForgotPassword';
 import ScrollToTop from './components/common/ScrollToTop';
 
 // Placeholder Pages
@@ -29,39 +37,48 @@ const PagePlaceholder = ({ title }: { title: string }) => (
 
 function App() {
   return (
-    <HashRouter>
-      <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<Home />}>
-          <Route index element={<Navigate to="/stocks" replace />} />
-          <Route path="stocks">
-            <Route index element={<Stocks />} />
-            <Route path=":symbol" element={<StockDetails />} />
+    <AuthProvider>
+      <HashRouter>
+        <ScrollToTop />
+        <Toaster position="top-right" />
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          
+          <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>}>
+            <Route index element={<Navigate to="/stocks" replace />} />
+            <Route path="stocks">
+              <Route index element={<Stocks />} />
+              <Route path=":symbol" element={<StockDetails />} />
+            </Route>
+            <Route path="market-analysis" element={<MarketAnalysis />} />
+            <Route path="indices" element={<Indices />} />
+            <Route path="index-details/:name" element={<IndexDetails />} />
+            <Route path="mutual-funds">
+              <Route index element={<MutualFunds />} />
+              <Route path=":id" element={<MutualFundDetails />} />
+            </Route>
+            <Route path="etfs">
+              <Route index element={<ETFs />} />
+              <Route path=":id" element={<ETFDetails />} />
+            </Route>
+            <Route path="gold-silver" element={<GoldSilver />} />
+            <Route path="commodities">
+              <Route index element={<Commodities />} />
+              <Route path=":id" element={<CommodityDetails />} />
+            </Route>
+            <Route path="watchlist" element={<Watchlist />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="notifications" element={<Notifications />} />
+            <Route path="stocks-in-news" element={<StocksInNews />} />
+            <Route path="news/:id" element={<NewsDetails />} />
+            <Route path="settings" element={<PagePlaceholder title="Settings" />} />
           </Route>
-          <Route path="market-analysis" element={<MarketAnalysis />} />
-          <Route path="indices" element={<Indices />} />
-          <Route path="index-details/:name" element={<IndexDetails />} />
-          <Route path="mutual-funds">
-            <Route index element={<MutualFunds />} />
-            <Route path=":id" element={<MutualFundDetails />} />
-          </Route>
-          <Route path="etfs">
-            <Route index element={<ETFs />} />
-            <Route path=":id" element={<ETFDetails />} />
-          </Route>
-          <Route path="gold-silver" element={<GoldSilver />} />
-          <Route path="commodities">
-            <Route index element={<Commodities />} />
-            <Route path=":id" element={<CommodityDetails />} />
-          </Route>
-          <Route path="watchlist" element={<Watchlist />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="news/:id" element={<NewsDetails />} />
-          <Route path="settings" element={<PagePlaceholder title="Settings" />} />
-        </Route>
-        <Route path="*" element={<ErrorPage />} />
-      </Routes>
-    </HashRouter>
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
+      </HashRouter>
+    </AuthProvider>
   );
 }
 

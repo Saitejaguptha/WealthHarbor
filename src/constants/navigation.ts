@@ -4,5 +4,6 @@ export const NAV_ITEMS = [
     { name: 'Mutual Fund', path: '/mutual-funds' },
     { name: 'ETF', path: '/etfs' },
     { name: 'Gold & Silver', path: '/gold-silver' },
-    { name: 'Commodities', path: '/commodities' }
+    { name: 'Commodities', path: '/commodities' },
+    { name: 'Stocks in News', path: '/stocks-in-news' }
 ];

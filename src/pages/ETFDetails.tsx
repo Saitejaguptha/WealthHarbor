@@ -6,6 +6,7 @@ import PriceHistoryChart from '../components/common/PriceHistoryChart';
 import MetricInfo from '../components/common/MetricInfo';
 import { addToWatchlist, removeFromWatchlist, isInWatchlist } from '../utils/watchlistUtils';
 import { FiPlus, FiCheck } from 'react-icons/fi';
+import { useAuth } from '../features/auth/AuthContext';
 
 const ETFDetails: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -15,21 +16,24 @@ const ETFDetails: React.FC = () => {
         return etfs.find(e => e.id === id);
     }, [id, etfs]);
 
+    const { user } = useAuth();
     const [inWatchlist, setInWatchlist] = React.useState(false);
 
+    const userEmail = user?.email || '';
+
     React.useEffect(() => {
-        if (etf) {
-            setInWatchlist(isInWatchlist(etf.id));
+        if (etf && userEmail) {
+            setInWatchlist(isInWatchlist(userEmail, etf.id));
         }
-    }, [etf]);
+    }, [etf, userEmail]);
 
     const toggleWatchlist = () => {
-        if (!etf) return;
+        if (!etf || !userEmail) return;
         if (inWatchlist) {
-            removeFromWatchlist(etf.id);
+            removeFromWatchlist(userEmail, etf.id);
             setInWatchlist(false);
         } else {
-            addToWatchlist({
+            addToWatchlist(userEmail, {
                 id: etf.id,
                 name: etf.name,
                 symbol: etf.symbol,

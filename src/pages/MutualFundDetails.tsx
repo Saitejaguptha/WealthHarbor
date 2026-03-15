@@ -6,6 +6,7 @@ import PriceHistoryChart from '../components/common/PriceHistoryChart';
 import MetricInfo from '../components/common/MetricInfo';
 import { addToWatchlist, removeFromWatchlist, isInWatchlist } from '../utils/watchlistUtils';
 import { FiPlus, FiCheck } from 'react-icons/fi';
+import { useAuth } from '../features/auth/AuthContext';
 
 const MutualFundDetails: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -15,21 +16,24 @@ const MutualFundDetails: React.FC = () => {
         return funds.find(f => f.id === id);
     }, [id, funds]);
 
+    const { user } = useAuth();
     const [inWatchlist, setInWatchlist] = React.useState(false);
 
+    const userEmail = user?.email || '';
+
     React.useEffect(() => {
-        if (fund) {
-            setInWatchlist(isInWatchlist(fund.id));
+        if (fund && userEmail) {
+            setInWatchlist(isInWatchlist(userEmail, fund.id));
         }
-    }, [fund]);
+    }, [fund, userEmail]);
 
     const toggleWatchlist = () => {
-        if (!fund) return;
+        if (!fund || !userEmail) return;
         if (inWatchlist) {
-            removeFromWatchlist(fund.id);
+            removeFromWatchlist(userEmail, fund.id);
             setInWatchlist(false);
         } else {
-            addToWatchlist({
+            addToWatchlist(userEmail, {
                 id: fund.id,
                 name: fund.name,
                 symbol: fund.id,

@@ -9,26 +9,30 @@ import PriceHistoryChart from '../components/common/PriceHistoryChart';
 import MetricInfo from '../components/common/MetricInfo';
 import { addToWatchlist, removeFromWatchlist, isInWatchlist } from '../utils/watchlistUtils';
 import { FiPlus, FiCheck } from 'react-icons/fi';
+import { useAuth } from '../features/auth/AuthContext';
 
 const StockDetails: React.FC = () => {
     const { symbol } = useParams<{ symbol: string }>();
     const navigate = useNavigate();
+    const { user } = useAuth();
     const stock = getStockBySymbol(symbol || '');
     const [inWatchlist, setInWatchlist] = React.useState(false);
 
+    const userEmail = user?.email || '';
+
     React.useEffect(() => {
-        if (stock) {
-            setInWatchlist(isInWatchlist(stock.symbol));
+        if (stock && userEmail) {
+            setInWatchlist(isInWatchlist(userEmail, stock.symbol));
         }
-    }, [stock]);
+    }, [stock, userEmail]);
 
     const toggleWatchlist = () => {
-        if (!stock) return;
+        if (!stock || !userEmail) return;
         if (inWatchlist) {
-            removeFromWatchlist(stock.symbol);
+            removeFromWatchlist(userEmail, stock.symbol);
             setInWatchlist(false);
         } else {
-            addToWatchlist({
+            addToWatchlist(userEmail, {
                 id: stock.symbol,
                 name: stock.name,
                 symbol: stock.symbol,

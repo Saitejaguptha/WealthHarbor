@@ -4,15 +4,47 @@ import { FiArrowLeft, FiActivity, FiGlobe, FiInfo, FiClock, FiLayers } from 'rea
 import { getCommodityById } from '../utils/commodityData';
 import PriceHistoryChart from '../components/common/PriceHistoryChart';
 import MetricInfo from '../components/common/MetricInfo';
+import { addToWatchlist, removeFromWatchlist, isInWatchlist } from '../utils/watchlistUtils';
+import { useAuth } from '../features/auth/AuthContext';
+import { FiPlus, FiCheck } from 'react-icons/fi';
 
 const CommodityDetails: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
     const commodity = useMemo(() => getCommodityById(id || ''), [id]);
 
+    const { user } = useAuth();
     const [currency] = React.useState<'INR' | 'USD'>(() => {
         return (localStorage.getItem('wealthharbor_currency') as 'INR' | 'USD') || 'INR';
     });
+    const [inWatchlist, setInWatchlist] = React.useState(false);
+
+    const userEmail = user?.email || '';
+
+    React.useEffect(() => {
+        if (commodity && userEmail) {
+            setInWatchlist(isInWatchlist(userEmail, commodity.id));
+        }
+    }, [commodity, userEmail]);
+
+    const toggleWatchlist = () => {
+        if (!commodity || !userEmail) return;
+        if (inWatchlist) {
+            removeFromWatchlist(userEmail, commodity.id);
+            setInWatchlist(false);
+        } else {
+            addToWatchlist(userEmail, {
+                id: commodity.id,
+                name: commodity.name,
+                symbol: commodity.symbol,
+                type: 'commodity',
+                price: formatPrice(commodity.currentPrice),
+                change: commodity.change,
+                changePercent: commodity.changePercent
+            });
+            setInWatchlist(true);
+        }
+    };
 
     const historyData = useMemo(() => {
         const USD_CONVERSION = 0.012;
@@ -65,6 +97,17 @@ const CommodityDetails: React.FC = () => {
                 </div>
 
                 <div className="flex items-center gap-4">
+                    <button
+                        onClick={toggleWatchlist}
+                        className={`px-6 py-3 rounded-2xl font-bold transition-all active:scale-95 shadow-sm text-sm flex items-center gap-2 ${inWatchlist
+                            ? 'bg-emerald-50 text-emerald-600 border border-emerald-100'
+                            : 'bg-indigo-600 text-white hover:bg-indigo-700'
+                            }`}
+                    >
+                        {inWatchlist ? <FiCheck /> : <FiPlus />}
+                        {inWatchlist ? 'In Watchlist' : 'Add to Watchlist'}
+                    </button>
+                    <div className="h-12 w-px bg-indigo-100 mx-2 hidden md:block" />
                     <div className="text-right relative">
                         <p className="text-indigo-900/40 text-[10px] font-black uppercase tracking-widest mb-1 flex items-center justify-end">
                             Live Price ({commodity.unit})
