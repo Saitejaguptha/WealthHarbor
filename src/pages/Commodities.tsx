@@ -1,8 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiTrendingUp, FiTrendingDown, FiSearch, FiActivity, FiGlobe } from 'react-icons/fi';
-import { getCommodities } from '../utils/commodityData';
-
+import { getAllCommodities, refreshCommodities } from '../utils/commodityData';
+import { FiTrendingUp, FiTrendingDown, FiSearch, FiActivity, FiGlobe, FiRefreshCw } from 'react-icons/fi';
 
 const Commodities: React.FC = () => {
     const navigate = useNavigate();
@@ -15,8 +14,13 @@ const Commodities: React.FC = () => {
         setCurrency(newCurrency);
         localStorage.setItem('wealthharbor_currency', newCurrency);
     };
+
     const [selectedCategory, setSelectedCategory] = useState<string>('All');
-    const [commodities] = useState(() => getCommodities());
+    const [commodities, setCommodities] = useState(() => getAllCommodities());
+
+    const handleRefresh = () => {
+        setCommodities(refreshCommodities());
+    };
 
     const categories = ['All', 'Metals', 'Energy', 'Utilities'];
     const USD_CONVERSION = 0.012; // 1 INR = 0.012 USD
@@ -75,82 +79,69 @@ const Commodities: React.FC = () => {
     };
 
     return (
-        <div className="p-4 md:p-10 pb-24 lg:pb-32 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-1000 space-y-4 md:space-y-12">
-            {/* Header Section */}
-            <div className="bg-white/40 backdrop-blur-3xl border border-white/50 p-4 md:p-12 rounded-[1.5rem] md:rounded-[3.5rem] shadow-2xl shadow-indigo-100/30 flex flex-col xl:flex-row items-center justify-between gap-4 md:gap-8 relative overflow-hidden group">
-                <div className="absolute top-0 right-0 p-8 md:p-12 opacity-[0.03] scale-100 md:scale-150 rotate-12 group-hover:rotate-0 transition-transform duration-1000">
-                    <FiGlobe className="text-[8rem] md:text-[12rem] text-indigo-950" />
-                </div>
-
-                <div className="text-center xl:text-left relative z-10 w-full">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-indigo-50 text-indigo-600 text-[9px] md:text-xs font-black rounded-full mb-3 md:mb-6 tracking-widest uppercase">
-                        <FiActivity className="animate-pulse" /> Live Feed
-                    </div>
-                    <h1 className="text-3xl md:text-7xl font-black text-indigo-950 mb-2 md:mb-4 tracking-tighter leading-tight">
-                        Commodities <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-indigo-400">Hub</span>
+        <div className="p-4 md:p-8 pb-24 lg:pb-32 max-w-7xl mx-auto animate-in fade-in duration-700">
+            <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <h1 className="text-4xl font-black text-indigo-950 mb-2 tracking-tight flex items-center gap-3">
+                        <div className="p-2 bg-indigo-600 rounded-xl text-white shadow-lg shadow-indigo-200">
+                            <FiGlobe className="text-3xl" />
+                        </div>
+                        Commodities Market
                     </h1>
-                    <p className="text-indigo-900/60 font-medium text-[11px] md:text-lg max-w-xl mx-auto xl:mx-0">
-                        Monitor global energy, metals, and utility markets.
-                    </p>
+                    <p className="text-indigo-900/60 font-medium tracking-tight">Monitor global energy, metals, and utility markets</p>
                 </div>
-
-                <div className="flex flex-col items-center xl:items-end gap-6 relative z-10 w-full xl:w-auto">
-                    <div className="bg-indigo-50 p-1.5 rounded-2xl flex items-center gap-1">
+                
+                <div className="flex items-center gap-3">
+                    <div className="bg-indigo-50 p-1 rounded-xl flex items-center gap-1 border border-indigo-100">
                         <button
                             onClick={() => handleCurrencyChange('INR')}
-                            className={`px-4 md:px-5 py-2 md:py-2.5 rounded-xl text-[10px] md:text-xs font-black transition-all uppercase tracking-widest ${currency === 'INR' ? 'bg-white text-indigo-600 shadow-sm' : 'text-indigo-900/40 hover:text-indigo-900'}`}
+                            className={`px-4 py-2 rounded-lg text-[10px] font-black transition-all uppercase tracking-widest ${currency === 'INR' ? 'bg-white text-indigo-600 shadow-sm' : 'text-indigo-900/40 hover:text-indigo-900'}`}
                         >
                             INR (₹)
                         </button>
                         <button
                             onClick={() => handleCurrencyChange('USD')}
-                            className={`px-4 md:px-5 py-2 md:py-2.5 rounded-xl text-[10px] md:text-xs font-black transition-all uppercase tracking-widest ${currency === 'USD' ? 'bg-white text-indigo-600 shadow-sm' : 'text-indigo-900/40 hover:text-indigo-900'}`}
+                            className={`px-4 py-2 rounded-lg text-[10px] font-black transition-all uppercase tracking-widest ${currency === 'USD' ? 'bg-white text-indigo-600 shadow-sm' : 'text-indigo-900/40 hover:text-indigo-900'}`}
                         >
                             USD ($)
                         </button>
                     </div>
-
-                    <div className="grid grid-cols-2 gap-3 md:gap-4 w-full">
-                        <div className="bg-white/80 p-4 md:p-6 rounded-3xl border border-indigo-50 shadow-sm">
-                            <span className="text-[8px] md:text-[10px] font-black uppercase tracking-widest text-indigo-900/40 block mb-1">Global Volume</span>
-                            <span className="text-sm md:text-xl font-black text-indigo-950 font-mono">
-                                {currency === 'INR' ? '₹1.24T' : '$14.9B'}
-                            </span>
-                        </div>
-                        <div className="bg-white/80 p-4 md:p-6 rounded-3xl border border-indigo-50 shadow-sm">
-                            <span className="text-[8px] md:text-[10px] font-black uppercase tracking-widest text-indigo-900/40 block mb-1">Sentiment</span>
-                            <span className="text-sm md:text-xl font-black text-emerald-600 font-mono">BULLISH</span>
-                        </div>
-                    </div>
+                    <button
+                        onClick={handleRefresh}
+                        className="flex items-center gap-2 px-6 py-3 bg-white border-2 border-indigo-50 text-indigo-600 font-bold rounded-2xl hover:border-indigo-500 hover:text-indigo-800 transition-all active:scale-95 shadow-sm hover:shadow-md"
+                    >
+                        <FiRefreshCw className="text-xl" />
+                        <span className="hidden sm:inline">Refresh Data</span>
+                    </button>
                 </div>
             </div>
 
-            {/* Toolbar */}
-            <div className="flex flex-col md:flex-row gap-4 items-center justify-between sticky top-6 z-40">
-                <div className="relative w-full md:w-96 group">
-                    <FiSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-indigo-400 text-xl transition-colors group-focus-within:text-indigo-600" />
+            {/* Controls Section */}
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8 group">
+                {/* Search Bar */}
+                <div className="lg:col-span-3 relative">
+                    <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-indigo-400 text-xl transition-colors group-focus-within:text-indigo-600" />
                     <input
                         type="text"
-                        placeholder="Search commodities (e.g. Oil, Gas)..."
-                        className="w-full pl-14 pr-6 py-4 bg-white/80 backdrop-blur-xl border-2 border-white rounded-2xl focus:border-indigo-500 focus:ring-8 focus:ring-indigo-500/5 outline-none transition-all duration-300 shadow-xl shadow-indigo-100/20 text-indigo-950 font-semibold placeholder:text-indigo-300"
+                        placeholder="Search commodities (e.g. Oil, Copper)..."
+                        className="w-full pl-12 pr-4 py-4 bg-white border-2 border-indigo-50 rounded-2xl focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all duration-300 shadow-sm hover:shadow-md text-indigo-950 font-medium placeholder:text-indigo-300"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
                 </div>
 
-                <div className="flex items-center gap-2 p-2 bg-white/80 backdrop-blur-xl rounded-[2rem] border border-white shadow-xl shadow-indigo-100/20 overflow-x-auto hide-scrollbar max-w-full">
-                    {categories.map((cat) => (
-                        <button
-                            key={cat}
-                            onClick={() => setSelectedCategory(cat)}
-                            className={`px-5 py-2.5 rounded-full text-xs font-black transition-all uppercase tracking-widest whitespace-nowrap ${selectedCategory === cat
-                                ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200 shadow-offset-y-2'
-                                : 'text-indigo-900/40 hover:text-indigo-600 hover:bg-indigo-50'
-                                }`}
-                        >
-                            {cat}
-                        </button>
-                    ))}
+                {/* Category Filter */}
+                <div className="relative">
+                    <FiActivity className="absolute left-4 top-1/2 -translate-y-1/2 text-indigo-400" />
+                    <select
+                        className="w-full pl-12 pr-4 py-4 bg-white border-2 border-indigo-50 rounded-2xl focus:border-indigo-500 outline-none appearance-none transition-all cursor-pointer text-indigo-900 font-semibold shadow-sm hover:shadow-md"
+                        value={selectedCategory}
+                        onChange={(e) => setSelectedCategory(e.target.value)}
+                    >
+                        {categories.map(cat => (
+                            <option key={cat} value={cat}>{cat === 'All' ? 'All Categories' : cat}</option>
+                        ))}
+                    </select>
                 </div>
             </div>
 
@@ -160,93 +151,78 @@ const Commodities: React.FC = () => {
                     filteredCommodities.map((item) => (
                         <div
                             key={item.id}
-                            className="bg-white/70 backdrop-blur-xl border border-white p-5 md:p-8 rounded-[2rem] md:rounded-[2.5rem] shadow-xl shadow-indigo-100/50 hover:shadow-2xl hover:shadow-indigo-200/50 transition-all duration-500 group relative flex flex-col justify-between overflow-hidden"
+                            className="bg-white/70 backdrop-blur-xl border border-white p-6 rounded-3xl shadow-xl shadow-indigo-100/50 hover:shadow-2xl hover:shadow-indigo-200/50 transition-all duration-500 group relative flex flex-col justify-between overflow-hidden"
                         >
-                            <div className="absolute -top-4 -right-4 w-40 h-40 bg-indigo-50/50 rounded-full blur-3xl group-hover:bg-indigo-100/50 transition-colors" />
+                            <div className="absolute top-0 right-0 p-8 opacity-[0.03] scale-150 rotate-12 group-hover:rotate-0 transition-transform duration-700 pointer-events-none">
+                                <FiGlobe className="text-8xl" />
+                            </div>
 
                             <div className="relative z-10">
-                                <div className="flex justify-between items-start mb-6 md:mb-8">
-                                    <div className="flex items-center gap-3 md:gap-4">
-                                        <div
-                                            className="w-12 h-12 md:w-14 md:h-14 rounded-2xl flex items-center justify-center text-2xl md:text-3xl shadow-inner border border-white/50"
-                                            style={{ backgroundColor: `${item.color}15`, color: item.color }}
-                                        >
-                                            {item.icon}
+                                <div className="flex justify-between items-start mb-6">
+                                    <div className="flex-1">
+                                        <div className="flex items-center gap-2 mb-2 flex-wrap">
+                                            <span className="px-3 py-1 bg-indigo-50 text-indigo-600 text-[10px] font-black rounded-lg tracking-widest uppercase shadow-sm">
+                                                {item.symbol}
+                                            </span>
+                                            <span className="text-[10px] font-bold text-indigo-900/40 uppercase tracking-widest">{item.category}</span>
                                         </div>
-                                        <div>
-                                            <div className="flex items-center gap-2 flex-wrap">
-                                                <h3 className="text-xl md:text-2xl font-black text-indigo-950 tracking-tight shrink-0">{item.name}</h3>
-                                                <span className="px-1.5 py-0.5 bg-indigo-50 text-indigo-400 text-[8px] md:text-[10px] font-black rounded-md border border-indigo-100/50 uppercase">
-                                                    {item.symbol}
-                                                </span>
-                                            </div>
-                                            <p className="text-indigo-900/40 text-[9px] md:text-xs font-black uppercase tracking-widest">
-                                                {item.category} Market
-                                            </p>
-                                        </div>
+                                        <h3 className="text-2xl font-black text-indigo-950 leading-tight">{item.name}</h3>
                                     </div>
-                                    <div className="flex flex-col items-end opacity-80 md:opacity-100">
-                                        <Sparkline history={item.history} color={item.change >= 0 ? '#10B981' : '#F43F5E'} />
+                                    <div className="text-right ml-4">
+                                        <div className={`flex items-center justify-end gap-1 text-[10px] font-black px-2 py-1 rounded-lg ${item.change >= 0 ? 'bg-emerald-50 text-emerald-600' : 'bg-rose-50 text-rose-600'
+                                            } mb-1`}>
+                                            {item.change >= 0 ? <FiTrendingUp /> : <FiTrendingDown />}
+                                            {Math.abs(item.changePercent)}%
+                                        </div>
+                                        <span className="text-2xl font-black text-indigo-950 tabular-nums">
+                                            {formatPrice(item.currentPrice)}
+                                        </span>
                                     </div>
                                 </div>
 
-                                <div className="flex items-end justify-between mb-6">
-                                    <div>
-                                        <span className="text-indigo-900/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest block mb-1">Last Traded Price</span>
-                                        <div className="flex items-baseline gap-2">
-                                            <span className="text-3xl md:text-4xl font-black text-indigo-950 tabular-nums">
-                                                {formatPrice(item.currentPrice)}
-                                            </span>
-                                            <span className={`flex items-center gap-1 text-[10px] md:text-sm font-black px-1.5 py-0.5 md:px-2 md:py-1 rounded-lg md:rounded-xl ${item.change >= 0 ? 'bg-emerald-50 text-emerald-600' : 'bg-rose-50 text-rose-600'
-                                                }`}>
-                                                {item.change >= 0 ? <FiTrendingUp /> : <FiTrendingDown />}
-                                                {Math.abs(item.changePercent)}%
-                                            </span>
-                                        </div>
-                                    </div>
+                                <div className="mb-6 flex items-center justify-center py-2">
+                                    <Sparkline history={item.history} color={item.change >= 0 ? '#10B981' : '#F43F5E'} />
                                 </div>
-                            </div>
 
-                            <div className="relative z-10 flex flex-col gap-4">
-                                <div className="grid grid-cols-2 gap-2 sm:gap-4 py-4 border-t border-indigo-50/50">
+                                <div className="grid grid-cols-2 gap-4 p-4 bg-indigo-50/50 rounded-2xl border border-indigo-50 mb-6 font-medium">
                                     <div className="min-w-0">
-                                        <span className="text-[7px] md:text-[9px] font-black text-indigo-300 uppercase tracking-widest block mb-0.5 truncate">24h Vol ({item.unit})</span>
-                                        <span className="text-[10px] sm:text-xs md:text-sm font-black text-indigo-900/70 truncate block">{item.currentVolume.toLocaleString()}</span>
+                                        <p className="text-indigo-900/40 text-[9px] font-black uppercase tracking-widest mb-1 truncate">24h Vol ({item.unit})</p>
+                                        <p className="text-sm text-indigo-950 font-bold truncate">{item.currentVolume.toLocaleString()}</p>
                                     </div>
                                     <div className="text-right min-w-0">
-                                        <span className="text-[7px] md:text-[9px] font-black text-indigo-300 uppercase tracking-widest block mb-0.5 truncate">Day Range</span>
-                                        <span className="text-[10px] sm:text-xs md:text-sm font-black text-indigo-900/70 truncate block">{item.dayLow} - {item.dayHigh}</span>
+                                        <p className="text-indigo-900/40 text-[9px] font-black uppercase tracking-widest mb-1 truncate">Day Range</p>
+                                        <p className="text-sm text-indigo-950 font-bold truncate">{item.dayLow} - {item.dayHigh}</p>
                                     </div>
                                 </div>
-                                <button
-                                    onClick={() => navigate(`/commodities/${item.id}`)}
-                                    className="w-full py-3 bg-indigo-600 text-white text-xs md:text-sm font-black rounded-xl hover:bg-indigo-700 transition-all active:scale-95 shadow-lg shadow-indigo-100 hover:shadow-indigo-200 uppercase tracking-widest"
-                                >
-                                    Analyze Data
-                                </button>
                             </div>
+
+                            <button
+                                onClick={() => navigate(`/commodities/${item.id}`)}
+                                className="relative z-10 w-full py-4 bg-indigo-600 text-white text-xs font-black rounded-xl hover:bg-indigo-700 transition-all duration-300 active:scale-95 shadow-lg shadow-indigo-100/50 flex items-center justify-center uppercase tracking-widest"
+                            >
+                                Analyze Now
+                            </button>
                         </div>
                     ))
                 ) : (
-                    <div className="col-span-full py-32 text-center bg-white/40 backdrop-blur-xl border border-white rounded-[3rem]">
-                        <div className="text-8xl mb-6 opacity-10">📦</div>
-                        <h3 className="text-2xl font-black text-indigo-950/40 uppercase tracking-widest">Market Data Not Found</h3>
-                        <p className="text-indigo-900/30 font-medium">Try broadening your search or switching categories</p>
+                    <div className="col-span-full py-20 text-center">
+                        <div className="text-6xl mb-4 opacity-20">🔍</div>
+                        <h3 className="text-xl font-bold text-indigo-900/40 uppercase tracking-widest">No commodities found</h3>
+                        <p className="text-indigo-900/30">Try adjusting your search or category filters</p>
                     </div>
                 )}
             </div>
 
             {/* Footer Disclaimer */}
-            <div className="p-8 bg-indigo-950 rounded-[2.5rem] text-white shadow-2xl relative overflow-hidden group">
+            <div className="mt-12 p-8 bg-indigo-950 rounded-[2rem] text-white shadow-2xl relative overflow-hidden group">
                 <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl scale-150 group-hover:scale-175 transition-transform duration-1000" />
                 <div className="relative z-10 flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
                     <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-3xl">⚠️</div>
                     <div>
                         <h4 className="text-xl font-black mb-1">Market Risk Disclosure</h4>
-                        <p className="text-indigo-200/60 font-medium text-sm leading-relaxed max-w-4xl">
-                            Commodity futures and spot prices are subject to high volatility due to geopolitical events, weather, and supply chain shifts.
-                            The data shown is for informational purposes only and may be delayed by up to 15 minutes. Always consult with a financial advisor
-                            before making investment decisions in the commodities market.
+                        <p className="text-indigo-200/60 font-medium text-xs leading-relaxed max-w-4xl">
+                            Commodity futures and spot prices are subject to high volatility. The data shown is for informational purposes only.
+                            Always consult with a financial advisor before making investment decisions in the commodities market.
                         </p>
                     </div>
                 </div>

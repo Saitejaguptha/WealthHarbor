@@ -74,6 +74,11 @@ export const getAllCommodities = () => {
     return cachedCommodities;
 };
 
+export const refreshCommodities = () => {
+    cachedCommodities = getCommodities();
+    return cachedCommodities;
+};
+
 export const getCommodityById = (id: string) => {
     return getAllCommodities().find(c => c.id === id);
 };
