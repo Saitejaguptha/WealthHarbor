@@ -48,7 +48,7 @@ const Commodities: React.FC = () => {
         const height = 30;
 
         React.useEffect(() => {
-            const handleResize = () => setWidth(window.innerWidth < 640 ? 80 : 120);
+            const handleResize = () => setWidth(window.innerWidth < 380 ? 60 : window.innerWidth < 640 ? 80 : 120);
             window.addEventListener('resize', handleResize);
             return () => window.removeEventListener('resize', handleResize);
         }, []);
@@ -75,7 +75,7 @@ const Commodities: React.FC = () => {
     };
 
     return (
-        <div className="p-3 md:p-10 pb-24 lg:pb-32 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-1000 space-y-4 md:space-y-12">
+        <div className="p-4 md:p-10 pb-24 lg:pb-32 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-1000 space-y-4 md:space-y-12">
             {/* Header Section */}
             <div className="bg-white/40 backdrop-blur-3xl border border-white/50 p-4 md:p-12 rounded-[1.5rem] md:rounded-[3.5rem] shadow-2xl shadow-indigo-100/30 flex flex-col xl:flex-row items-center justify-between gap-4 md:gap-8 relative overflow-hidden group">
                 <div className="absolute top-0 right-0 p-8 md:p-12 opacity-[0.03] scale-100 md:scale-150 rotate-12 group-hover:rotate-0 transition-transform duration-1000">
@@ -138,7 +138,7 @@ const Commodities: React.FC = () => {
                     />
                 </div>
 
-                <div className="flex items-center gap-2 p-2 bg-white/80 backdrop-blur-xl rounded-[2rem] border border-white shadow-xl shadow-indigo-100/20 overflow-x-auto no-scrollbar max-w-full">
+                <div className="flex items-center gap-2 p-2 bg-white/80 backdrop-blur-xl rounded-[2rem] border border-white shadow-xl shadow-indigo-100/20 overflow-x-auto hide-scrollbar max-w-full">
                     {categories.map((cat) => (
                         <button
                             key={cat}
@@ -174,9 +174,9 @@ const Commodities: React.FC = () => {
                                             {item.icon}
                                         </div>
                                         <div>
-                                            <div className="flex items-center gap-2">
-                                                <h3 className="text-xl md:text-2xl font-black text-indigo-950 tracking-tight">{item.name}</h3>
-                                                <span className="px-1.5 py-0.5 bg-indigo-50 text-indigo-400 text-[8px] md:text-[10px] font-black rounded-md border border-indigo-100/50">
+                                            <div className="flex items-center gap-2 flex-wrap">
+                                                <h3 className="text-xl md:text-2xl font-black text-indigo-950 tracking-tight shrink-0">{item.name}</h3>
+                                                <span className="px-1.5 py-0.5 bg-indigo-50 text-indigo-400 text-[8px] md:text-[10px] font-black rounded-md border border-indigo-100/50 uppercase">
                                                     {item.symbol}
                                                 </span>
                                             </div>
@@ -208,14 +208,14 @@ const Commodities: React.FC = () => {
                             </div>
 
                             <div className="relative z-10 flex flex-col gap-4">
-                                <div className="grid grid-cols-2 gap-4 py-4 border-t border-indigo-50/50">
-                                    <div>
-                                        <span className="text-[8px] md:text-[9px] font-black text-indigo-300 uppercase tracking-widest block mb-0.5">24h Vol ({item.unit})</span>
-                                        <span className="text-xs md:text-sm font-black text-indigo-900/70">{item.currentVolume.toLocaleString()}</span>
+                                <div className="grid grid-cols-2 gap-2 sm:gap-4 py-4 border-t border-indigo-50/50">
+                                    <div className="min-w-0">
+                                        <span className="text-[7px] md:text-[9px] font-black text-indigo-300 uppercase tracking-widest block mb-0.5 truncate">24h Vol ({item.unit})</span>
+                                        <span className="text-[10px] sm:text-xs md:text-sm font-black text-indigo-900/70 truncate block">{item.currentVolume.toLocaleString()}</span>
                                     </div>
-                                    <div className="text-right">
-                                        <span className="text-[8px] md:text-[9px] font-black text-indigo-300 uppercase tracking-widest block mb-0.5">Day Range</span>
-                                        <span className="text-xs md:text-sm font-black text-indigo-900/70">{item.dayLow} - {item.dayHigh}</span>
+                                    <div className="text-right min-w-0">
+                                        <span className="text-[7px] md:text-[9px] font-black text-indigo-300 uppercase tracking-widest block mb-0.5 truncate">Day Range</span>
+                                        <span className="text-[10px] sm:text-xs md:text-sm font-black text-indigo-900/70 truncate block">{item.dayLow} - {item.dayHigh}</span>
                                     </div>
                                 </div>
                                 <button
