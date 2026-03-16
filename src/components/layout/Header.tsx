@@ -26,16 +26,16 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
             </div>
 
             <div className="flex-1 flex justify-center">
-                <div className="text-sm md:text-base font-medium text-indigo-900/60 hidden sm:block">
+                <div className="text-sm lg:text-base font-medium text-indigo-900/60 hidden md:block">
                     Welcome back, <span className="font-bold text-indigo-600">{user?.username || 'User'}!</span>
                 </div>
             </div>
 
-            <div className="flex items-center gap-2 md:gap-4">
+            <div className="flex items-center gap-1 md:gap-4">
                 <NavLink
                     to="/watchlist"
                     className={({ isActive }) =>
-                        `p-2 rounded-xl transition-all ${isActive ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200' : 'text-indigo-400 hover:bg-indigo-50 hover:text-indigo-600'}`
+                        `p-1.5 md:p-2 rounded-xl transition-all ${isActive ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200' : 'text-indigo-400 hover:bg-indigo-50 hover:text-indigo-600'}`
                     }
                     title="Watchlist"
                 >
@@ -46,7 +46,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
                 <NavLink
                     to="/market-analysis"
                     className={({ isActive }) =>
-                        `p-2 rounded-xl transition-all ${isActive ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200' : 'text-indigo-400 hover:bg-indigo-50 hover:text-indigo-600 flex items-center justify-center hover:shadow-sm'}`
+                        `p-1.5 md:p-2 rounded-xl transition-all ${isActive ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200' : 'text-indigo-400 hover:bg-indigo-50 hover:text-indigo-600 flex items-center justify-center hover:shadow-sm'}`
                     }
                     title="Market Overview"
                 >
@@ -57,7 +57,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
                 <NavLink
                     to="/stocks-in-news"
                     className={({ isActive }) =>
-                        `p-2 rounded-xl transition-all ${isActive ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200' : 'text-indigo-400 hover:bg-indigo-50 hover:text-indigo-600 flex items-center justify-center hover:shadow-sm'}`
+                        `p-1.5 md:p-2 rounded-xl transition-all ${isActive ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200' : 'text-indigo-400 hover:bg-indigo-50 hover:text-indigo-600 flex items-center justify-center hover:shadow-sm'}`
                     }
                     title="Stocks in News"
                 >
@@ -66,9 +66,9 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
 
                 <NotificationBar />
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-1 md:gap-3">
                     <NavLink to="/profile" title="Profile">
-                        <div className="h-8 w-8 rounded-full bg-indigo-100 border border-indigo-200 flex items-center justify-center text-indigo-600 overflow-hidden shadow-sm hover:ring-2 ring-indigo-300 transition-all cursor-pointer">
+                        <div className="h-7 w-7 md:h-8 md:w-8 rounded-full bg-indigo-100 border border-indigo-200 flex items-center justify-center text-indigo-600 overflow-hidden shadow-sm hover:ring-2 ring-indigo-300 transition-all cursor-pointer">
                             <img
                                 src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.username || 'Lucky'}`}
                                 alt="Profile"
@@ -76,17 +76,17 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
                             />
                         </div>
                     </NavLink>
-                </div>
 
-                <NavLink
-                    to="/about"
-                    className={({ isActive }) =>
-                        `p-2 rounded-xl transition-all ${isActive ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200' : 'text-indigo-400 hover:bg-indigo-50 hover:text-indigo-600'}`
-                    }
-                    title="About Project"
-                >
-                    <FiInfo className="h-5 w-5 md:h-6 md:w-6" />
-                </NavLink>
+                    <NavLink
+                        to="/about"
+                        className={({ isActive }) =>
+                            `p-1.5 md:p-2 rounded-xl transition-all ${isActive ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200' : 'text-indigo-400 hover:bg-indigo-50 hover:text-indigo-600'}`
+                        }
+                        title="About Project"
+                    >
+                        <FiInfo className="h-5 w-5 md:h-6 md:w-6" />
+                    </NavLink>
+                </div>
             </div>
         </header>
     );
