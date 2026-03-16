@@ -25,7 +25,7 @@ const StocksInNews: React.FC = () => {
     );
 
     return (
-        <div className="p-4 md:p-8 max-w-7xl mx-auto animate-in fade-in duration-700">
+        <div className="p-4 md:p-8 w-full animate-in fade-in duration-700">
             <PageHeader
                 title="Stocks in News"
                 description="Latest market-moving headlines and corporate developments"

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FiUser, FiLock, FiSave, FiEdit2, FiCheck, FiPhone, FiAlertCircle } from 'react-icons/fi';
+import { FiUser, FiLock, FiSave, FiEdit2, FiCheck, FiPhone, FiAlertCircle, FiEye, FiEyeOff } from 'react-icons/fi';
 import { useAuth } from '../features/auth/AuthContext';
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
@@ -28,6 +28,9 @@ const Profile: React.FC = () => {
         new: '',
         confirm: '',
     });
+    const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+    const [showNewPassword, setShowNewPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     useEffect(() => {
         if (user) {
@@ -268,14 +271,23 @@ const Profile: React.FC = () => {
                             <div className="space-y-6">
                                 <div className="space-y-2">
                                     <label className="text-[9px] md:text-sm font-black text-indigo-900/40 uppercase tracking-widest ml-1">Confirm Current Password</label>
-                                    <input
-                                        type="password"
-                                        disabled={!isEditing}
-                                        value={passwords.current}
-                                        onChange={(e) => setPasswords({ ...passwords, current: e.target.value })}
-                                        className="w-full px-4 md:px-6 py-3 md:py-4 bg-white border-2 border-indigo-50 rounded-xl md:rounded-2xl focus:border-indigo-500 outline-none transition-all font-semibold text-indigo-950 text-xs md:text-base placeholder:text-indigo-100 disabled:opacity-50"
-                                        placeholder="••••••••"
-                                    />
+                                    <div className="relative">
+                                        <input
+                                            type={showCurrentPassword ? "text" : "password"}
+                                            disabled={!isEditing}
+                                            value={passwords.current}
+                                            onChange={(e) => setPasswords({ ...passwords, current: e.target.value })}
+                                            className="w-full px-4 md:px-6 py-3 md:py-4 bg-white border-2 border-indigo-50 rounded-xl md:rounded-2xl focus:border-indigo-500 outline-none transition-all font-semibold text-indigo-950 text-xs md:text-base placeholder:text-indigo-100 disabled:opacity-50"
+                                            placeholder="••••••••"
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                                            className="absolute right-4 top-1/2 -translate-y-1/2 text-indigo-300 hover:text-indigo-600 transition-colors"
+                                        >
+                                            {showCurrentPassword ? <FiEyeOff /> : <FiEye />}
+                                        </button>
+                                    </div>
                                 </div>
                                 <div className="flex flex-col gap-4">
                                     <button
@@ -297,23 +309,41 @@ const Profile: React.FC = () => {
                             <div className="space-y-4 md:space-y-6 animate-in slide-in-from-right-4 duration-500">
                                 <div className="space-y-1">
                                     <label className="text-[9px] md:text-sm font-black text-indigo-900/40 uppercase tracking-widest ml-1">New Password</label>
-                                    <input
-                                        type="password"
-                                        value={passwords.new}
-                                        onChange={(e) => setPasswords({ ...passwords, new: e.target.value })}
-                                        className="w-full px-4 md:px-6 py-3 md:py-4 bg-emerald-50/30 border-2 border-emerald-100 rounded-xl md:rounded-2xl focus:border-emerald-500 outline-none transition-all font-semibold text-indigo-950 text-xs md:text-base"
-                                        placeholder="Min 6 characters"
-                                    />
+                                    <div className="relative">
+                                        <input
+                                            type={showNewPassword ? "text" : "password"}
+                                            value={passwords.new}
+                                            onChange={(e) => setPasswords({ ...passwords, new: e.target.value })}
+                                            className="w-full px-4 md:px-6 py-3 md:py-4 bg-emerald-50/30 border-2 border-emerald-100 rounded-xl md:rounded-2xl focus:border-emerald-500 outline-none transition-all font-semibold text-indigo-950 text-xs md:text-base"
+                                            placeholder="Min 6 characters"
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={() => setShowNewPassword(!showNewPassword)}
+                                            className="absolute right-4 top-1/2 -translate-y-1/2 text-emerald-300 hover:text-emerald-600 transition-colors"
+                                        >
+                                            {showNewPassword ? <FiEyeOff /> : <FiEye />}
+                                        </button>
+                                    </div>
                                 </div>
                                 <div className="space-y-1">
                                     <label className="text-[9px] md:text-sm font-black text-indigo-900/40 uppercase tracking-widest ml-1">Confirm New Password</label>
-                                    <input
-                                        type="password"
-                                        value={passwords.confirm}
-                                        onChange={(e) => setPasswords({ ...passwords, confirm: e.target.value })}
-                                        className="w-full px-4 md:px-6 py-3 md:py-4 bg-emerald-50/30 border-2 border-emerald-100 rounded-xl md:rounded-2xl focus:border-emerald-500 outline-none transition-all font-semibold text-indigo-950 text-xs md:text-base"
-                                        placeholder="Confirm new password"
-                                    />
+                                    <div className="relative">
+                                        <input
+                                            type={showConfirmPassword ? "text" : "password"}
+                                            value={passwords.confirm}
+                                            onChange={(e) => setPasswords({ ...passwords, confirm: e.target.value })}
+                                            className="w-full px-4 md:px-6 py-3 md:py-4 bg-emerald-50/30 border-2 border-emerald-100 rounded-xl md:rounded-2xl focus:border-emerald-500 outline-none transition-all font-semibold text-indigo-950 text-xs md:text-base"
+                                            placeholder="Confirm new password"
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                            className="absolute right-4 top-1/2 -translate-y-1/2 text-emerald-300 hover:text-emerald-600 transition-colors"
+                                        >
+                                            {showConfirmPassword ? <FiEyeOff /> : <FiEye />}
+                                        </button>
+                                    </div>
                                 </div>
                                 <div className="flex gap-3">
                                     <button 

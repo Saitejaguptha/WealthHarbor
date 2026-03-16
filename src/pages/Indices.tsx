@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { FiActivity, FiSearch } from 'react-icons/fi';
+import { FiSearch, FiActivity } from 'react-icons/fi';
 import { getIndicesByExchange } from '../utils/indexData';
 import AssetCard from '../components/common/AssetCard';
 import PageHeader from '../components/common/PageHeader';
@@ -36,20 +36,22 @@ const Indices: React.FC = () => {
                     </div>
 
                     {/* Exchange Switcher */}
-                    <div className="flex bg-indigo-50/50 p-1.5 rounded-2xl w-full lg:w-fit border border-indigo-100/50 backdrop-blur-sm self-stretch lg:self-auto">
-                        {['ALL', 'NSE', 'BSE'].map((ex) => (
-                            <button
-                                key={ex}
-                                onClick={() => setExchange(ex as any)}
-                                className={`flex-1 lg:flex-none px-8 py-2.5 rounded-xl text-xs font-black tracking-widest transition-all duration-300 ${
-                                    exchange === ex 
-                                    ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200' 
-                                    : 'text-indigo-900/40 hover:text-indigo-600 hover:bg-white/50'
-                                }`}
-                            >
-                                {ex}
-                            </button>
-                        ))}
+                    <div className="flex flex-col md:flex-row gap-4">
+                        <div className="bg-white/70 backdrop-blur-md p-1.5 rounded-2xl border border-white flex gap-1 shadow-lg shadow-indigo-100/50 w-full md:w-auto">
+                            {['ALL', 'NSE', 'BSE'].map((ex) => (
+                                <button
+                                    key={ex}
+                                    onClick={() => setExchange(ex as 'NSE' | 'BSE' | 'ALL')}
+                                    className={`flex-1 md:flex-none px-6 md:px-8 py-3 rounded-xl font-bold uppercase tracking-wider transition-all duration-300 ${
+                                        exchange === ex 
+                                            ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200 active:scale-95' 
+                                            : 'text-indigo-400 hover:bg-white hover:text-indigo-600'
+                                    }`}
+                                >
+                                    {ex}
+                                </button>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </PageHeader>

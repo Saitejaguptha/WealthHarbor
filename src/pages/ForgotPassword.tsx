@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FiMail, FiUser, FiLock, FiArrowLeft, FiCheckCircle } from 'react-icons/fi';
+import { FiMail, FiUser, FiLock, FiArrowLeft, FiCheckCircle, FiEye, FiEyeOff } from 'react-icons/fi';
 import { toast } from 'react-hot-toast';
 
 import { addNotification } from '../utils/watchlistUtils';
@@ -15,6 +15,8 @@ const ForgotPassword: React.FC = () => {
         new: '',
         confirm: ''
     });
+    const [showNewPassword, setShowNewPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const handleVerify = (e: React.FormEvent) => {
         e.preventDefault();
@@ -124,13 +126,20 @@ const ForgotPassword: React.FC = () => {
                             <div className="relative group">
                                 <FiLock className="absolute left-5 top-1/2 -translate-y-1/2 text-indigo-300" />
                                 <input
-                                    type="password"
+                                    type={showNewPassword ? "text" : "password"}
                                     required
                                     value={newPasswords.new}
                                     onChange={(e) => setNewPasswords({ ...newPasswords, new: e.target.value })}
-                                    className="w-full pl-14 pr-6 py-4 bg-white border-2 border-indigo-50 rounded-2xl focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all font-bold text-indigo-950 placeholder:text-indigo-200"
+                                    className="w-full pl-14 pr-12 py-4 bg-white border-2 border-indigo-50 rounded-2xl focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all font-bold text-indigo-950 placeholder:text-indigo-200"
                                     placeholder="••••••••"
                                 />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowNewPassword(!showNewPassword)}
+                                    className="absolute right-5 top-1/2 -translate-y-1/2 text-indigo-300 hover:text-indigo-600 transition-colors"
+                                >
+                                    {showNewPassword ? <FiEyeOff /> : <FiEye />}
+                                </button>
                             </div>
                         </div>
 
@@ -139,13 +148,20 @@ const ForgotPassword: React.FC = () => {
                             <div className="relative group">
                                 <FiLock className="absolute left-5 top-1/2 -translate-y-1/2 text-indigo-300" />
                                 <input
-                                    type="password"
+                                    type={showConfirmPassword ? "text" : "password"}
                                     required
                                     value={newPasswords.confirm}
                                     onChange={(e) => setNewPasswords({ ...newPasswords, confirm: e.target.value })}
-                                    className="w-full pl-14 pr-6 py-4 bg-white border-2 border-indigo-50 rounded-2xl focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all font-bold text-indigo-950 placeholder:text-indigo-200"
+                                    className="w-full pl-14 pr-12 py-4 bg-white border-2 border-indigo-50 rounded-2xl focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all font-bold text-indigo-950 placeholder:text-indigo-200"
                                     placeholder="••••••••"
                                 />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                    className="absolute right-5 top-1/2 -translate-y-1/2 text-indigo-300 hover:text-indigo-600 transition-colors"
+                                >
+                                    {showConfirmPassword ? <FiEyeOff /> : <FiEye />}
+                                </button>
                             </div>
                         </div>
 

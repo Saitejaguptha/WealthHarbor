@@ -9,7 +9,6 @@ import {
     FiActivity,
     FiX,
     FiLogOut,
-    FiFileText,
     FiBell,
     FiBarChart2
 } from 'react-icons/fi';
@@ -42,6 +41,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
             case 'Notifications': return <FiBell />;
             case 'Stocks in News': return <FiActivity />;
             case 'FII & DII Data': return <FiBarChart2 />;
+            case 'F&O Options': return <FiLayers />;
+            case 'Best Intraday Stocks': return <FiActivity />;
             default: return null;
         }
     };
@@ -58,7 +59,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
 
             <aside className={`
                 fixed inset-y-0 left-0 w-64 bg-indigo-50/95 backdrop-blur-md flex flex-col h-full border-r border-indigo-100 z-[70] transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:bg-indigo-50/80
-                ${isOpen ? 'translate-x-0 shadow-2xl shadow-indigo-900/10' : '-translate-x-full md:flex-shrink-0 hide-scrollbar overflow-y-auto'}
+                ${isOpen ? 'translate-x-0 shadow-2xl shadow-indigo-900/10' : '-translate-x-full md:flex-shrink-0 hide-scrollbar md:overflow-hidden overflow-y-auto'}
             `}>
                 <div className="p-5 border-b border-indigo-100 flex items-center justify-between">
                     <div className="font-bold text-indigo-900 text-lg tracking-tight uppercase text-xs opacity-50 px-2">
@@ -73,7 +74,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                     </button>
                 </div>
 
-                <div className="p-5 pt-0 mt-4 h-full overflow-y-auto hide-scrollbar">
+                <div className="p-5 pt-0 mt-4 h-full md:overflow-hidden overflow-y-auto">
                     <div className="space-y-1">
                         {NAV_ITEMS.map((item) => (
                             <NavLink
@@ -96,31 +97,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                     </div>
 
                     <div className="mt-10 pt-6 border-t border-indigo-100">
-                        <div className="space-y-4 px-2">
-                            <div className="bg-white/50 p-4 rounded-2xl border border-indigo-50 hover:bg-white transition-all group cursor-default">
-                                <div className="flex items-start gap-3">
-                                    <div className="p-2 bg-indigo-50 text-indigo-600 rounded-xl group-hover:bg-indigo-600 group-hover:text-white transition-colors">
-                                        <FiFileText />
-                                    </div>
-                                    <div className="flex-1">
-                                        <p className="text-[11px] font-bold text-indigo-950 leading-tight">Reliance Invested in Ambuja Cement</p>
-                                        <p className="text-[9px] text-indigo-900/40 mt-1 font-medium italic">2 hours ago</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="bg-white/50 p-4 rounded-2xl border border-indigo-50 hover:bg-white transition-all group cursor-default">
-                                <div className="flex items-start gap-3">
-                                    <div className="p-2 bg-indigo-50 text-indigo-600 rounded-xl group-hover:bg-indigo-600 group-hover:text-white transition-colors">
-                                        <FiFileText />
-                                    </div>
-                                    <div className="flex-1">
-                                        <p className="text-[11px] font-bold text-indigo-950 leading-tight">TATA Motors Q3 Results</p>
-                                        <p className="text-[9px] text-indigo-900/40 mt-1 font-medium italic">4 hours ago</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {/* News section removed as per request */}
                     </div>
                 </div>
 

@@ -59,11 +59,11 @@ const MutualFundDetails: React.FC = () => {
     return (
         <div className="p-8 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700">
             {/* Header */}
-            <div className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
                 <div className="flex items-center gap-4">
                     <Link
                         to="/mutual-funds"
-                        className="p-3 bg-white border border-indigo-50 rounded-2xl text-indigo-600 hover:bg-indigo-50 transition-all shadow-sm"
+                        className="p-3 bg-white border border-indigo-50 rounded-2xl text-indigo-600 hover:bg-indigo-50 transition-all shadow-sm active:scale-95"
                     >
                         <FiArrowLeft className="text-xl" />
                     </Link>
@@ -72,23 +72,35 @@ const MutualFundDetails: React.FC = () => {
                             <span className="px-3 py-1 bg-indigo-600 text-white text-[10px] font-black rounded-lg uppercase tracking-widest">
                                 {fund.sector}
                             </span>
-                            <span className="text-indigo-900/40 text-sm font-bold uppercase tracking-widest">{fund.fundHouse}</span>
+                            <span className="text-indigo-900/40 text-[10px] md:text-sm font-bold uppercase tracking-widest truncate">{fund.fundHouse}</span>
                         </div>
-                        <h1 className="text-4xl font-black text-indigo-950 tracking-tight">{fund.name}</h1>
+                        <h1 className="text-2xl md:text-4xl font-black text-indigo-950 tracking-tight leading-tight">{fund.name}</h1>
                     </div>
                 </div>
 
-                <div className="flex items-center gap-4">
-                    <div className="text-right">
-                        <p className="text-indigo-900/40 text-[10px] font-black uppercase tracking-widest mb-1">Current NAV</p>
-                        <span className="text-3xl font-black text-indigo-950">₹{fund.nav}</span>
-                    </div>
-                    <div className="h-12 w-px bg-indigo-100 mx-2 hidden md:block" />
-                    <div className="text-right">
-                        <p className="text-indigo-900/40 text-[10px] font-black uppercase tracking-widest mb-1">1Y Return</p>
-                        <span className={`text-3xl font-black ${fund.return1Y >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
-                            {fund.return1Y > 0 ? '+' : ''}{fund.return1Y}%
-                        </span>
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
+                    <button
+                        onClick={toggleWatchlist}
+                        className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3 rounded-2xl font-bold transition-all active:scale-95 shadow-lg shadow-indigo-100/50 text-sm ${inWatchlist
+                                ? 'bg-emerald-50 text-emerald-600 border border-emerald-100'
+                                : 'bg-indigo-600 text-white hover:bg-indigo-700'
+                            }`}
+                    >
+                        {inWatchlist ? <FiCheck /> : <FiPlus />}
+                        {inWatchlist ? 'In Watchlist' : 'Add to Watchlist'}
+                    </button>
+                    <div className="flex items-center gap-4 bg-white/70 backdrop-blur-md px-6 py-2 rounded-2xl border border-white shadow-sm">
+                        <div className="text-right">
+                            <p className="text-indigo-900/40 text-[8px] font-black uppercase tracking-widest mb-0.5">Current NAV</p>
+                            <span className="text-lg font-black text-indigo-950">₹{fund.nav}</span>
+                        </div>
+                        <div className="h-8 w-px bg-indigo-100 mx-1" />
+                        <div className="text-right">
+                            <p className="text-indigo-900/40 text-[8px] font-black uppercase tracking-widest mb-0.5">1Y Return</p>
+                            <span className={`text-lg font-black ${fund.return1Y >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
+                                {fund.return1Y > 0 ? '+' : ''}{fund.return1Y}%
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -219,16 +231,6 @@ const MutualFundDetails: React.FC = () => {
                             </div>
                         </div>
 
-                        <button
-                            onClick={toggleWatchlist}
-                            className={`w-full mt-10 py-4 font-black rounded-2xl transition-all active:scale-95 shadow-xl flex items-center justify-center gap-2 ${inWatchlist
-                                ? 'bg-emerald-500 text-white shadow-emerald-200'
-                                : 'bg-white text-indigo-900 hover:bg-indigo-50'
-                                }`}
-                        >
-                            {inWatchlist ? <FiCheck /> : <FiPlus />}
-                            {inWatchlist ? 'In Watchlist' : 'Add to Watchlist'}
-                        </button>
                     </div>
 
                     {/* Tax & Charges */}

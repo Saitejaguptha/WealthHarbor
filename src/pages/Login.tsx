@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../features/auth/AuthContext';
 import { toast } from 'react-hot-toast';
-import { FiMail, FiLock, FiLogIn, FiArrowRight } from 'react-icons/fi';
+import { FiMail, FiLock, FiLogIn, FiArrowRight, FiEye, FiEyeOff } from 'react-icons/fi';
 import { addNotification } from '../utils/watchlistUtils';
 
 const Login: React.FC = () => {
@@ -10,6 +10,7 @@ const Login: React.FC = () => {
         email: '',
         password: ''
     });
+    const [showPassword, setShowPassword] = useState(false);
     const { login } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
@@ -65,12 +66,27 @@ const Login: React.FC = () => {
                         <div className="relative group">
                             <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-indigo-300 group-focus-within:text-indigo-600 transition-colors" />
                             <input
-                                type="password"
+                                type={showPassword ? "text" : "password"}
                                 placeholder="Password"
-                                className="w-full pl-12 pr-4 py-3 bg-white border border-indigo-50 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all font-medium text-indigo-950 placeholder:text-indigo-200"
+                                className="w-full pl-12 pr-12 py-3 bg-white border border-indigo-50 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all font-medium text-indigo-950 placeholder:text-indigo-200"
                                 value={formData.password}
                                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                             />
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="absolute right-4 top-1/2 -translate-y-1/2 text-indigo-300 hover:text-indigo-600 transition-colors"
+                            >
+                                {showPassword ? <FiEyeOff /> : <FiEye />}
+                            </button>
+                        </div>
+                        <div className="flex justify-end px-1">
+                            <Link 
+                                to="/forgot-password" 
+                                className="text-[10px] font-black uppercase tracking-widest text-indigo-400 hover:text-indigo-600 transition-colors"
+                            >
+                                Forgot Password?
+                            </Link>
                         </div>
                     </div>
 

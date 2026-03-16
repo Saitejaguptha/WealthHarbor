@@ -53,8 +53,16 @@ export const addToWatchlist = (email: string, item: WatchlistItem) => {
 export const removeFromWatchlist = (email: string, id: string) => {
     if (!email) return;
     const watchlist = getWatchlist(email);
-    const updated = watchlist.filter(i => i.id !== id);
-    localStorage.setItem(getWatchlistKey(email), JSON.stringify(updated));
+    const updatedWatchlist = watchlist.filter(item => item.id !== id);
+    localStorage.setItem(getWatchlistKey(email), JSON.stringify(updatedWatchlist));
+    
+    // Add notification for removal
+    const item = watchlist.find(i => i.id === id);
+    if (item) { // userEmail was not defined, using 'email' parameter
+        addNotification(email, `${item.name} (${item.symbol}) has been removed from your watchlist.`);
+    }
+    
+    return true;
 };
 
 export const isInWatchlist = (email: string, id: string): boolean => {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FiBell, FiTrash2, FiCheckCircle, FiInfo, FiClock } from 'react-icons/fi';
+import { FiBell, FiTrash2, FiCheckCircle, FiClock } from 'react-icons/fi';
 import { useAuth } from '../features/auth/AuthContext';
 import { getNotifications, markNotificationsAsRead } from '../utils/watchlistUtils';
 import PageHeader from '../components/common/PageHeader';
@@ -41,7 +41,7 @@ const Notifications: React.FC = () => {
     const unreadCount = notifications.filter(n => !n.read).length;
 
     return (
-        <div className="p-4 md:p-8 max-w-4xl mx-auto animate-in fade-in duration-700">
+        <div className="p-4 md:p-8 w-full animate-in fade-in duration-700">
             <PageHeader
                 title="Notifications"
                 description="Stay updated with your latest activities and alerts"
@@ -79,11 +79,6 @@ const Notifications: React.FC = () => {
                                     : 'bg-white border-white shadow-xl shadow-indigo-100/30'
                             }`}
                         >
-                            <div className={`h-12 w-12 rounded-2xl flex items-center justify-center shrink-0 ${
-                                notif.read ? 'bg-indigo-50 text-indigo-300' : 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/20'
-                            }`}>
-                                <FiInfo size={24} />
-                            </div>
                             <div className="flex-1">
                                 <div className="flex justify-between items-start mb-1">
                                     <p className={`text-base leading-relaxed ${notif.read ? 'text-indigo-900/60 font-medium' : 'text-indigo-950 font-bold'}`}>

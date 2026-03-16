@@ -1,5 +1,5 @@
 import { Link, NavLink } from 'react-router-dom';
-import { FiMenu, FiBookmark, FiGlobe } from 'react-icons/fi';
+import { FiMenu, FiBookmark, FiGlobe, FiInfo, FiFileText } from 'react-icons/fi';
 import { useAuth } from '../../features/auth/AuthContext';
 import NotificationBar from './NotificationBar';
 
@@ -41,7 +41,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
                 >
                     <FiBookmark className="h-5 w-5 md:h-6 md:w-6" />
                 </NavLink>
-                
+
                 {/* Market Details Link */}
                 <NavLink
                     to="/market-analysis"
@@ -51,6 +51,17 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
                     title="Market Overview"
                 >
                     <FiGlobe className="h-5 w-5 md:h-6 md:w-6" />
+                </NavLink>
+
+                {/* Stocks in News Link */}
+                <NavLink
+                    to="/stocks-in-news"
+                    className={({ isActive }) =>
+                        `p-2 rounded-xl transition-all ${isActive ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200' : 'text-indigo-400 hover:bg-indigo-50 hover:text-indigo-600 flex items-center justify-center hover:shadow-sm'}`
+                    }
+                    title="Stocks in News"
+                >
+                    <FiFileText className="h-5 w-5 md:h-6 md:w-6" />
                 </NavLink>
 
                 <NotificationBar />
@@ -66,6 +77,16 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
                         </div>
                     </NavLink>
                 </div>
+
+                <NavLink
+                    to="/about"
+                    className={({ isActive }) =>
+                        `p-2 rounded-xl transition-all ${isActive ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200' : 'text-indigo-400 hover:bg-indigo-50 hover:text-indigo-600'}`
+                    }
+                    title="About Project"
+                >
+                    <FiInfo className="h-5 w-5 md:h-6 md:w-6" />
+                </NavLink>
             </div>
         </header>
     );

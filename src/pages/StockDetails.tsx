@@ -96,10 +96,10 @@ const StockDetails: React.FC = () => {
                         <h1 className="text-2xl md:text-3xl font-black text-indigo-950 tracking-tight leading-tight">{stock.name}</h1>
                     </div>
                 </div>
-                <div className="flex flex-wrap items-center gap-3">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full md:w-auto mt-4 md:mt-0">
                     <button
                         onClick={toggleWatchlist}
-                        className={`flex items-center gap-2 px-6 py-3 rounded-xl md:rounded-2xl font-bold transition-all active:scale-95 shadow-sm text-sm ${inWatchlist
+                        className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3 rounded-2xl font-bold transition-all active:scale-95 shadow-lg shadow-indigo-100/50 text-sm ${inWatchlist
                                 ? 'bg-emerald-50 text-emerald-600 border border-emerald-100'
                                 : 'bg-indigo-600 text-white hover:bg-indigo-700'
                             }`}
@@ -112,7 +112,7 @@ const StockDetails: React.FC = () => {
                             refreshStocks();
                             window.location.reload();
                         }}
-                        className="flex items-center justify-center gap-2 px-6 py-3 md:py-3 bg-indigo-50 text-indigo-600 font-bold rounded-xl md:rounded-2xl hover:bg-indigo-600 hover:text-white transition-all active:scale-95 shadow-sm text-sm"
+                        className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3 bg-white border border-indigo-100 text-indigo-600 font-bold rounded-2xl hover:bg-indigo-50 transition-all active:scale-95 shadow-lg shadow-indigo-100/50 text-sm"
                     >
                         <FiRefreshCw className="shrink-0" />
                         Re-Analyze
