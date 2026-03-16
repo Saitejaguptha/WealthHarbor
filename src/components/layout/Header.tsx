@@ -1,7 +1,6 @@
 import { Link, NavLink } from 'react-router-dom';
-import { FiMenu, FiBookmark, FiGlobe, FiInfo, FiFileText } from 'react-icons/fi';
+import { FiMenu, FiInfo } from 'react-icons/fi';
 import { useAuth } from '../../features/auth/AuthContext';
-import NotificationBar from './NotificationBar';
 
 interface HeaderProps {
     onMenuClick: () => void;
@@ -25,68 +24,32 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
                 </Link>
             </div>
 
-            <div className="flex-1 flex justify-center">
-                <div className="text-sm lg:text-base font-medium text-indigo-900/60 hidden md:block">
-                    Welcome back, <span className="font-bold text-indigo-600">{user?.username || 'User'}!</span>
+            <div className="flex-1 flex justify-center px-2">
+                <div className="text-[10px] sm:text-sm font-medium text-indigo-900/60 text-center line-clamp-1">
+                    Welcome, <span className="font-bold text-indigo-600 truncate max-w-[60px] sm:max-w-none inline-block align-bottom">{user?.username || 'User'}</span>
                 </div>
             </div>
 
-            <div className="flex items-center gap-1 md:gap-4">
+            <div className="flex items-center gap-4">
                 <NavLink
-                    to="/watchlist"
+                    to="/about"
                     className={({ isActive }) =>
                         `p-1.5 md:p-2 rounded-xl transition-all ${isActive ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200' : 'text-indigo-400 hover:bg-indigo-50 hover:text-indigo-600'}`
                     }
-                    title="Watchlist"
+                    title="About Project"
                 >
-                    <FiBookmark className="h-5 w-5 md:h-6 md:w-6" />
+                    <FiInfo className="h-5 w-5 md:h-6 md:w-6" />
                 </NavLink>
 
-                {/* Market Details Link */}
-                <NavLink
-                    to="/market-analysis"
-                    className={({ isActive }) =>
-                        `p-1.5 md:p-2 rounded-xl transition-all ${isActive ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200' : 'text-indigo-400 hover:bg-indigo-50 hover:text-indigo-600 flex items-center justify-center hover:shadow-sm'}`
-                    }
-                    title="Market Overview"
-                >
-                    <FiGlobe className="h-5 w-5 md:h-6 md:w-6" />
+                <NavLink to="/profile" title="Profile">
+                    <div className="h-7 w-7 md:h-8 md:w-8 rounded-full bg-indigo-100 border border-indigo-200 flex items-center justify-center text-indigo-600 overflow-hidden shadow-sm hover:ring-2 ring-indigo-300 transition-all cursor-pointer">
+                        <img
+                            src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.username || 'Lucky'}`}
+                            alt="Profile"
+                            className="h-full w-full object-cover"
+                        />
+                    </div>
                 </NavLink>
-
-                {/* Stocks in News Link */}
-                <NavLink
-                    to="/stocks-in-news"
-                    className={({ isActive }) =>
-                        `p-1.5 md:p-2 rounded-xl transition-all ${isActive ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200' : 'text-indigo-400 hover:bg-indigo-50 hover:text-indigo-600 flex items-center justify-center hover:shadow-sm'}`
-                    }
-                    title="Stocks in News"
-                >
-                    <FiFileText className="h-5 w-5 md:h-6 md:w-6" />
-                </NavLink>
-
-                <NotificationBar />
-
-                <div className="flex items-center gap-1 md:gap-3">
-                    <NavLink to="/profile" title="Profile">
-                        <div className="h-7 w-7 md:h-8 md:w-8 rounded-full bg-indigo-100 border border-indigo-200 flex items-center justify-center text-indigo-600 overflow-hidden shadow-sm hover:ring-2 ring-indigo-300 transition-all cursor-pointer">
-                            <img
-                                src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.username || 'Lucky'}`}
-                                alt="Profile"
-                                className="h-full w-full object-cover"
-                            />
-                        </div>
-                    </NavLink>
-
-                    <NavLink
-                        to="/about"
-                        className={({ isActive }) =>
-                            `p-1.5 md:p-2 rounded-xl transition-all ${isActive ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200' : 'text-indigo-400 hover:bg-indigo-50 hover:text-indigo-600'}`
-                        }
-                        title="About Project"
-                    >
-                        <FiInfo className="h-5 w-5 md:h-6 md:w-6" />
-                    </NavLink>
-                </div>
             </div>
         </header>
     );

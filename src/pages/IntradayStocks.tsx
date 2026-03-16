@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FiArrowLeft, FiClock, FiShare2, FiBookmark } from 'react-icons/fi';
+import intradayHero from '../assets/images/intraday-hero.png';
 
 const IntradayStocks: React.FC = () => {
     // This is the "Stock in News Read Full Article" page for Best Intraday Stocks
@@ -16,7 +17,7 @@ const IntradayStocks: React.FC = () => {
             <div className="bg-white/70 backdrop-blur-xl border border-white rounded-[2.5rem] shadow-2xl shadow-indigo-100/50 overflow-hidden">
                 <div className="h-64 overflow-hidden">
                     <img 
-                        src="https://images.unsplash.com/photo-1611974717483-9b250aa06ad4?auto=format&fit=crop&q=80&w=1200" 
+                        src={intradayHero} 
                         alt="Intraday Trading" 
                         className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                     />

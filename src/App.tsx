@@ -28,6 +28,7 @@ import FIIDII from './pages/FIIDII';
 import About from './pages/About';
 import FandO from './pages/FandO';
 import IntradayStocks from './pages/IntradayStocks';
+import MarketSummary from './pages/MarketSummary';
 import ScrollToTop from './components/common/ScrollToTop';
 
 // Placeholder Pages
@@ -81,6 +82,7 @@ function App() {
             <Route path="about" element={<About />} />
             <Route path="f-and-o" element={<FandO />} />
             <Route path="intraday-news" element={<IntradayStocks />} />
+            <Route path="market-summary" element={<MarketSummary />} />
             <Route path="settings" element={<PagePlaceholder title="Settings" />} />
           </Route>
           <Route path="*" element={<ErrorPage />} />
