@@ -34,14 +34,14 @@ const FundHoldingsSection: React.FC<Props> = ({ topHoldings, sectorAllocation, t
                         <span className="text-[10px] font-black text-indigo-400 uppercase tracking-widest">Top Holdings</span>
                     </div>
                     <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-indigo-100 scrollbar-track-transparent">
-                        <table className="w-full text-sm min-w-[500px]">
+                        <table className="w-full text-sm min-w-[320px] md:min-w-[500px]">
                             <thead>
                                 <tr className="border-b border-indigo-50">
-                                    <th className="text-left px-6 py-3 text-[10px] font-black text-indigo-400 uppercase tracking-widest">Company</th>
+                                    <th className="text-left px-4 md:px-6 py-3 text-[10px] font-black text-indigo-400 uppercase tracking-widest">Company</th>
                                     {topHoldings[0]?.sector && (
-                                        <th className="text-left px-6 py-3 text-[10px] font-black text-indigo-400 uppercase tracking-widest">Sector</th>
+                                        <th className="text-left px-4 md:px-6 py-3 text-[10px] font-black text-indigo-400 uppercase tracking-widest">Sector</th>
                                     )}
-                                    <th className="text-right px-6 py-3 text-[10px] font-black text-indigo-400 uppercase tracking-widest">Alloc (%)</th>
+                                    <th className="text-right px-4 md:px-6 py-3 text-[10px] font-black text-indigo-400 uppercase tracking-widest">Alloc (%)</th>
                                 </tr>
                             </thead>
                             <tbody>

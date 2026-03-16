@@ -42,14 +42,14 @@ const FundPerformanceSection: React.FC<Props> = ({ benchmarkName, performance })
                     </div>
                 </div>
                 <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-indigo-100 scrollbar-track-transparent">
-                    <table className="w-full text-sm min-w-[600px]">
+                    <table className="w-full text-sm min-w-[450px] md:min-w-[600px]">
                         <thead>
                             <tr className="border-b border-indigo-50">
-                                <th className="text-left px-6 py-4 text-[10px] font-black text-indigo-400 uppercase tracking-widest">Period</th>
-                                <th className="text-right px-6 py-4 text-[10px] font-black text-indigo-600 uppercase tracking-widest">Fund</th>
-                                <th className="text-right px-6 py-4 text-[10px] font-black text-violet-500 uppercase tracking-widest">{benchmarkName}</th>
-                                <th className="text-right px-6 py-4 text-[10px] font-black text-emerald-500 uppercase tracking-widest">Category Avg</th>
-                                <th className="text-right px-6 py-4 text-[10px] font-black text-indigo-400 uppercase tracking-widest">Rank</th>
+                                <th className="text-left px-4 md:px-6 py-4 text-[10px] font-black text-indigo-400 uppercase tracking-widest">Period</th>
+                                <th className="text-right px-4 md:px-6 py-4 text-[10px] font-black text-indigo-600 uppercase tracking-widest">Fund</th>
+                                <th className="text-right px-4 md:px-6 py-4 text-[10px] font-black text-violet-500 uppercase tracking-widest">{benchmarkName}</th>
+                                <th className="text-right px-4 md:px-6 py-4 text-[10px] font-black text-emerald-500 uppercase tracking-widest">Category Avg</th>
+                                <th className="text-right px-4 md:px-6 py-4 text-[10px] font-black text-indigo-400 uppercase tracking-widest">Rank</th>
                             </tr>
                         </thead>
                         <tbody>

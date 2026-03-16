@@ -114,8 +114,8 @@ const FairValueBreakup: React.FC<{ currentPrice: number; fairValue: number }> = 
         <div className="bg-white rounded-3xl border border-indigo-50 shadow-xl shadow-indigo-50 p-5 md:p-6 h-full flex flex-col justify-between">
             <div>
                 <p className="text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-5">Current Price vs Fair Value</p>
-                <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-                    <div className="flex-1 min-w-[100px]">
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
+                    <div className="w-full sm:flex-1 text-center sm:text-left">
                         <p className="text-[9px] font-bold text-indigo-400 uppercase tracking-widest">Current Price</p>
                         <p className="text-xl md:text-2xl font-black text-indigo-950">₹{currentPrice.toLocaleString('en-IN')}</p>
                     </div>
@@ -123,7 +123,7 @@ const FairValueBreakup: React.FC<{ currentPrice: number; fairValue: number }> = 
                         <p className="text-[8px] font-black uppercase tracking-widest leading-none mb-1">{overvalued ? 'Overvalued' : 'Undervalued'}</p>
                         <p className="text-base font-black leading-none">{overvalued ? '+' : '-'}{Math.abs(Number(discount))}%</p>
                     </div>
-                    <div className="flex-1 min-w-[100px] text-right">
+                    <div className="w-full sm:flex-1 text-center sm:text-right">
                         <p className="text-[9px] font-bold text-indigo-400 uppercase tracking-widest">Fair Value</p>
                         <p className="text-xl md:text-2xl font-black text-indigo-950">₹{fairValue.toLocaleString('en-IN')}</p>
                     </div>

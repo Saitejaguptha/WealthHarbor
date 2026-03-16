@@ -54,8 +54,8 @@ const QuarterlyResultsSection: React.FC<{ stock: ReturnType<typeof getStockBySym
             <SectionTitle icon={<FiCalendar />} title="Quarterly Results" />
             <div className="bg-white rounded-3xl border border-indigo-50 shadow-xl shadow-indigo-50 overflow-hidden">
                 {/* Pagination header */}
-                <div className="flex items-center justify-between p-4 border-b border-indigo-50 bg-indigo-50/40">
-                    <span className="text-xs font-bold text-indigo-400 uppercase tracking-widest">
+                <div className="flex flex-col sm:flex-row items-center justify-between p-4 border-b border-indigo-50 bg-indigo-50/40 gap-3">
+                    <span className="text-[10px] md:text-xs font-bold text-indigo-400 uppercase tracking-widest text-center sm:text-left">
                         Showing {page * perPage + 1}–{Math.min((page + 1) * perPage, quarters.length)} of {quarters.length} Quarters
                     </span>
                     <div className="flex gap-1.5">
@@ -71,13 +71,13 @@ const QuarterlyResultsSection: React.FC<{ stock: ReturnType<typeof getStockBySym
                         ><FiChevronRight className="text-lg md:text-base" /></button>
                     </div>
                 </div>
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-indigo-100">
                     <table className="w-full text-sm">
                         <thead>
                             <tr className="border-b border-indigo-50">
-                                <th className="text-left px-5 py-3 text-[10px] font-black text-indigo-400 uppercase tracking-widest min-w-[160px]">Metric</th>
+                                <th className="text-left px-5 py-3 text-[10px] font-black text-indigo-400 uppercase tracking-widest min-w-[140px] md:min-w-[160px]">Metric</th>
                                 {visible.map(q => (
-                                    <th key={q.quarter} className="text-right px-4 py-3 text-[10px] font-black text-indigo-600 uppercase tracking-widest whitespace-nowrap min-w-[110px]">{q.quarter}</th>
+                                    <th key={q.quarter} className="text-right px-4 py-3 text-[10px] font-black text-indigo-600 uppercase tracking-widest whitespace-nowrap min-w-[90px] md:min-w-[110px]">{q.quarter}</th>
                                 ))}
                             </tr>
                         </thead>
@@ -124,13 +124,13 @@ const ProfitLossSection: React.FC<{ stock: ReturnType<typeof getStockBySymbol> }
         <div className="mb-8 md:mb-12">
             <SectionTitle icon={<FiFileText />} title="Profit & Loss" />
             <div className="bg-white rounded-3xl border border-indigo-50 shadow-xl shadow-indigo-50 overflow-hidden">
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-indigo-100">
                     <table className="w-full text-sm">
                         <thead>
                             <tr className="border-b border-indigo-50 bg-indigo-50/40">
-                                <th className="text-left px-5 py-3 text-[10px] font-black text-indigo-400 uppercase tracking-widest min-w-[180px]">Metric (₹ Cr)</th>
+                                <th className="text-left px-5 py-3 text-[10px] font-black text-indigo-400 uppercase tracking-widest min-w-[120px] md:min-w-[180px]">Metric (₹ Cr)</th>
                                 {data.map(d => (
-                                    <th key={d.year} className="text-right px-5 py-3 text-[10px] font-black text-indigo-600 uppercase tracking-widest min-w-[100px]">{d.year}</th>
+                                    <th key={d.year} className="text-right px-5 py-3 text-[10px] font-black text-indigo-600 uppercase tracking-widest min-w-[80px] md:min-w-[100px]">{d.year}</th>
                                 ))}
                             </tr>
                         </thead>
@@ -174,13 +174,13 @@ const BalanceSheetSection: React.FC<{ stock: ReturnType<typeof getStockBySymbol>
     ];
 
     const TableBlock = ({ rows, title }: { rows: typeof liabilityRows; title: string }) => (
-        <div className="min-w-[400px]">
+        <div className="min-w-full">
             <div className="px-5 py-3 border-b border-indigo-100 bg-indigo-50/60">
                 <span className="text-[10px] font-black text-indigo-500 uppercase tracking-widest">{title}</span>
             </div>
             {rows.map((row, ri) => (
-                <div key={ri} className={`flex justify-between items-center px-5 py-3 border-b border-indigo-50/60 ${row.highlight ? 'bg-indigo-50/50' : 'hover:bg-indigo-50/20'} transition-colors`}>
-                    <span className={`text-xs font-bold ${row.highlight ? 'text-indigo-700' : 'text-indigo-900/70'} whitespace-nowrap mr-4`}>{row.label}</span>
+                <div key={ri} className={`flex justify-between items-center px-5 py-3 border-b border-indigo-50/60 ${row.highlight ? 'bg-indigo-50/50' : 'hover:bg-indigo-50/20'} transition-colors overflow-x-auto`}>
+                    <span className={`text-xs font-bold ${row.highlight ? 'text-indigo-700' : 'text-indigo-900/70'} whitespace-nowrap mr-6`}>{row.label}</span>
                     <div className="flex gap-4 md:gap-6">
                         {data.map(d => (
                             <span key={d.year} className={`text-sm font-bold ${row.highlight ? 'text-indigo-700' : 'text-indigo-950'} min-w-[70px] md:min-w-[80px] text-right`}>
@@ -229,13 +229,13 @@ const CashFlowSection: React.FC<{ stock: ReturnType<typeof getStockBySymbol> }> 
         <div className="mb-8 md:mb-12">
             <SectionTitle icon={<FiDollarSign />} title="Cash Flows" />
             <div className="bg-white rounded-3xl border border-indigo-50 shadow-xl shadow-indigo-50 overflow-hidden">
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-indigo-100">
                     <table className="w-full text-sm">
                         <thead>
                             <tr className="border-b border-indigo-50 bg-indigo-50/40">
-                                <th className="text-left px-5 py-3 text-[10px] font-black text-indigo-400 uppercase tracking-widest min-w-[220px]">Activity (₹ Cr)</th>
+                                <th className="text-left px-5 py-3 text-[10px] font-black text-indigo-400 uppercase tracking-widest min-w-[160px] md:min-w-[220px]">Activity (₹ Cr)</th>
                                 {data.map(d => (
-                                    <th key={d.year} className="text-right px-5 py-3 text-[10px] font-black text-indigo-600 uppercase tracking-widest min-w-[100px]">{d.year}</th>
+                                    <th key={d.year} className="text-right px-5 py-3 text-[10px] font-black text-indigo-600 uppercase tracking-widest min-w-[80px] md:min-w-[100px]">{d.year}</th>
                                 ))}
                             </tr>
                         </thead>
@@ -312,13 +312,13 @@ const ShareholdingSection: React.FC<{ stock: ReturnType<typeof getStockBySymbol>
                     <div className="px-5 py-4 border-b border-indigo-50 bg-indigo-50/30">
                         <p className="text-xs font-black text-indigo-400 uppercase tracking-widest">Historical Trend (%)</p>
                     </div>
-                    <div className="overflow-x-auto">
+                    <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-indigo-100">
                         <table className="w-full text-sm">
                             <thead>
                                 <tr className="border-b border-indigo-50 bg-indigo-50/20">
-                                    <th className="text-left px-4 py-2.5 text-[9px] font-black text-indigo-400 uppercase tracking-widest">Holder</th>
+                                    <th className="text-left px-4 py-2.5 text-[9px] font-black text-indigo-400 uppercase tracking-widest min-w-[100px]">Holder</th>
                                     {data.map(d => (
-                                        <th key={d.quarter} className="text-right px-3 py-2.5 text-[9px] font-black text-indigo-500 uppercase tracking-widest whitespace-nowrap">{d.quarter}</th>
+                                        <th key={d.quarter} className="text-right px-3 py-2.5 text-[9px] font-black text-indigo-500 uppercase tracking-widest whitespace-nowrap min-w-[80px]">{d.quarter}</th>
                                     ))}
                                 </tr>
                             </thead>

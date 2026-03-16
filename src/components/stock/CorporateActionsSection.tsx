@@ -29,14 +29,14 @@ const CorporateActionsAndSuppliers: React.FC<Props> = ({ corporateActions, suppl
         <div className="mb-8 md:mb-12">
             <SectionTitle icon={<FiCalendar />} title="Corporate Actions" />
             <div className="bg-white rounded-3xl border border-indigo-50 shadow-xl shadow-indigo-50 overflow-hidden">
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-indigo-100">
                     <table className="w-full text-sm">
                         <thead>
                             <tr className="border-b border-indigo-50 bg-indigo-50/40">
-                                <th className="text-left px-5 py-3 text-[10px] font-black text-indigo-400 uppercase tracking-widest min-w-[100px]">Date</th>
-                                <th className="text-left px-5 py-3 text-[10px] font-black text-indigo-400 uppercase tracking-widest min-w-[80px]">Type</th>
-                                <th className="text-left px-5 py-3 text-[10px] font-black text-indigo-400 uppercase tracking-widest min-w-[200px]">Details</th>
-                                <th className="text-right px-5 py-3 text-[10px] font-black text-indigo-400 uppercase tracking-widest min-w-[100px]">Amount</th>
+                                <th className="text-left px-4 md:px-5 py-3 text-[10px] font-black text-indigo-400 uppercase tracking-widest min-w-[80px] md:min-w-[100px]">Date</th>
+                                <th className="text-left px-4 md:px-5 py-3 text-[10px] font-black text-indigo-400 uppercase tracking-widest min-w-[70px] md:min-w-[80px]">Type</th>
+                                <th className="text-left px-4 md:px-5 py-3 text-[10px] font-black text-indigo-400 uppercase tracking-widest min-w-[160px] md:min-w-[200px]">Details</th>
+                                <th className="text-right px-4 md:px-5 py-3 text-[10px] font-black text-indigo-400 uppercase tracking-widest min-w-[80px] md:min-w-[100px]">Amount</th>
                             </tr>
                         </thead>
                         <tbody>

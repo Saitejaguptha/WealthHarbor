@@ -30,12 +30,12 @@ const PeerComparisonSection: React.FC<Props> = ({ peers, currentSymbol }) => {
         <div className="mb-8 md:mb-12">
             <SectionTitle icon={<FiBarChart2 />} title="Peer Comparison" />
             <div className="bg-white rounded-3xl border border-indigo-50 shadow-xl shadow-indigo-50 overflow-hidden">
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-indigo-100">
                     <table className="w-full text-sm">
                         <thead>
                             <tr className="border-b border-indigo-50 bg-indigo-50/50">
                                 {cols.map(c => (
-                                    <th key={String(c.key)} className={`text-left px-5 py-3.5 text-[10px] font-black text-indigo-400 uppercase tracking-widest whitespace-nowrap ${c.key === 'name' ? 'min-w-[160px]' : 'min-w-[100px]'}`}>{c.label}</th>
+                                    <th key={String(c.key)} className={`text-left px-4 md:px-5 py-3.5 text-[10px] font-black text-indigo-400 uppercase tracking-widest whitespace-nowrap ${c.key === 'name' ? 'min-w-[140px] md:min-w-[160px]' : 'min-w-[80px] md:min-w-[100px]'}`}>{c.label}</th>
                                 ))}
                             </tr>
                         </thead>
