@@ -8,11 +8,14 @@ export interface MutualFund {
     fundHouse: string;
     sector: MutualFundSector;
     nav: number;
+    change: number;
+    changePercent: number;
     return1Y: number;
     return3Y: number;
-    aum: string; // Assets Under Management
+    return5Y: number;
+    aum: string;
     expenseRatio: number;
-    rating: number; // 1-5 stars
+    rating: number;
     minSIP: number;
     holdings: {
         equity: number;
@@ -20,12 +23,44 @@ export interface MutualFund {
         cash: number;
         commodities: number;
     };
-    alpha: number;
-    beta: number;
+    categoryAverage1Y: number;
+    categoryAverage3Y: number;
+    categoryAverage5Y: number;
+    benchmarkName: string;
+    benchmarkReturn1Y: number;
+    benchmarkReturn3Y: number;
+    benchmarkReturn5Y: number;
+    topHoldings: {
+        company: string;
+        sector: string;
+        allocation: number;
+    }[];
+    sectorAllocation: {
+        sector: string;
+        percentage: number;
+    }[];
+    riskMetrics: {
+        standardDeviation: number;
+        sharpeRatio: number;
+        sortinoRatio: number;
+        alpha: number;
+        beta: number;
+    };
+    alpha: number; // legacy
+    beta: number; // legacy
     exitLoad: string;
     stampDuty: string;
     taxImplication: string;
-    fundManager: string;
+    fundManager: {
+        name: string;
+        experience: string;
+        education: string;
+        otherFunds: string[];
+    };
+    schemeDocuments: {
+        name: string;
+        url: string;
+    }[];
     description: string;
     history: PriceHistoryPoint[];
 }

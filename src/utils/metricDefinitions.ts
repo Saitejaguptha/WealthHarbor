@@ -12,6 +12,11 @@ export const METRIC_GLOSSARY: Record<string, MetricDefinition> = {
         description: 'The ratio of a company\'s share price to its earnings per share. It helps determine if a stock is overvalued or undervalued.',
         formula: 'P/E Ratio = Market Value per Share / Earnings per Share (EPS)'
     },
+    'Market Price': {
+        name: 'Market Price',
+        description: 'The current price at which an asset is being traded in the open market.',
+        formula: 'Determined by the supply and demand in the exchange.'
+    },
     'Market Cap': {
         name: 'Market Capitalization',
         description: 'The total value of all a company\'s shares of stock.',
@@ -46,7 +51,7 @@ export const METRIC_GLOSSARY: Record<string, MetricDefinition> = {
     },
     'Alpha': {
         name: 'Alpha',
-        description: 'The excess return of an investment relative to the return of a benchmark index.',
+        description: 'The excess return of an investment relative to the return of a benchmark index. A positive alpha means the fund outperformed its benchmark.',
         formula: 'Alpha = Actual Return - [Risk-Free Rate + Beta x (Market Return - Risk-Free Rate)]'
     },
     'Beta': {
@@ -56,13 +61,33 @@ export const METRIC_GLOSSARY: Record<string, MetricDefinition> = {
     },
     'Expense Ratio': {
         name: 'Expense Ratio',
-        description: 'The annual fee that all funds or ETFs charge their unit holders.',
+        description: 'The annual fee that all funds or ETFs charge their unit holders. It covers management fees, administrative costs, and marketing.',
         formula: 'Expense Ratio = (Total Fund Operating Expenses / Total Fund Assets) x 100'
     },
     'Exit Load': {
         name: 'Exit Load',
-        description: 'A fee charged by AMCs at the time of redemption of mutual fund units.',
-        formula: 'Usually calculated as a percentage of the NAV at the time of exit.'
+        description: 'A fee charged by AMCs at the time of redemption of mutual fund units if redeemed before a specified period.',
+        formula: 'Exit Load = NAV x Exit Load Percentage'
+    },
+    'Sharpe Ratio': {
+        name: 'Sharpe Ratio',
+        description: 'Measures risk-adjusted performance. A higher Sharpe ratio indicates better reward per unit of risk.',
+        formula: 'Sharpe Ratio = (Fund Return - Risk-Free Rate) / Standard Deviation'
+    },
+    'Sortino Ratio': {
+        name: 'Sortino Ratio',
+        description: 'Similar to Sharpe, but only considers downside risk. Better for highlighting protection against negative returns.',
+        formula: 'Sortino Ratio = (Fund Return - Risk-Free Rate) / Downside Deviation'
+    },
+    'Standard Deviation': {
+        name: 'Standard Deviation',
+        description: 'A mathematical measure of volatility. It shows how much the fund\'s returns deviate from its average.',
+        formula: 'σ = sqrt[ Σ(Ri - Ravg)² / n ]'
+    },
+    'AUM': {
+        name: 'Assets Under Management',
+        description: 'The total market value of the investments managed by the fund.',
+        formula: 'Total Value of Portfolio Securities + Cash - Liabilities'
     },
 
     // ETFs
@@ -70,5 +95,30 @@ export const METRIC_GLOSSARY: Record<string, MetricDefinition> = {
         name: 'Tracking Error',
         description: 'The difference between the performance of an ETF and its underlying benchmark index.',
         formula: 'Tracking Error = Standard Deviation of (ETF Return - Benchmark Return)'
+    },
+    'PE Ratio': {
+        name: 'Price-to-Earnings Ratio (ETF)',
+        description: 'The weighted average of the P/E ratios of all companies in the ETF\'s portfolio.',
+        formula: 'Σ (Weight_i x PE_i)'
+    },
+    'Yield': {
+        name: 'Dividend Yield',
+        description: 'The annual dividends distributed by the ETF as a percentage of its current price.',
+        formula: 'Yield = (Dividends / ETF Price) x 100'
+    },
+    'Liquidity Score': {
+        name: 'Liquidity Score',
+        description: 'An internal metric measuring the ease of buying or selling the ETF without affecting its price.',
+        formula: 'Based on average volume, bid-ask spread, and impact cost.'
+    },
+    'Bid-Ask Spread': {
+        name: 'Bid-Ask Spread',
+        description: 'The difference between the highest price a buyer is willing to pay and the lowest price a seller is willing to accept.',
+        formula: 'Spread = (Ask Price - Bid Price) / Ask Price x 100'
+    },
+    'Discount/Prem': {
+        name: 'Discount/Premium to NAV',
+        description: 'The difference between the market price of an ETF and its Net Asset Value (NAV). a Discount means it trades below NAV; a Premium means it trades above.',
+        formula: '((Market Price - NAV) / NAV) x 100'
     }
 };

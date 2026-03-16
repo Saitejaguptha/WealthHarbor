@@ -52,13 +52,13 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
             {/* Mobile Backdrop */}
             {isOpen && (
                 <div
-                    className="fixed inset-0 bg-indigo-900/20 backdrop-blur-sm z-[60] md:hidden transition-opacity cursor-pointer"
+                    className="fixed top-[60px] inset-x-0 bottom-0 bg-indigo-900/20 backdrop-blur-sm z-[60] md:hidden transition-opacity cursor-pointer"
                     onClick={onClose}
                 />
             )}
 
             <aside className={`
-                fixed inset-y-0 left-0 w-64 bg-indigo-50/95 backdrop-blur-md flex flex-col h-full border-r border-indigo-100 z-[70] transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:bg-indigo-50/80
+                fixed top-[60px] bottom-0 left-0 w-64 bg-indigo-50/95 backdrop-blur-md flex flex-col border-r border-indigo-100 z-[70] transition-transform duration-300 ease-in-out md:relative md:top-0 md:translate-x-0 md:bg-indigo-50/80
                 ${isOpen ? 'translate-x-0 shadow-2xl shadow-indigo-900/10' : '-translate-x-full md:flex-shrink-0 hide-scrollbar md:overflow-hidden overflow-y-auto'}
             `}>
                 <div className="p-5 border-b border-indigo-100 flex items-center justify-between">

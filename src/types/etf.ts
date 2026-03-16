@@ -13,11 +13,32 @@ export interface ETF {
     price: number;
     change: number;
     changePercent: number;
+    nav: number;
+    navDiscount: number; // Percentage
     expenseRatio: number;
     trackingError: number;
     aum: string;
     avgVolume: string;
     rating: number;
+    yield: number;
+    peRatio: number;
+    pbRatio: number;
+    topHoldings: {
+        company: string;
+        allocation: number;
+    }[];
+    sectorAllocation: {
+        sector: string;
+        percentage: number;
+    }[];
+    assetAllocation: {
+        equity: number;
+        debt: number;
+        cash: number;
+        others: number;
+    };
+    liquidityScore: number; // 1-10
+    bidAskSpread: number; // Percentage
     description: string;
     history: PriceHistoryPoint[];
 }

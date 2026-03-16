@@ -10,7 +10,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
     const { user } = useAuth();
 
     return (
-        <header className="h-[60px] bg-white flex items-center justify-between px-4 md:px-6 border-b border-indigo-100 shrink-0 shadow-sm z-50 sticky top-0">
+        <header className="h-[60px] bg-white/95 backdrop-blur-sm flex items-center justify-between px-4 md:px-6 border-b border-indigo-100 shadow-sm z-50 fixed top-0 left-0 right-0">
             <div className="flex items-center gap-4">
                 <button
                     onClick={onMenuClick}

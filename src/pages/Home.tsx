@@ -9,7 +9,7 @@ const Home: React.FC = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     return (
-        <div className="flex h-screen flex-col overflow-hidden bg-indigo-50 text-gray-900 font-sans">
+        <div className="flex h-screen flex-col overflow-hidden bg-indigo-50 text-gray-900 font-sans pt-[60px]">
             <Header onMenuClick={() => setSidebarOpen(true)} />
             <div className="flex flex-1 overflow-hidden relative">
                 <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
