@@ -4,7 +4,7 @@ import type { MetalPricePoint, MetalData } from '../../types/metals';
 import PageHeader from '../../components/common/PageHeader';
 import PageShell from '../../components/layout/PageShell';
 import { useAppPreferences } from '../../store/slices/preferencesHooks';
-import { MARKET_HOURS, REGULATORY_NOTE, OUNCE_CONVERSION } from './goldSilverData';
+import { MARKET_HOURS, REGULATORY_NOTE } from './goldSilverData';
 import { fetchMetalData, calculateAdjustedPrice, formatCurrency } from './goldSilverService';
 
 const GoldSilver: React.FC = () => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { NewsService } from '../../services/api';
-import type { NewsArticle } from '../../utils/newsData';
+import type { NewsArticle } from '../../data/newsData';
 import { FiArrowLeft, FiClock, FiShare2, FiBookmark } from 'react-icons/fi';
 import PageShell from '../../components/layout/PageShell';
 
@@ -98,7 +98,7 @@ const NewsDetails: React.FC = () => {
                         {article.summary}
                     </p>
                     
-                    {article.content.map((paragraph, idx) => (
+                    {article.content.map((paragraph: string, idx: number) => (
                         <p key={idx} className="mb-6">
                             {paragraph}
                         </p>

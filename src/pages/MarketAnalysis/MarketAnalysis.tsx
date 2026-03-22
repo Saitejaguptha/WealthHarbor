@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FiArrowRight, FiClock, FiActivity, FiGlobe, FiPieChart } from 'react-icons/fi';
 import { NewsService } from '../../services/api';
-import type { NewsArticle } from '../../utils/newsData';
+import type { NewsArticle } from '../../data/newsData';
 import PageShell from '../../components/layout/PageShell';
 
 const mockMovers = [

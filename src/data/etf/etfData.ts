@@ -1,4 +1,4 @@
-import type { ETF, ETFSector, ETFMarketCap } from '../../types/etf';
+import type { ETF } from '../../types/etf';
 import { ETF_SECTORS, ETF_MARKET_CAPS, ETF_FUND_HOUSES } from '../../types/etf';
 import { generatePriceHistory } from '../shared/historyUtils';
 

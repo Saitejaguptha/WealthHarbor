@@ -1,4 +1,3 @@
-import React from 'react';
 import { formatNumberEnIn } from '../../utils/numberFormat';
 
 export interface TableRowDef<T> {

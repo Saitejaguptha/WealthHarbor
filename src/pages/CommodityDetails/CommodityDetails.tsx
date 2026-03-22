@@ -5,7 +5,7 @@ import { CommodityService } from '../../services/api';
 import type { CommodityData } from '../../types/commodity';
 import PriceHistoryChart from '../../components/common/PriceHistoryChart';
 import MetricInfo from '../../components/common/MetricInfo';
-import { addToWatchlist, removeFromWatchlist, isInWatchlist } from '../../utils/watchlistUtils';
+import { addToWatchlist, removeFromWatchlist } from '../../utils/watchlistUtils';
 import { useAuth } from '../../features/auth/authHooks';
 import { FiPlus, FiCheck } from 'react-icons/fi';
 import PageShell from '../../components/layout/PageShell';
@@ -17,8 +17,8 @@ const CommodityDetails: React.FC = () => {
     const { user } = useAuth();
     const { currency } = useAppPreferences();
     const [commodity, setCommodity] = useState<CommodityData | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+    const [_isLoading, setIsLoading] = useState(true);
+    const [_error, setError] = useState<string | null>(null);
     const [inWatchlist, setInWatchlist] = useState(false);
     const userEmail = user?.email || '';
 
