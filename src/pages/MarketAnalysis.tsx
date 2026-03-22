@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { FiArrowRight, FiClock, FiActivity, FiGlobe, FiPieChart } from 'react-icons/fi';
 import { getNews } from '../utils/newsData';
+import PageShell from '../components/layout/PageShell';
 
 const mockMovers = [
     { symbol: 'RELIANCE', company: 'Reliance Industries', price: '₹2,985.40', change: '+1.2%', isPositive: true, volume: '4.5M' },
@@ -16,7 +17,7 @@ const MarketAnalysis: React.FC = () => {
     const latestNews = useMemo(() => getNews(), []);
 
     return (
-        <div className="p-4 md:p-8 max-w-7xl mx-auto animate-in fade-in duration-700">
+        <PageShell className="animate-in fade-in duration-700">
             <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
                 <div>
                     <h1 className="text-4xl font-black text-indigo-950 mb-2 tracking-tight">Market Overview</h1>
@@ -40,7 +41,7 @@ const MarketAnalysis: React.FC = () => {
             </div>
 
             {/* Quick Overview Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 stagger-children">
                 <div className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-3xl p-6 text-white shadow-lg shadow-indigo-200">
                     <div className="flex items-center gap-3 mb-4 opacity-80">
                         <FiActivity className="text-2xl" />
@@ -73,7 +74,7 @@ const MarketAnalysis: React.FC = () => {
                         <FiClock className="text-indigo-600" /> Real-time Coverage
                     </h2>
 
-                    <div className="grid grid-cols-1 gap-6">
+                    <div className="grid grid-cols-1 gap-6 stagger-children">
                         {latestNews.map((news) => (
                             <Link 
                                 key={news.id} 
@@ -115,7 +116,7 @@ const MarketAnalysis: React.FC = () => {
                         <FiPieChart className="text-indigo-600" /> Top Movers
                     </h2>
 
-                    <div className="bg-white/70 backdrop-blur-xl border border-white rounded-3xl shadow-xl shadow-indigo-100/50 overflow-hidden">
+                    <div className="bg-white/70 backdrop-blur-xl border border-white rounded-3xl shadow-xl shadow-indigo-100/50 overflow-hidden stagger-children">
                         {mockMovers.map((mover, i) => (
                             <div key={i} className={`p-5 flex items-center justify-between hover:bg-indigo-50/50 transition-colors cursor-pointer gap-2 ${
                                 i !== mockMovers.length - 1 ? 'border-b border-indigo-50/50' : ''
@@ -147,7 +148,7 @@ const MarketAnalysis: React.FC = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </PageShell>
     );
 };
 

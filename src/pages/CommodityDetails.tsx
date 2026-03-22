@@ -7,6 +7,8 @@ import MetricInfo from '../components/common/MetricInfo';
 import { addToWatchlist, removeFromWatchlist, isInWatchlist } from '../utils/watchlistUtils';
 import { useAuth } from '../features/auth/AuthContext';
 import { FiPlus, FiCheck } from 'react-icons/fi';
+import PageShell from '../components/layout/PageShell';
+import { useAppPreferences } from '../context/AppPreferencesContext';
 
 const CommodityDetails: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -14,9 +16,7 @@ const CommodityDetails: React.FC = () => {
     const commodity = useMemo(() => getCommodityById(id || ''), [id]);
 
     const { user } = useAuth();
-    const [currency] = React.useState<'INR' | 'USD'>(() => {
-        return (localStorage.getItem('wealthharbor_currency') as 'INR' | 'USD') || 'INR';
-    });
+    const { currency } = useAppPreferences();
     const [inWatchlist, setInWatchlist] = React.useState(false);
 
     const userEmail = user?.email || '';
@@ -50,7 +50,7 @@ const CommodityDetails: React.FC = () => {
         const USD_CONVERSION = 0.012;
         return commodity?.history.map(point => ({
             ...point,
-            price: currency === 'USD' ? Number((point.price * USD_CONVERSION).toFixed(2)) : point.price
+            price: currency === 'USD' ? Number((point.price * USD_CONVERSION).toFixed(3)) : point.price
         })) || [];
     }, [commodity, currency]);
 
@@ -60,7 +60,8 @@ const CommodityDetails: React.FC = () => {
         return adjustedPrice.toLocaleString(currency === 'INR' ? 'en-IN' : 'en-US', {
             style: 'currency',
             currency: currency,
-            maximumFractionDigits: currency === 'USD' ? 2 : 0
+            maximumFractionDigits: currency === 'USD' ? 2 : 3,
+            minimumFractionDigits: 0,
         });
     };
 
@@ -75,7 +76,7 @@ const CommodityDetails: React.FC = () => {
     }
 
     return (
-        <div className="p-3 md:p-8 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <PageShell className="animate-in fade-in slide-in-from-bottom-4 duration-700">
             {/* Header */}
             <div className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div className="flex items-center gap-4">
@@ -221,7 +222,7 @@ const CommodityDetails: React.FC = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </PageShell>
     );
 };
 

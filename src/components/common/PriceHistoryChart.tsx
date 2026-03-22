@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import type { PriceHistoryPoint } from '../../types/history';
+import { formatNumberEnIn } from '../../utils/numberFormat';
 
 interface PriceHistoryChartProps {
     history: PriceHistoryPoint[];
@@ -52,7 +53,7 @@ const PriceHistoryChart: React.FC<PriceHistoryChartProps> = ({
     };
 
     return (
-        <div className="relative w-full group/chart bg-white/50 backdrop-blur-sm rounded-[2rem] p-6 border border-indigo-50 shadow-sm overflow-hidden">
+        <div className="relative w-full min-w-0 max-w-full group/chart bg-white/50 backdrop-blur-sm rounded-[2rem] p-4 sm:p-6 border border-indigo-50 shadow-sm overflow-hidden">
             <div className="flex justify-between items-center mb-6">
                 <div>
                     <h3 className="text-sm font-black text-indigo-950 uppercase tracking-widest">{title}</h3>
@@ -61,7 +62,7 @@ const PriceHistoryChart: React.FC<PriceHistoryChartProps> = ({
                 {hoveredPoint && (
                     <div className="text-right">
                         <p className="text-xs font-black text-indigo-600 uppercase tracking-widest">{hoveredPoint.date}</p>
-                        <p className="text-xl font-black text-indigo-950">{currencySymbol}{hoveredPoint.price}</p>
+                        <p className="text-xl font-black text-indigo-950">{currencySymbol}{formatNumberEnIn(hoveredPoint.price)}</p>
                     </div>
                 )}
             </div>

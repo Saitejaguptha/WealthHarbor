@@ -1,4 +1,5 @@
 import type { CommodityData, CommodityPricePoint } from '../types/commodity';
+import { roundToMaxDecimals, DISPLAY_MAX_DECIMALS } from './numberFormat';
 
 export const generateCommodityHistory = (basePrice: number, baseVolume: number, days: number = 30): CommodityPricePoint[] => {
     const history: CommodityPricePoint[] = [];
@@ -23,7 +24,7 @@ export const generateCommodityHistory = (basePrice: number, baseVolume: number, 
 
         history.push({
             date: date.toISOString().split('T')[0],
-            price: parseFloat(currentPrice.toFixed(2)),
+            price: roundToMaxDecimals(currentPrice, DISPLAY_MAX_DECIMALS),
             volume: Math.floor(currentVolume)
         });
     }
@@ -48,8 +49,8 @@ export const getCommodities = (): CommodityData[] => {
         const history = generateCommodityHistory(config.basePrice, config.baseVolume);
         const latest = history[history.length - 1];
         const previous = history[history.length - 2];
-        const change = parseFloat((latest.price - previous.price).toFixed(2));
-        const changePercent = parseFloat(((change / previous.price) * 100).toFixed(2));
+        const change = roundToMaxDecimals(latest.price - previous.price, DISPLAY_MAX_DECIMALS);
+        const changePercent = roundToMaxDecimals((change / previous.price) * 100, DISPLAY_MAX_DECIMALS);
 
         const prices = history.map(h => h.price);
 

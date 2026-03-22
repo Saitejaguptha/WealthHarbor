@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getNewsById } from '../utils/newsData';
 import { FiArrowLeft, FiClock, FiShare2, FiBookmark } from 'react-icons/fi';
+import PageShell from '../components/layout/PageShell';
 
 const NewsDetails: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -14,7 +15,7 @@ const NewsDetails: React.FC = () => {
 
     if (!article) {
         return (
-            <div className="p-4 md:p-8 max-w-4xl mx-auto flex flex-col items-center justify-center h-full min-h-[50vh]">
+            <PageShell maxWidth="4xl" className="flex flex-col items-center justify-center h-full min-h-[50vh]">
                 <div className="text-6xl mb-4 opacity-20">📰</div>
                 <h2 className="text-2xl font-bold text-indigo-900/60 uppercase tracking-widest mb-4">Article Not Found</h2>
                 <button 
@@ -23,7 +24,7 @@ const NewsDetails: React.FC = () => {
                 >
                     <FiArrowLeft /> Back to Market
                 </button>
-            </div>
+            </PageShell>
         );
     }
 
@@ -37,7 +38,7 @@ const NewsDetails: React.FC = () => {
     });
 
     return (
-        <div className="p-4 md:p-8 max-w-7xl mx-auto animate-fade-in-up">
+        <PageShell className="animate-fade-in-up">
             <button 
                 onClick={() => navigate(-1)}
                 className="flex items-center gap-2 text-indigo-600 font-bold mb-8 hover:text-indigo-800 transition-colors group"
@@ -95,7 +96,7 @@ const NewsDetails: React.FC = () => {
                     ))}
                 </div>
             </article>
-        </div>
+        </PageShell>
     );
 };
 

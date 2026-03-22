@@ -1,12 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FiActivity, FiTrendingUp, FiTrendingDown, FiClock } from 'react-icons/fi';
 import PageHeader from '../components/common/PageHeader';
-import MonthYearSelector from '../components/common/MonthYearSelector';
 
 const FandO: React.FC = () => {
-    const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
-    const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
-
     // Sample data for 10 days call and put options
     const sampleOptions = [
         { strike: 22000, callPrice: 450.50, callChange: 12.5, putPrice: 12.20, putChange: -5.4, date: '16 Mar 2026' },
@@ -26,16 +22,7 @@ const FandO: React.FC = () => {
             <PageHeader
                 title="F&O Options Chain"
                 description="Live derivatives data and sample 10-day option chains"
-            >
-                <div className="flex justify-end w-full">
-                    <MonthYearSelector
-                        selectedMonth={selectedMonth}
-                        selectedYear={selectedYear}
-                        onMonthChange={setSelectedMonth}
-                        onYearChange={setSelectedYear}
-                    />
-                </div>
-            </PageHeader>
+            />
 
             <div className="bg-white/70 backdrop-blur-xl border border-white rounded-[2.5rem] shadow-2xl shadow-indigo-100/50 overflow-hidden">
                 <div className="p-6 md:p-8 border-b border-indigo-50 flex flex-col md:flex-row md:items-center justify-between gap-4">

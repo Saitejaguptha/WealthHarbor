@@ -1,4 +1,5 @@
 import type { PriceHistoryPoint } from '../types/history';
+import { roundToMaxDecimals, DISPLAY_MAX_DECIMALS } from './numberFormat';
 
 export const generatePriceHistory = (basePrice: number, days: number = 30): PriceHistoryPoint[] => {
     const history: PriceHistoryPoint[] = [];
@@ -17,7 +18,7 @@ export const generatePriceHistory = (basePrice: number, days: number = 30): Pric
 
         history.push({
             date: date.toISOString().split('T')[0],
-            price: parseFloat(currentPrice.toFixed(2))
+            price: roundToMaxDecimals(currentPrice, DISPLAY_MAX_DECIMALS)
         });
     }
 

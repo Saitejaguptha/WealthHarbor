@@ -24,7 +24,7 @@ const MarketSummary: React.FC = () => {
                 />
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-4 mt-3 md:mt-4 flex-1 min-h-0 overflow-y-auto lg:overflow-hidden pb-4 lg:pb-0 custom-scrollbar">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-4 mt-3 md:mt-4 flex-1 min-h-0 overflow-y-auto lg:overflow-hidden pb-4 lg:pb-0 custom-scrollbar stagger-children">
                 {/* Highlights Section */}
                 <div className="lg:col-span-2 flex flex-col min-h-[300px] lg:min-h-0 h-full">
                     <div className="bg-white/80 backdrop-blur-xl border border-white rounded-[2rem] md:rounded-[2.5rem] p-5 md:p-6 shadow-2xl shadow-indigo-100/30 flex flex-col min-h-0 h-full overflow-hidden">
@@ -47,7 +47,7 @@ const MarketSummary: React.FC = () => {
                 </div>
 
                 {/* Media Overviews Section */}
-                <div className="flex flex-col gap-3 md:gap-4 min-h-0 h-full">
+                <div className="flex flex-col gap-3 md:gap-4 min-h-0 h-full stagger-children">
                     {/* Video Overview Button */}
                     <button
                         onClick={() => setShowVideo(true)}

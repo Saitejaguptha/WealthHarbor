@@ -5,9 +5,11 @@ import { METRIC_GLOSSARY } from '../../utils/metricDefinitions';
 
 interface MetricInfoProps {
     metricKey: string;
+    /** corner: absolute top-right (default). inline-beside: compact button for same row as a value (flex with items-center). */
+    position?: 'corner' | 'inline-beside';
 }
 
-const MetricInfo: React.FC<MetricInfoProps> = ({ metricKey }) => {
+const MetricInfo: React.FC<MetricInfoProps> = ({ metricKey, position = 'corner' }) => {
     const [isOpen, setIsOpen] = useState(false);
     const definition = METRIC_GLOSSARY[metricKey];
 
@@ -20,33 +22,33 @@ const MetricInfo: React.FC<MetricInfoProps> = ({ metricKey }) => {
                 onClick={() => setIsOpen(false)}
             />
 
-            <div className="relative w-full max-w-md bg-white/95 backdrop-blur-2xl border border-white p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] shadow-[0_20px_50px_rgba(31,38,135,0.37)] animate-in zoom-in-95 duration-300 max-h-[90vh] overflow-y-auto">
+            <div className="relative w-full max-w-sm md:max-w-md bg-white border border-indigo-100 p-5 md:p-8 rounded-2xl md:rounded-[2.5rem] shadow-2xl shadow-indigo-950/20 animate-in zoom-in-95 duration-300 max-h-[85vh] overflow-y-auto">
                 <button
                     onClick={() => setIsOpen(false)}
-                    className="absolute top-6 right-6 p-2 text-indigo-900/40 hover:text-indigo-900 transition-colors"
+                    className="absolute top-4 right-4 md:top-6 md:right-6 p-2 text-indigo-900/40 hover:text-indigo-900 transition-colors"
                 >
-                    <FiX className="text-xl" />
+                    <FiX className="text-lg md:text-xl" />
                 </button>
 
-                <div className="flex items-center gap-4 mb-6">
-                    <div className="p-3 bg-indigo-600 rounded-2xl text-white shadow-lg shadow-indigo-200 shrink-0">
-                        <FiInfo className="text-xl" />
+                <div className="flex items-center gap-3 md:gap-4 mb-5 md:mb-6">
+                    <div className="p-2.5 md:p-3 bg-indigo-600 rounded-xl md:rounded-2xl text-white shadow-lg shadow-indigo-200 shrink-0">
+                        <FiInfo className="text-lg md:text-xl" />
                     </div>
-                    <h3 className="text-xl md:text-2xl font-black text-indigo-950 tracking-tight leading-tight">{definition.name}</h3>
+                    <h3 className="text-lg md:text-2xl font-black text-indigo-950 tracking-tight leading-tight">{definition.name}</h3>
                 </div>
 
-                <div className="space-y-6">
+                <div className="space-y-4 md:space-y-6">
                     <div>
-                        <p className="text-[10px] font-black text-indigo-900/40 uppercase tracking-widest mb-2">Description</p>
-                        <p className="text-indigo-900/70 font-medium leading-relaxed text-sm md:text-base">
+                        <p className="text-[9px] md:text-[10px] font-black text-indigo-900/40 uppercase tracking-widest mb-1.5 md:mb-2">Description</p>
+                        <p className="text-indigo-900/70 font-medium leading-relaxed text-xs md:text-base">
                             {definition.description}
                         </p>
                     </div>
 
                     {definition.formula && (
-                        <div className="p-5 bg-indigo-50/50 rounded-2xl border border-indigo-50">
-                            <p className="text-[10px] font-black text-indigo-600 uppercase tracking-widest mb-2">Technical Formula</p>
-                            <code className="text-[11px] md:text-xs font-bold text-indigo-950 font-mono block break-words">
+                        <div className="p-4 md:p-5 bg-indigo-50/50 rounded-xl md:rounded-2xl border border-indigo-50">
+                            <p className="text-[9px] md:text-[10px] font-black text-indigo-600 uppercase tracking-widest mb-1.5 md:mb-2 text-center md:text-left">Technical Formula</p>
+                            <code className="text-[10px] md:text-xs font-bold text-indigo-950 font-mono block break-words text-center md:text-left">
                                 {definition.formula}
                             </code>
                         </div>
@@ -55,7 +57,7 @@ const MetricInfo: React.FC<MetricInfoProps> = ({ metricKey }) => {
 
                 <button
                     onClick={() => setIsOpen(false)}
-                    className="w-full mt-8 py-3 md:py-4 bg-indigo-950 text-white font-black rounded-2xl hover:bg-black transition-all active:scale-95 shadow-xl shadow-indigo-900/10"
+                    className="w-full mt-6 md:mt-8 py-3 md:py-4 bg-indigo-950 text-white font-black rounded-xl md:rounded-2xl hover:bg-black transition-all active:scale-95 shadow-xl shadow-indigo-900/10 text-sm md:text-base"
                 >
                     Got it
                 </button>
@@ -66,14 +68,19 @@ const MetricInfo: React.FC<MetricInfoProps> = ({ metricKey }) => {
     return (
         <>
             <button
+                type="button"
                 onClick={(e) => {
                     e.stopPropagation();
                     setIsOpen(true);
                 }}
-                className="absolute top-2 right-2 p-2 bg-amber-50 rounded-xl text-amber-500 hover:bg-amber-100 hover:scale-110 transition-all z-20 shadow-sm border border-amber-100/50 flex items-center justify-center"
+                className={
+                    position === 'inline-beside'
+                        ? 'shrink-0 p-1.5 bg-amber-50 rounded-lg text-amber-500 hover:bg-amber-100 hover:scale-105 transition-all shadow-sm border border-amber-100/50 flex items-center justify-center'
+                        : 'absolute top-2 right-2 p-2 bg-amber-50 rounded-xl text-amber-500 hover:bg-amber-100 hover:scale-110 transition-all z-20 shadow-sm border border-amber-100/50 flex items-center justify-center'
+                }
                 title={`What is ${metricKey}?`}
             >
-                <FiStar className="text-sm md:text-base fill-amber-500" />
+                <FiStar className={position === 'inline-beside' ? 'text-xs fill-amber-500' : 'text-sm md:text-base fill-amber-500'} />
             </button>
 
             {isOpen && createPortal(modalContent, document.body)}

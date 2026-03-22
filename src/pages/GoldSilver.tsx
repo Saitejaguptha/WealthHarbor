@@ -2,14 +2,13 @@ import React, { useState, useMemo } from 'react';
 import { FiTrendingUp, FiClock, FiInfo, FiLayers } from 'react-icons/fi';
 import { getGoldData, getSilverData } from '../utils/metalData';
 import type { MetalPricePoint, MetalData } from '../types/metals';
-import MonthYearSelector from '../components/common/MonthYearSelector';
 import PageHeader from '../components/common/PageHeader';
+import PageShell from '../components/layout/PageShell';
+import { useAppPreferences } from '../context/AppPreferencesContext';
 
 const GoldSilver: React.FC = () => {
     const [unit, setUnit] = useState<'gram' | 'ounce'>('gram');
-    const [currency, setCurrency] = useState<'INR' | 'USD'>('INR');
-    const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
-    const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+    const { currency } = useAppPreferences();
     const goldData = useMemo(() => getGoldData(), []);
     const silverData = useMemo(() => getSilverData(), []);
 
@@ -26,7 +25,8 @@ const GoldSilver: React.FC = () => {
         return adjustedPrice.toLocaleString('en-IN', {
             style: 'currency',
             currency: currency,
-            maximumFractionDigits: currency === 'USD' ? 2 : 0
+            maximumFractionDigits: currency === 'USD' ? 2 : 3,
+            minimumFractionDigits: 0,
         });
     };
 
@@ -214,46 +214,23 @@ const GoldSilver: React.FC = () => {
     };
 
     return (
-        <div className="p-3 md:p-10 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-1000 space-y-5 md:space-y-12">
+        <PageShell className="animate-in fade-in slide-in-from-bottom-6 duration-1000 space-y-5 md:space-y-12">
             <PageHeader
                 title="Gold & Silver"
                 description="Live historical tracking and rates"
             >
-                <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-end w-full">
-                    <MonthYearSelector
-                        selectedMonth={selectedMonth}
-                        selectedYear={selectedYear}
-                        onMonthChange={setSelectedMonth}
-                        onYearChange={setSelectedYear}
-                        className="w-full md:w-auto"
-                    />
-
-                    <div className="bg-white/70 backdrop-blur-md p-1.5 rounded-2xl border border-white flex gap-1 shadow-lg shadow-indigo-100/50 w-full xl:w-auto overflow-x-auto sm:overflow-visible">
-                        {/* Currency Switcher */}
-                        <div className="flex gap-1 border-r border-indigo-50 pr-1 mr-1">
-                            <button
-                                onClick={() => setCurrency('INR')}
-                                className={`px-4 md:px-6 py-2 md:py-2.5 rounded-xl text-[10px] md:text-xs font-bold transition-all uppercase tracking-widest whitespace-nowrap ${currency === 'INR' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-100' : 'text-indigo-400 hover:bg-white/50 hover:text-indigo-600'}`}
-                            >
-                                INR
-                            </button>
-                            <button
-                                onClick={() => setCurrency('USD')}
-                                className={`px-4 md:px-6 py-2 md:py-2.5 rounded-xl text-[10px] md:text-xs font-bold transition-all uppercase tracking-widest whitespace-nowrap ${currency === 'USD' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-100' : 'text-indigo-400 hover:bg-white/50 hover:text-indigo-600'}`}
-                            >
-                                USD
-                            </button>
-                        </div>
-
-                        {/* Unit Switcher */}
+                <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-end w-full">
+                    <div className="bg-white/70 backdrop-blur-md p-1.5 rounded-2xl border border-white flex gap-1 shadow-lg shadow-indigo-100/50 w-full sm:w-auto overflow-x-auto sm:overflow-visible justify-center sm:justify-end">
                         <div className="flex gap-1">
                             <button
+                                type="button"
                                 onClick={() => setUnit('gram')}
                                 className={`px-4 md:px-6 py-2 md:py-2.5 rounded-xl text-[10px] md:text-xs font-bold transition-all uppercase tracking-widest whitespace-nowrap ${unit === 'gram' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-100' : 'text-indigo-400 hover:bg-white/50 hover:text-indigo-600'}`}
                             >
                                 Gram
                             </button>
                             <button
+                                type="button"
                                 onClick={() => setUnit('ounce')}
                                 className={`px-4 md:px-6 py-2 md:py-2.5 rounded-xl text-[10px] md:text-xs font-bold transition-all uppercase tracking-widest whitespace-nowrap ${unit === 'ounce' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-100' : 'text-indigo-400 hover:bg-white/50 hover:text-indigo-600'}`}
                             >
@@ -295,7 +272,7 @@ const GoldSilver: React.FC = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </PageShell>
     );
 };
 

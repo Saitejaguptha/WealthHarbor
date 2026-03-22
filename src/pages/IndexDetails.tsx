@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
     FiArrowLeft, FiTrendingUp, FiTrendingDown, FiPieChart,
@@ -7,6 +7,8 @@ import {
 import { getIndexByName } from '../utils/indexData';
 import PriceHistoryChart from '../components/common/PriceHistoryChart';
 import MetricInfo from '../components/common/MetricInfo';
+import { formatMetricCell, formatNumberEnIn } from '../utils/numberFormat';
+import PageShell from '../components/layout/PageShell';
 
 const IndexDetails: React.FC = () => {
     const { name } = useParams<{ name: string }>();
@@ -27,19 +29,38 @@ const IndexDetails: React.FC = () => {
         );
     }
 
-    const metrics = [
-        { label: 'P/E Ratio', value: indexData.peRatio, icon: <FiActivity />, suffix: '' },
-        { label: 'P/B Ratio', value: indexData.pbRatio, icon: <FiPieChart />, suffix: '' },
-        { label: 'Div. Yield', value: indexData.divYield, icon: <FiDollarSign />, suffix: '%' },
-        { label: 'Market Cap', value: indexData.marketCapValue, icon: <FiAward />, suffix: '' },
-        { label: 'Beta', value: (0.8 + Math.random() * 0.5).toFixed(2), icon: <FiActivity />, suffix: '' },
-        { label: 'Standard Dev', value: (10 + Math.random() * 10).toFixed(2), icon: <FiTarget />, suffix: '%' },
-        { label: 'Daily Range', value: (parseFloat(indexData.value.replace(/,/g, '')) * 0.98).toFixed(2) + ' - ' + (parseFloat(indexData.value.replace(/,/g, '')) * 1.02).toFixed(2), icon: <FiBarChart2 />, suffix: '' },
-        { label: '52W Range', value: (parseFloat(indexData.value.replace(/,/g, '')) * 0.85).toFixed(2) + ' - ' + (parseFloat(indexData.value.replace(/,/g, '')) * 1.15).toFixed(2), icon: <FiTrendingUp />, suffix: '' },
-    ];
+    const metrics = useMemo(() => {
+        const base = parseFloat(indexData.value.replace(/,/g, '')) || 0;
+        const rnd = (seed: number) => {
+            const x = Math.sin(seed + base) * 10000;
+            return x - Math.floor(x);
+        };
+        const beta = 0.8 + rnd(1) * 0.5;
+        const stdDev = 10 + rnd(2) * 10;
+        return [
+            { label: 'P/E Ratio', value: indexData.peRatio as string | number, icon: <FiActivity />, suffix: '' },
+            { label: 'P/B Ratio', value: indexData.pbRatio as string | number, icon: <FiPieChart />, suffix: '' },
+            { label: 'Div. Yield', value: indexData.divYield as string | number, icon: <FiDollarSign />, suffix: '%' },
+            { label: 'Market Cap', value: indexData.marketCapValue as string | number, icon: <FiAward />, suffix: '' },
+            { label: 'Beta', value: beta, icon: <FiActivity />, suffix: '' },
+            { label: 'Standard Dev', value: stdDev, icon: <FiTarget />, suffix: '%' },
+            {
+                label: 'Daily Range',
+                value: `${formatNumberEnIn(base * 0.98)} - ${formatNumberEnIn(base * 1.02)}`,
+                icon: <FiBarChart2 />,
+                suffix: '',
+            },
+            {
+                label: '52W Range',
+                value: `${formatNumberEnIn(base * 0.85)} - ${formatNumberEnIn(base * 1.15)}`,
+                icon: <FiTrendingUp />,
+                suffix: '',
+            },
+        ];
+    }, [indexData]);
 
     return (
-        <div className="p-4 md:p-8 pb-24 lg:pb-32 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <PageShell className="pb-24 lg:pb-32 animate-in fade-in slide-in-from-bottom-4 duration-700">
             {/* Header */}
             <div className="flex flex-col md:flex-row md:items-center gap-4 mb-6 md:mb-8">
                 <div className="flex items-center gap-4">
@@ -123,12 +144,14 @@ const IndexDetails: React.FC = () => {
                         </div>
                         <p className="text-indigo-900/40 text-[8px] md:text-[10px] font-black uppercase tracking-widest mb-1">{metric.label}</p>
                         <p className="text-sm md:text-base lg:text-lg font-bold text-indigo-950 truncate">
-                            {metric.value}{metric.suffix}
+                            {typeof metric.value === 'number'
+                                ? formatMetricCell(metric.value, metric.suffix)
+                                : `${metric.value}${metric.suffix}`}
                         </p>
                     </div>
                 ))}
             </div>
-        </div>
+        </PageShell>
     );
 };
 

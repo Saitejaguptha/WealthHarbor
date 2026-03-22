@@ -235,6 +235,8 @@ export const generateRandomStocks = (count: number): Stock[] =>
             changePercent: parseFloat((change / (price / 100)).toFixed(2)),
             marketCap:     MARKET_CAPS[i % 3],
             sector,
+            description: `${ALL_NAMES[i % ALL_NAMES.length]} is a leading player in the ${sector} sector with a ${MARKET_CAPS[i % 3]} valuation. Currently trading at ₹${price}, the stock has shown a ${parseFloat((change / (price / 100)).toFixed(2))}% movement in the latest session.`,
+            volume: `${randI(1, 100)}.${randI(0, 9)}M`,
 
             peRatio:       parseFloat(rand(10, 60).toFixed(2)),
             marketCapValue:(1000 + Math.random() * 1500000).toFixed(0) + ' Cr',

@@ -1,23 +1,38 @@
 import React, { useMemo, useState } from 'react';
-import { FiSearch, FiActivity } from 'react-icons/fi';
+import { FiSearch, FiActivity, FiPieChart } from 'react-icons/fi';
 import { getIndicesByExchange } from '../utils/indexData';
 import AssetCard from '../components/common/AssetCard';
 import PageHeader from '../components/common/PageHeader';
+import PageShell from '../components/layout/PageShell';
 
 const Indices: React.FC = () => {
     const [exchange, setExchange] = useState<'NSE' | 'BSE' | 'ALL'>('ALL');
     const [searchTerm, setSearchTerm] = useState('');
+    const [selectedCategory, setSelectedCategory] = useState<string>('All');
+
+    const categories = ['All', 'Benchmark', 'Sectoral', 'Thematic'];
 
     const filteredIndices = useMemo(() => {
         const baseIndices = getIndicesByExchange(exchange === 'ALL' ? undefined : exchange);
-        return baseIndices.filter(idx => 
-            idx.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            idx.exchange.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-    }, [exchange, searchTerm]);
+        return baseIndices.filter(idx => {
+            const matchesSearch = idx.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                idx.exchange.toLowerCase().includes(searchTerm.toLowerCase());
+            
+            let matchesCategory = true;
+            if (selectedCategory === 'Benchmark') {
+                matchesCategory = idx.name.includes('Nifty 50') || idx.name.includes('Sensex') || idx.name.includes('Next 50') || idx.name.includes('100') || idx.name.includes('500');
+            } else if (selectedCategory === 'Sectoral') {
+                matchesCategory = idx.name.includes('Bank') || idx.name.includes('IT') || idx.name.includes('Pharma') || idx.name.includes('FMCG') || idx.name.includes('Auto') || idx.name.includes('Realty') || idx.name.includes('Metal') || idx.name.includes('Energy') || idx.name.includes('Media') || idx.name.includes('Oil & Gas');
+            } else if (selectedCategory === 'Thematic') {
+                matchesCategory = !idx.name.includes('Nifty 50') && !idx.name.includes('Sensex') && !idx.name.includes('Next 50') && !idx.name.includes('100') && !idx.name.includes('500') && !idx.name.includes('Bank') && !idx.name.includes('IT') && !idx.name.includes('Pharma') && !idx.name.includes('FMCG') && !idx.name.includes('Auto') && !idx.name.includes('Realty') && !idx.name.includes('Metal') && !idx.name.includes('Energy') && !idx.name.includes('Media') && !idx.name.includes('Oil & Gas');
+            }
+            
+            return matchesSearch && (selectedCategory === 'All' || matchesCategory);
+        });
+    }, [exchange, searchTerm, selectedCategory]);
 
     return (
-        <div className="p-4 md:p-8 max-w-7xl mx-auto animate-in fade-in duration-700">
+        <PageShell className="animate-in fade-in duration-700">
             <PageHeader
                 title="Market Indices"
                 description="Live performance of major benchmark indices"
@@ -35,8 +50,9 @@ const Indices: React.FC = () => {
                         />
                     </div>
 
-                    {/* Exchange Switcher */}
-                    <div className="flex flex-col md:flex-row gap-4">
+                    {/* Filters Container */}
+                    <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
+                        {/* Exchange Switcher */}
                         <div className="bg-white/70 backdrop-blur-md p-1.5 rounded-2xl border border-white flex gap-1 shadow-lg shadow-indigo-100/50 w-full md:w-auto">
                             {['ALL', 'NSE', 'BSE'].map((ex) => (
                                 <button
@@ -52,11 +68,26 @@ const Indices: React.FC = () => {
                                 </button>
                             ))}
                         </div>
+
+                        {/* Category Filter */}
+                        <div className="relative group min-w-[180px]">
+                            <FiPieChart className="absolute left-4 top-1/2 -translate-y-1/2 text-indigo-400" />
+                            <select
+                                className="w-full pl-12 pr-10 py-4 bg-white border-2 border-indigo-50 rounded-2xl focus:border-indigo-500 outline-none appearance-none transition-all cursor-pointer text-indigo-950 font-semibold shadow-sm hover:shadow-md"
+                                value={selectedCategory}
+                                onChange={(e) => setSelectedCategory(e.target.value)}
+                            >
+                                {categories.map(cat => (
+                                    <option key={cat} value={cat}>{cat === 'All' ? 'All Types' : cat}</option>
+                                ))}
+                            </select>
+                            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-indigo-300">▼</div>
+                        </div>
                     </div>
                 </div>
             </PageHeader>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 stagger-children">
                 {filteredIndices.length > 0 ? (
                     filteredIndices.map((idx, i) => (
                         <AssetCard
@@ -85,7 +116,7 @@ const Indices: React.FC = () => {
                     </div>
                 )}
             </div>
-        </div>
+        </PageShell>
     );
 };
 

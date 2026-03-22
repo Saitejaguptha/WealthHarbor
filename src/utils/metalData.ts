@@ -1,4 +1,5 @@
 import type { MetalPricePoint, MetalData } from '../types/metals';
+import { roundToMaxDecimals, DISPLAY_MAX_DECIMALS } from './numberFormat';
 
 export const generateMetalHistory = (basePrice: number, days: number = 30): MetalPricePoint[] => {
     const history: MetalPricePoint[] = [];
@@ -15,7 +16,7 @@ export const generateMetalHistory = (basePrice: number, days: number = 30): Meta
 
         history.push({
             date: date.toISOString().split('T')[0],
-            price: parseFloat(basePrice.toFixed(2))
+            price: roundToMaxDecimals(basePrice, DISPLAY_MAX_DECIMALS)
         });
     }
 

@@ -3,6 +3,7 @@ import { FiUser, FiLock, FiSave, FiEdit2, FiCheck, FiPhone, FiAlertCircle, FiEye
 import { useAuth } from '../features/auth/AuthContext';
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import PageShell from '../components/layout/PageShell';
 
 import { addNotification } from '../utils/watchlistUtils';
 
@@ -102,7 +103,7 @@ const Profile: React.FC = () => {
     };
 
     return (
-        <div className="p-3 md:p-10 max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-1000 space-y-6 md:space-y-10">
+        <PageShell maxWidth="4xl" className="animate-in fade-in slide-in-from-bottom-6 duration-1000 space-y-6 md:space-y-10">
             <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 mb-4">
                 <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 text-center md:text-left">
                     <div className="relative group">
@@ -369,7 +370,7 @@ const Profile: React.FC = () => {
                 <div className="h-1.5 w-1.5 md:h-2 md:w-2 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(16,185,129,0.5)] shrink-0" />
                 Security Check: Your information is safe and only accessible to you.
             </div>
-        </div>
+        </PageShell>
     );
 };
 

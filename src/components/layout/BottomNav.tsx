@@ -26,7 +26,7 @@ const BottomNav: React.FC = () => {
                     }
                 >
                     <span className="text-xl md:text-2xl">{item.icon}</span>
-                    <span className="text-[10px] font-bold uppercase tracking-widest">{item.label}</span>
+                    <span className="text-[8px] md:text-[10px] font-bold uppercase tracking-wide truncate max-w-[60px]">{item.label}</span>
                 </NavLink>
             ))}
         </nav>

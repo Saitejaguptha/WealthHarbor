@@ -8,10 +8,10 @@ interface Props {
 }
 
 const SectionTitle: React.FC<{ icon: React.ReactNode; title: string }> = ({ icon, title }) => (
-    <h2 className="text-xl md:text-2xl font-black text-indigo-950 mb-4 md:mb-6 tracking-tight flex items-center gap-3">
-        <span className="text-indigo-400 text-2xl">{icon}</span>
-        {title}
-        <div className="h-1 flex-1 bg-indigo-50 rounded-full" />
+    <h2 className="text-lg md:text-2xl font-black text-indigo-950 mb-4 md:mb-6 tracking-tight flex items-center gap-2 md:gap-3">
+        <span className="text-indigo-400 text-xl md:text-2xl shrink-0">{icon}</span>
+        <span className="break-words line-clamp-2">{title}</span>
+        <div className="h-0.5 md:h-1 flex-1 bg-indigo-50 rounded-full min-w-[20px]" />
     </h2>
 );
 
@@ -29,14 +29,30 @@ const CorporateActionsAndSuppliers: React.FC<Props> = ({ corporateActions, suppl
         <div className="mb-8 md:mb-12">
             <SectionTitle icon={<FiCalendar />} title="Corporate Actions" />
             <div className="bg-white rounded-3xl border border-indigo-50 shadow-xl shadow-indigo-50 overflow-hidden">
-                <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-indigo-100">
-                    <table className="w-full text-sm">
+                {/* Mobile: vertical list — no horizontal scroll */}
+                <ul className="md:hidden divide-y divide-indigo-50">
+                    {corporateActions.map((action, i) => (
+                        <li key={i} className="p-4 hover:bg-indigo-50/20 transition-colors">
+                            <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                                <span className="text-xs font-bold text-indigo-900/60">{action.date}</span>
+                                <span className={`text-[10px] font-black px-2.5 py-1 rounded-full shrink-0 ${ACTION_COLORS[action.type]}`}>
+                                    {action.type}
+                                </span>
+                            </div>
+                            <p className="text-xs font-medium text-indigo-900/70 leading-relaxed">{action.details}</p>
+                            <p className="text-sm font-black text-indigo-950 mt-2 tabular-nums">{action.amount || '—'}</p>
+                        </li>
+                    ))}
+                </ul>
+
+                <div className="hidden md:block overflow-x-auto scrollbar-thin scrollbar-thumb-indigo-200 pb-2">
+                    <table className="w-full text-sm min-w-max">
                         <thead>
                             <tr className="border-b border-indigo-50 bg-indigo-50/40">
-                                <th className="text-left px-4 md:px-5 py-3 text-[10px] font-black text-indigo-400 uppercase tracking-widest min-w-[80px] md:min-w-[100px]">Date</th>
-                                <th className="text-left px-4 md:px-5 py-3 text-[10px] font-black text-indigo-400 uppercase tracking-widest min-w-[70px] md:min-w-[80px]">Type</th>
-                                <th className="text-left px-4 md:px-5 py-3 text-[10px] font-black text-indigo-400 uppercase tracking-widest min-w-[160px] md:min-w-[200px]">Details</th>
-                                <th className="text-right px-4 md:px-5 py-3 text-[10px] font-black text-indigo-400 uppercase tracking-widest min-w-[80px] md:min-w-[100px]">Amount</th>
+                                <th className="text-left px-3 md:px-5 py-3 text-[10px] font-black text-indigo-400 uppercase tracking-widest min-w-[70px] md:min-w-[100px]">Date</th>
+                                <th className="text-left px-3 md:px-5 py-3 text-[10px] font-black text-indigo-400 uppercase tracking-widest min-w-[60px] md:min-w-[80px]">Type</th>
+                                <th className="text-left px-3 md:px-5 py-3 text-[10px] font-black text-indigo-400 uppercase tracking-widest min-w-[140px] md:min-w-[200px]">Details</th>
+                                <th className="text-right px-3 md:px-5 py-3 text-[10px] font-black text-indigo-400 uppercase tracking-widest min-w-[70px] md:min-w-[100px]">Amount</th>
                             </tr>
                         </thead>
                         <tbody>

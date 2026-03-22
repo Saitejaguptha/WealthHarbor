@@ -10,6 +10,8 @@ import FundHoldingsSection from '../components/fund/FundHoldingsSection';
 import FundPerformanceSection from '../components/fund/FundPerformanceSection';
 import FundRiskSection from '../components/fund/FundRiskSection';
 import MetricInfo from '../components/common/MetricInfo';
+import { formatNumberEnIn, formatIntegerEnIn } from '../utils/numberFormat';
+import PageShell from '../components/layout/PageShell';
 
 const MutualFundDetails: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -68,7 +70,7 @@ const MutualFundDetails: React.FC = () => {
     ];
 
     return (
-        <div className="p-4 md:p-8 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <PageShell className="animate-in fade-in slide-in-from-bottom-4 duration-700 overflow-x-hidden">
             {/* Header */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
                 <div className="flex items-center gap-4">
@@ -78,86 +80,96 @@ const MutualFundDetails: React.FC = () => {
                     >
                         <FiArrowLeft className="text-xl" />
                     </button>
-                    <div>
-                        <div className="flex items-center gap-2 mb-1">
-                            <span className="px-2 py-0.5 bg-indigo-600 text-white text-[9px] md:text-[10px] font-black rounded uppercase tracking-widest shrink-0">
+                    <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1 flex-wrap">
+                            <span className="px-2 py-0.5 bg-indigo-600 text-white text-[8px] md:text-[10px] font-black rounded uppercase tracking-widest shrink-0">
                                 {fund.sector}
                             </span>
-                            <span className="text-indigo-900/40 text-[10px] md:text-sm font-bold uppercase tracking-widest truncate">{fund.fundHouse}</span>
+                            <span className="text-indigo-900/40 text-[9px] md:text-sm font-bold uppercase tracking-widest truncate">{fund.fundHouse}</span>
                         </div>
-                        <h1 className="text-2xl md:text-3xl font-black text-indigo-950 tracking-tight leading-tight">{fund.name}</h1>
+                        <h1 className="text-lg md:text-3xl font-black text-indigo-950 tracking-tight leading-tight break-words">{fund.name}</h1>
                     </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full md:w-auto mt-2 md:mt-0">
                     <button
                         onClick={toggleWatchlist}
-                        className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3 rounded-2xl font-bold transition-all active:scale-95 shadow-lg shadow-indigo-100/50 text-sm ${inWatchlist
+                        className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 md:px-6 py-2 md:py-3 rounded-xl md:rounded-2xl font-bold transition-all active:scale-95 shadow-lg shadow-indigo-100/50 text-[10px] md:text-sm ${inWatchlist
                             ? 'bg-emerald-50 text-emerald-600 border border-emerald-100'
                             : 'bg-indigo-600 text-white hover:bg-indigo-700'
                         }`}
                     >
-                        {inWatchlist ? <FiCheck /> : <FiPlus />}
-                        {inWatchlist ? 'In Watchlist' : 'Add to Watchlist'}
+                        {inWatchlist ? <FiCheck className="shrink-0" /> : <FiPlus className="shrink-0" />}
+                        <span className="whitespace-nowrap">{inWatchlist ? 'In Watchlist' : 'Add to Watchlist'}</span>
                     </button>
                     <button
                         onClick={() => { refreshMutualFunds(); window.location.reload(); }}
-                        className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3 bg-white border border-indigo-100 text-indigo-600 font-bold rounded-2xl hover:bg-indigo-50 transition-all active:scale-95 shadow-lg shadow-indigo-100/50 text-sm"
+                        className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 md:px-6 py-2 md:py-3 bg-white border border-indigo-100 text-indigo-600 font-bold rounded-xl md:rounded-2xl hover:bg-indigo-50 transition-all active:scale-95 shadow-lg shadow-indigo-100/50 text-[10px] md:text-sm"
                     >
                         <FiRefreshCw className="shrink-0" />
-                        Update Data
+                        <span className="whitespace-nowrap">Update Data</span>
                     </button>
                 </div>
             </div>
 
-            {/* NAV Overview Card */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 mb-8">
-                <div className="bg-gradient-to-br from-indigo-600 to-indigo-800 p-6 md:p-8 rounded-[2rem] text-white shadow-2xl shadow-indigo-100 relative overflow-hidden">
+            {/* NAV Overview Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-8 mb-6 md:mb-8 min-w-0">
+                {/* Main NAV Card */}
+                <div className="lg:col-span-2 bg-gradient-to-br from-indigo-600 to-indigo-800 p-5 md:p-10 rounded-2xl md:rounded-[2.5rem] text-white shadow-2xl shadow-indigo-200/50 relative overflow-hidden min-w-0 max-w-full">
                     <MetricInfo metricKey="NAV" />
-                    <div className="relative z-10">
-                        <p className="text-indigo-100/60 font-bold uppercase tracking-widest text-[10px] md:text-xs mb-2">Current NAV</p>
-                        <div className="flex items-baseline gap-4">
-                            <span className="text-4xl md:text-6xl font-black">₹{fund.nav}</span>
-                            <div className={`flex items-center gap-1 font-bold text-lg ${fund.change >= 0 ? 'text-emerald-300' : 'text-rose-300'}`}>
-                                {fund.change >= 0 ? <FiTrendingUp /> : <FiActivity />}
-                                <span>{fund.change >= 0 ? '+' : ''}{fund.changePercent}%</span>
+                    <div className="relative z-10 flex flex-col justify-between h-full">
+                        <div>
+                            <p className="text-indigo-100/60 font-bold uppercase tracking-widest text-[9px] md:text-xs mb-2 md:mb-3">Current NAV</p>
+                            <div className="flex items-baseline gap-2 md:gap-6 flex-wrap">
+                                <span className="text-3xl md:text-7xl font-black">₹{formatNumberEnIn(fund.nav)}</span>
+                                <div className={`flex items-center gap-1 font-black text-sm md:text-2xl ${fund.change >= 0 ? 'text-emerald-300' : 'text-rose-300'}`}>
+                                    {fund.change >= 0 ? <FiTrendingUp /> : <FiActivity />}
+                                    <span>{fund.change >= 0 ? '+' : ''}{formatNumberEnIn(fund.changePercent)}%</span>
+                                </div>
                             </div>
                         </div>
-                        <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-4">
+
+                        <div className="mt-6 md:mt-12 grid grid-cols-2 sm:grid-cols-3 gap-4 md:gap-8 pt-6 md:pt-8 border-t border-white/10">
                             <div>
-                                <p className="text-indigo-200/50 text-[10px] font-black uppercase tracking-widest leading-none mb-1">1Y Return</p>
-                                <p className="text-base md:text-lg font-black text-emerald-300 truncate">{fund.return1Y}%</p>
+                                <p className="text-indigo-100/40 text-[8px] md:text-[10px] font-black uppercase tracking-widest mb-1">1Y Return</p>
+                                <p className="text-xs md:text-xl font-black text-emerald-300 truncate">{formatNumberEnIn(fund.return1Y)}%</p>
                             </div>
                             <div>
-                                <p className="text-indigo-200/50 text-[10px] font-black uppercase tracking-widest leading-none mb-1">3Y Return</p>
-                                <p className="text-base md:text-lg font-black text-emerald-300 truncate">{fund.return3Y}%</p>
+                                <p className="text-indigo-100/40 text-[8px] md:text-[10px] font-black uppercase tracking-widest mb-1">3Y Return</p>
+                                <p className="text-xs md:text-xl font-black text-emerald-300 truncate">{formatNumberEnIn(fund.return3Y)}%</p>
                             </div>
-                            <div className="col-span-2 sm:col-span-1">
-                                <p className="text-indigo-200/50 text-[10px] font-black uppercase tracking-widest leading-none mb-1">Min. SIP</p>
-                                <p className="text-base md:text-lg font-black text-white truncate">₹{fund.minSIP}</p>
+                            <div>
+                                <p className="text-indigo-100/40 text-[8px] md:text-[10px] font-black uppercase tracking-widest mb-1">Min. SIP</p>
+                                <p className="text-xs md:text-xl font-black text-white truncate">₹{formatIntegerEnIn(fund.minSIP)}</p>
                             </div>
                         </div>
                     </div>
+                    <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-white/5 rounded-full blur-3xl pointer-events-none" />
                 </div>
 
-                <div className="bg-white/70 backdrop-blur-sm p-6 md:p-8 rounded-[2rem] border border-indigo-50 shadow-xl shadow-indigo-50 flex flex-col justify-center">
-                    <div className="flex justify-between items-center mb-4">
-                        <span className="text-indigo-950 font-black text-lg md:text-xl">Fund Overview</span>
-                        <div className="flex gap-1">
+                {/* Fund Overview Card */}
+                <div className="bg-white/70 backdrop-blur-md p-5 md:p-10 rounded-2xl md:rounded-[2.5rem] border border-white shadow-2xl shadow-indigo-100/30 flex flex-col justify-center relative overflow-hidden min-w-0 max-w-full">
+                    <div className="flex justify-between items-center mb-4 md:mb-6">
+                        <span className="text-indigo-950 font-black text-lg md:text-2xl tracking-tight">Fund Overview</span>
+                        <div className="flex gap-1 drop-shadow-sm">
                             {[...Array(5)].map((_, i) => (
-                                <span key={i} className={`text-sm ${i < fund.rating ? 'text-amber-400' : 'text-indigo-100'}`}>★</span>
+                                <span key={i} className={`text-sm md:text-lg ${i < fund.rating ? 'text-amber-400' : 'text-indigo-100'}`}>★</span>
                             ))}
                         </div>
                     </div>
-                    <p className="text-indigo-900/60 leading-relaxed font-medium text-sm">
+                    <p className="text-indigo-900/60 leading-relaxed font-medium text-[11px] md:text-base mb-4 md:mb-6">
                         {fund.description}
                     </p>
+                    <div className="flex flex-wrap gap-2">
+                        <span className="px-2 py-1 bg-indigo-50 text-indigo-600 text-[9px] font-bold rounded-full uppercase tracking-widest">{fund.sector}</span>
+                        <span className="px-2 py-1 bg-indigo-50 text-indigo-600 text-[9px] font-bold rounded-full uppercase tracking-widest">{fund.fundHouse}</span>
+                    </div>
                 </div>
             </div>
 
             {/* Performance Chart */}
-            <div className="mb-8 md:mb-12">
-                <div className="bg-white rounded-[2.5rem] p-0 border border-indigo-50 shadow-sm overflow-hidden">
+            <div className="mb-8 md:mb-12 min-w-0 max-w-full">
+                <div className="bg-white rounded-[2.5rem] p-0 border border-indigo-50 shadow-sm overflow-hidden min-w-0">
                     <PriceHistoryChart
                         history={fund.history}
                         color="#6366F1"
@@ -184,9 +196,9 @@ const MutualFundDetails: React.FC = () => {
             />
 
             {/* Manager & Documents */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12 min-w-0">
                 {/* Fund Manager */}
-                <div className="lg:col-span-2 bg-white rounded-[2.5rem] border border-indigo-50 shadow-xl shadow-indigo-50 p-8">
+                <div className="lg:col-span-2 bg-white rounded-[2.5rem] border border-indigo-50 shadow-xl shadow-indigo-50 p-5 sm:p-8 min-w-0 max-w-full">
                     <div className="flex items-center gap-4 mb-6">
                         <div className="w-16 h-16 rounded-2xl bg-indigo-600 flex items-center justify-center text-white text-3xl">
                             <FiUser />
@@ -222,31 +234,33 @@ const MutualFundDetails: React.FC = () => {
                 </div>
 
                 {/* Scheme Documents */}
-                <div className="bg-indigo-900 rounded-[2.5rem] p-8 text-white shadow-2xl shadow-indigo-100 flex flex-col justify-between">
+                <div className="bg-indigo-900 rounded-[2.5rem] p-5 sm:p-8 text-white shadow-2xl shadow-indigo-100 flex flex-col justify-between min-w-0 max-w-full overflow-hidden">
                     <div>
                         <h3 className="text-xl font-black mb-6 flex items-center gap-2">
                             <FiPercent /> Scheme Documents
                         </h3>
                         <div className="space-y-4">
                             {fund.schemeDocuments.map((doc, i) => (
-                                <a key={i} href={doc.url} className="flex items-center justify-between p-4 bg-white/10 hover:bg-white/20 rounded-2xl transition-all group">
-                                    <span className="text-sm font-bold text-white/80 group-hover:text-white">{doc.name}</span>
+                                <a key={i} href={doc.url} className="flex items-center justify-between gap-3 p-4 bg-white/10 hover:bg-white/20 rounded-2xl transition-all group min-w-0">
+                                    <span className="text-sm font-bold text-white/80 group-hover:text-white min-w-0 break-words">{doc.name}</span>
                                     <FiDownload className="text-white/40 group-hover:text-white" />
                                 </a>
                             ))}
                         </div>
                     </div>
-                    <div className="mt-8 pt-8 border-t border-white/10 relative">
-                        <MetricInfo metricKey="Expense Ratio" />
-                        <div className="flex justify-between items-center mb-2">
+                    <div className="mt-8 pt-8 border-t border-white/10">
+                        <div className="flex justify-between items-center gap-3 mb-2">
                             <span className="text-white/40 text-[10px] font-black uppercase tracking-widest">Expense Ratio</span>
-                            <span className="text-xl font-black">{fund.expenseRatio}%</span>
+                            <div className="flex items-center justify-end gap-2 min-w-0 shrink-0">
+                                <span className="text-xl font-black tabular-nums">{formatNumberEnIn(fund.expenseRatio)}%</span>
+                                <MetricInfo metricKey="Expense Ratio" position="inline-beside" />
+                            </div>
                         </div>
                         <p className="text-[10px] text-white/30 italic">Direct plan. Regular plans may have higher ratios.</p>
                     </div>
                 </div>
             </div>
-        </div>
+        </PageShell>
     );
 };
 

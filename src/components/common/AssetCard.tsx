@@ -1,6 +1,7 @@
 import React from 'react';
 import { FiTrendingUp, FiTrendingDown } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+import { formatNumberEnIn } from '../../utils/numberFormat';
 
 interface AssetCardProps {
     id?: string;
@@ -33,7 +34,7 @@ const AssetCard: React.FC<AssetCardProps> = ({
     metrics
 }) => {
     return (
-        <div className="bg-white/70 backdrop-blur-xl border border-white p-6 rounded-3xl shadow-xl shadow-indigo-100/50 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden flex flex-col justify-between">
+        <div className="bg-white/70 backdrop-blur-xl border border-white p-6 rounded-3xl shadow-xl shadow-indigo-100/50 hover-lift transition-luxury group relative overflow-hidden flex flex-col justify-between">
             <div className="absolute top-0 right-0 p-8 opacity-[0.03] scale-150 rotate-12 group-hover:rotate-0 transition-transform duration-700 pointer-events-none">
                 <Icon className="text-8xl text-indigo-950" />
             </div>
@@ -56,10 +57,16 @@ const AssetCard: React.FC<AssetCardProps> = ({
                         )}
                     </div>
                     <div className={`flex flex-col items-end shrink-0 ${isPositive ? 'text-emerald-600' : 'text-rose-600'}`}>
-                        <span className="text-2xl font-black text-indigo-950">₹{price}</span>
+                        <span className="text-2xl font-black text-indigo-950">
+                            ₹{typeof price === 'number' ? formatNumberEnIn(price) : price}
+                        </span>
                         <div className="flex items-center gap-1 text-sm font-bold">
                             {isPositive ? <FiTrendingUp /> : <FiTrendingDown />}
-                            <span>{isPositive ? '+' : ''}{change}{changePercent ? `%` : ''}</span>
+                            <span>
+                                {isPositive ? '+' : ''}
+                                {typeof change === 'number' ? formatNumberEnIn(change) : change}
+                                {changePercent ? `%` : ''}
+                            </span>
                         </div>
                     </div>
                 </div>

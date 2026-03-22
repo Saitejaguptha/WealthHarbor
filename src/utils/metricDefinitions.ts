@@ -116,6 +116,10 @@ export const METRIC_GLOSSARY: Record<string, MetricDefinition> = {
         description: 'The difference between the highest price a buyer is willing to pay and the lowest price a seller is willing to accept.',
         formula: 'Spread = (Ask Price - Bid Price) / Ask Price x 100'
     },
+    'Avg. Volume': {
+        name: 'Average Daily Volume',
+        description: 'Typical number of ETF units traded per day. Higher volume usually means tighter spreads and easier execution.',
+    },
     'Discount/Prem': {
         name: 'Discount/Premium to NAV',
         description: 'The difference between the market price of an ETF and its Net Asset Value (NAV). a Discount means it trades below NAV; a Premium means it trades above.',

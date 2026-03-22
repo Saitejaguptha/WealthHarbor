@@ -1,19 +1,14 @@
 import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAllCommodities, refreshCommodities } from '../utils/commodityData';
-import { FiTrendingUp, FiTrendingDown, FiSearch, FiActivity, FiGlobe, FiRefreshCw } from 'react-icons/fi';
+import { FiTrendingUp, FiTrendingDown, FiSearch, FiActivity, FiGlobe, FiRefreshCw, FiChevronDown } from 'react-icons/fi';
+import PageShell from '../components/layout/PageShell';
+import { useAppPreferences } from '../context/AppPreferencesContext';
 
 const Commodities: React.FC = () => {
     const navigate = useNavigate();
+    const { currency } = useAppPreferences();
     const [searchTerm, setSearchTerm] = useState('');
-    const [currency, setCurrency] = useState<'INR' | 'USD'>(() => {
-        return (localStorage.getItem('wealthharbor_currency') as 'INR' | 'USD') || 'INR';
-    });
-
-    const handleCurrencyChange = (newCurrency: 'INR' | 'USD') => {
-        setCurrency(newCurrency);
-        localStorage.setItem('wealthharbor_currency', newCurrency);
-    };
 
     const [selectedCategory, setSelectedCategory] = useState<string>('All');
     const [commodities, setCommodities] = useState(() => getAllCommodities());
@@ -40,7 +35,8 @@ const Commodities: React.FC = () => {
         return adjustedPrice.toLocaleString(currency === 'INR' ? 'en-IN' : 'en-US', {
             style: 'currency',
             currency: currency,
-            maximumFractionDigits: currency === 'USD' ? 2 : 0
+            maximumFractionDigits: currency === 'USD' ? 2 : 3,
+            minimumFractionDigits: 0,
         });
     };
 
@@ -80,7 +76,7 @@ const Commodities: React.FC = () => {
     };
 
     return (
-        <div className="p-4 md:p-8 pb-24 lg:pb-32 max-w-7xl mx-auto animate-in fade-in duration-700">
+        <PageShell className="pb-24 lg:pb-32 animate-in fade-in duration-700">
             <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
                 <div>
                     <h1 className="text-4xl font-black text-indigo-950 mb-2 tracking-tight flex items-center gap-3">
@@ -93,20 +89,6 @@ const Commodities: React.FC = () => {
                 </div>
                 
                 <div className="flex items-center gap-3">
-                    <div className="bg-indigo-50 p-1 rounded-xl flex items-center gap-1 border border-indigo-100">
-                        <button
-                            onClick={() => handleCurrencyChange('INR')}
-                            className={`px-4 py-2 rounded-lg text-[10px] font-black transition-all uppercase tracking-widest ${currency === 'INR' ? 'bg-white text-indigo-600 shadow-sm' : 'text-indigo-900/40 hover:text-indigo-900'}`}
-                        >
-                            INR (₹)
-                        </button>
-                        <button
-                            onClick={() => handleCurrencyChange('USD')}
-                            className={`px-4 py-2 rounded-lg text-[10px] font-black transition-all uppercase tracking-widest ${currency === 'USD' ? 'bg-white text-indigo-600 shadow-sm' : 'text-indigo-900/40 hover:text-indigo-900'}`}
-                        >
-                            USD ($)
-                        </button>
-                    </div>
                     <button
                         onClick={handleRefresh}
                         className="flex items-center gap-2 px-6 py-3 bg-white border-2 border-indigo-50 text-indigo-600 font-bold rounded-2xl hover:border-indigo-500 hover:text-indigo-800 transition-all active:scale-95 shadow-sm hover:shadow-md"
@@ -133,11 +115,13 @@ const Commodities: React.FC = () => {
 
                 {/* Category Filter */}
                 <div className="relative">
-                    <FiActivity className="absolute left-4 top-1/2 -translate-y-1/2 text-indigo-400" />
+                    <FiActivity className="absolute left-4 top-1/2 -translate-y-1/2 text-indigo-400 pointer-events-none z-[1]" />
+                    <FiChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-indigo-400 pointer-events-none w-5 h-5" aria-hidden />
                     <select
-                        className="w-full pl-12 pr-4 py-4 bg-white border-2 border-indigo-50 rounded-2xl focus:border-indigo-500 outline-none appearance-none transition-all cursor-pointer text-indigo-900 font-semibold shadow-sm hover:shadow-md"
+                        className="w-full pl-12 pr-12 py-4 bg-white border-2 border-indigo-50 rounded-2xl focus:border-indigo-500 outline-none appearance-none transition-all cursor-pointer text-indigo-900 font-semibold shadow-sm hover:shadow-md"
                         value={selectedCategory}
                         onChange={(e) => setSelectedCategory(e.target.value)}
+                        aria-label="Category"
                     >
                         {categories.map(cat => (
                             <option key={cat} value={cat}>{cat === 'All' ? 'All Categories' : cat}</option>
@@ -228,7 +212,7 @@ const Commodities: React.FC = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </PageShell>
     );
 };
 

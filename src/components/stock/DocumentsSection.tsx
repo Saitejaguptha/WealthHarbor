@@ -13,8 +13,8 @@ interface Props {
 const SectionTitle: React.FC<{ icon: React.ReactNode; title: string }> = ({ icon, title }) => (
     <h2 className="text-lg md:text-2xl font-black text-indigo-950 mb-4 md:mb-6 tracking-tight flex items-center gap-2 md:gap-3">
         <span className="text-indigo-400 text-xl md:text-2xl shrink-0">{icon}</span>
-        <span className="whitespace-nowrap">{title}</span>
-        <div className="h-0.5 md:h-1 flex-1 bg-indigo-50 rounded-full" />
+        <span className="break-words line-clamp-2">{title}</span>
+        <div className="h-0.5 md:h-1 flex-1 bg-indigo-50 rounded-full min-w-[20px]" />
     </h2>
 );
 

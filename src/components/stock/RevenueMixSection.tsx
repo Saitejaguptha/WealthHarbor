@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FiPieChart } from 'react-icons/fi';
+import { formatNumberEnIn } from '../../utils/numberFormat';
 import type { RevenueMixItem } from '../../types/stock';
 
 interface Props {
@@ -9,10 +10,10 @@ interface Props {
 }
 
 const SectionTitle: React.FC<{ icon: React.ReactNode; title: string }> = ({ icon, title }) => (
-    <h2 className="text-xl md:text-2xl font-black text-indigo-950 mb-4 md:mb-6 tracking-tight flex items-center gap-3">
-        <span className="text-indigo-400 text-2xl">{icon}</span>
-        {title}
-        <div className="h-1 flex-1 bg-indigo-50 rounded-full" />
+    <h2 className="text-lg md:text-2xl font-black text-indigo-950 mb-4 md:mb-6 tracking-tight flex items-center gap-2 md:gap-3">
+        <span className="text-indigo-400 text-xl md:text-2xl shrink-0">{icon}</span>
+        <span className="break-words line-clamp-2">{title}</span>
+        <div className="h-0.5 md:h-1 flex-1 bg-indigo-50 rounded-full min-w-[20px]" />
     </h2>
 );
 
@@ -75,7 +76,7 @@ const DonutChart: React.FC<{ items: RevenueMixItem[]; title: string }> = ({ item
                             <div className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: item.color }} />
                             <span className={`font-semibold ${hovered === i ? 'text-indigo-700' : 'text-indigo-900/70'}`}>{item.label}</span>
                         </div>
-                        <span className="font-black text-indigo-950">{item.value}%</span>
+                        <span className="font-black text-indigo-950">{formatNumberEnIn(item.value)}%</span>
                     </div>
                 ))}
             </div>
@@ -94,7 +95,7 @@ const BarBreakup: React.FC<{ items: RevenueMixItem[]; title: string }> = ({ item
                             <div className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: item.color }} />
                             <span className="text-xs font-bold text-indigo-900/70">{item.label}</span>
                         </div>
-                        <span className="text-xs font-black text-indigo-950">{item.value}%</span>
+                        <span className="text-xs font-black text-indigo-950">{formatNumberEnIn(item.value)}%</span>
                     </div>
                     <div className="h-2 bg-indigo-50 rounded-full overflow-hidden">
                         <div className="h-full rounded-full transition-all duration-700"

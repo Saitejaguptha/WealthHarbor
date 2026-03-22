@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FiTrendingUp, FiTrendingDown, FiCalendar } from 'react-icons/fi';
 import PageHeader from '../components/common/PageHeader';
 import InstitutionalActivityChart from '../components/common/InstitutionalActivityChart';
-import MonthYearSelector from '../components/common/MonthYearSelector';
+import { formatNumberEnIn } from '../utils/numberFormat';
 
 interface FIIData {
     date: string;
@@ -33,8 +33,6 @@ const FIIDII: React.FC = () => {
         return data;
     };
 
-    const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
-    const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
     const [data] = useState<FIIData[]>(generateData());
 
     return (
@@ -44,38 +42,29 @@ const FIIDII: React.FC = () => {
                 description="Track institutional investment flows in the Indian market"
                 onRefresh={() => window.location.reload()}
                 refreshLabel="Update Activity"
-            >
-                <div className="flex justify-end w-full">
-                    <MonthYearSelector
-                        selectedMonth={selectedMonth}
-                        selectedYear={selectedYear}
-                        onMonthChange={setSelectedMonth}
-                        onYearChange={setSelectedYear}
-                    />
-                </div>
-            </PageHeader>
+            />
 
             <div className="space-y-8 mb-10">
                 <div className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 stagger-children">
                         <div className="bg-white p-6 rounded-[2rem] border border-indigo-50 shadow-xl shadow-indigo-100/20">
                             <p className="text-indigo-900/40 text-[10px] font-black uppercase tracking-widest mb-1">Latest FII Net</p>
                             <div className={`flex items-center gap-2 text-2xl font-black ${data[0].fiiNet >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
                                 {data[0].fiiNet >= 0 ? <FiTrendingUp /> : <FiTrendingDown />}
-                                ₹{Math.abs(data[0].fiiNet).toLocaleString()} <span className="text-xs font-bold text-indigo-900/40 mt-1">Cr</span>
+                                ₹{formatNumberEnIn(Math.abs(data[0].fiiNet))} <span className="text-xs font-bold text-indigo-900/40 mt-1">Cr</span>
                             </div>
                         </div>
                         <div className="bg-white p-6 rounded-[2rem] border border-indigo-50 shadow-xl shadow-indigo-100/20">
                             <p className="text-indigo-900/40 text-[10px] font-black uppercase tracking-widest mb-1">Latest DII Net</p>
                             <div className={`flex items-center gap-2 text-2xl font-black ${data[0].diiNet >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
                                 {data[0].diiNet >= 0 ? <FiTrendingUp /> : <FiTrendingDown />}
-                                ₹{Math.abs(data[0].diiNet).toLocaleString()} <span className="text-xs font-bold text-indigo-900/40 mt-1">Cr</span>
+                                ₹{formatNumberEnIn(Math.abs(data[0].diiNet))} <span className="text-xs font-bold text-indigo-900/40 mt-1">Cr</span>
                             </div>
                         </div>
                         <div className="bg-indigo-600 p-6 rounded-[2rem] shadow-xl shadow-indigo-200">
                             <p className="text-white/60 text-[10px] font-black uppercase tracking-widest mb-1">Flow Balance</p>
                             <div className="text-2xl font-black text-white">
-                                ₹{(data[0].fiiNet + data[0].diiNet).toLocaleString()} <span className="text-xs font-bold text-white/60 mt-1">Cr</span>
+                                ₹{formatNumberEnIn(data[0].fiiNet + data[0].diiNet)} <span className="text-xs font-bold text-white/60 mt-1">Cr</span>
                             </div>
                         </div>
                     </div>
@@ -122,13 +111,13 @@ const FIIDII: React.FC = () => {
                                             </div>
                                         </td>
                                         <td className={`px-6 py-4 text-right font-black text-sm ${row.fiiNet >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
-                                            {row.fiiNet > 0 ? '+' : ''}{row.fiiNet.toLocaleString()}
+                                            {row.fiiNet > 0 ? '+' : ''}{formatNumberEnIn(row.fiiNet)}
                                         </td>
                                         <td className={`px-6 py-4 text-right font-black text-sm ${row.diiNet >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
-                                            {row.diiNet > 0 ? '+' : ''}{row.diiNet.toLocaleString()}
+                                            {row.diiNet > 0 ? '+' : ''}{formatNumberEnIn(row.diiNet)}
                                         </td>
                                         <td className={`px-6 py-4 text-right font-black text-sm hidden md:table-cell ${row.totalNet >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
-                                            {row.totalNet > 0 ? '+' : ''}{row.totalNet.toLocaleString()}
+                                            {row.totalNet > 0 ? '+' : ''}{formatNumberEnIn(row.totalNet)}
                                         </td>
                                     </tr>
                                 ))}

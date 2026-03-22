@@ -115,6 +115,8 @@ export interface Stock {
     changePercent: number;
     marketCap: MarketCap;
     sector: string;
+    description: string;
+    volume: string;
 
     // Advanced Metrics
     peRatio: number;

@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { FiTrendingUp, FiTrendingDown, FiTrash2, FiArrowRight, FiBookmark, FiActivity } from 'react-icons/fi';
 import { getWatchlist, removeFromWatchlist, type WatchlistItem } from '../utils/watchlistUtils';
 import { useAuth } from '../features/auth/AuthContext';
+import { formatNumberEnIn } from '../utils/numberFormat';
+import PageShell from '../components/layout/PageShell';
 
 const Watchlist: React.FC = () => {
     const navigate = useNavigate();
@@ -66,7 +68,7 @@ const Watchlist: React.FC = () => {
     }
 
     return (
-        <div className="p-4 md:p-8 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <PageShell className="animate-in fade-in slide-in-from-bottom-4 duration-700">
             <div className="flex items-center gap-4 mb-8">
                 <div className="p-3 bg-indigo-600 rounded-2xl text-white shadow-lg shadow-indigo-100">
                     <FiBookmark className="text-2xl" />
@@ -111,12 +113,12 @@ const Watchlist: React.FC = () => {
                             <div className="flex items-end justify-between mt-6">
                                 <div>
                                     <p className="text-indigo-900/40 text-[9px] font-black uppercase tracking-widest mb-0.5">Price</p>
-                                    <span className="text-2xl font-black text-indigo-950">{typeof item.price === 'number' ? `₹${item.price.toLocaleString()}` : item.price}</span>
+                                    <span className="text-2xl font-black text-indigo-950">{typeof item.price === 'number' ? `₹${formatNumberEnIn(item.price)}` : item.price}</span>
                                 </div>
                                 {item.changePercent !== undefined && (
                                     <div className={`flex items-center gap-1 font-bold text-sm ${item.changePercent >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
                                         {item.changePercent >= 0 ? <FiTrendingUp /> : <FiTrendingDown />}
-                                        {Math.abs(item.changePercent)}%
+                                        {formatNumberEnIn(Math.abs(item.changePercent))}%
                                     </div>
                                 )}
                             </div>
@@ -128,7 +130,7 @@ const Watchlist: React.FC = () => {
                     </div>
                 ))}
             </div>
-        </div>
+        </PageShell>
     );
 };
 
