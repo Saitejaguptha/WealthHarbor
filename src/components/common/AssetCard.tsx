@@ -63,9 +63,9 @@ const AssetCard: React.FC<AssetCardProps> = ({
                         <div className="flex items-center gap-1 text-sm font-bold">
                             {isPositive ? <FiTrendingUp /> : <FiTrendingDown />}
                             <span>
-                                {isPositive ? '+' : ''}
+                                {isPositive && !String(change).startsWith('+') ? '+' : ''}
                                 {typeof change === 'number' ? formatNumberEnIn(change) : change}
-                                {changePercent ? `%` : ''}
+                                {changePercent && !String(change).endsWith('%') ? '%' : ''}
                             </span>
                         </div>
                     </div>

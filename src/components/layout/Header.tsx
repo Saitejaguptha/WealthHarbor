@@ -1,13 +1,19 @@
-import { Link, NavLink } from 'react-router-dom';
-import { FiMenu, FiInfo } from 'react-icons/fi';
-import { useAuth } from '../../features/auth/AuthContext';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { FiMenu, FiInfo, FiLogOut } from 'react-icons/fi';
+import { useAuth } from '../../features/auth/authHooks';
 
 interface HeaderProps {
     onMenuClick: () => void;
 }
 
 const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
-    const { user } = useAuth();
+    const { user, logout } = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout();
+        navigate('/login');
+    };
 
     return (
         <header className="h-[60px] bg-white/95 backdrop-blur-sm flex items-center justify-between gap-2 px-3 sm:px-4 md:px-6 border-b border-indigo-100 shadow-sm z-50 fixed top-0 left-0 right-0 min-w-0">
@@ -56,6 +62,14 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
                         />
                     </div>
                 </NavLink>
+
+                <button
+                    onClick={handleLogout}
+                    title="Logout"
+                    className="p-1.5 md:p-2 rounded-xl text-rose-500 hover:bg-rose-50 hover:text-rose-600 transition-all shrink-0 ml-1"
+                >
+                    <FiLogOut className="h-5 w-5 md:h-6 md:w-6" />
+                </button>
             </div>
         </header>
     );

@@ -8,12 +8,9 @@ import {
     FiLayers,
     FiActivity,
     FiX,
-    FiLogOut,
     FiBell,
     FiBarChart2
 } from 'react-icons/fi';
-import { useAuth } from '../../auth/AuthContext';
-import { useNavigate } from 'react-router-dom';
 import { NAV_ITEMS } from '../../../constants/navigation';
 
 interface SidebarProps {
@@ -22,14 +19,6 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
-    const { logout } = useAuth();
-    const navigate = useNavigate();
-
-    const handleLogout = () => {
-        logout();
-        navigate('/login');
-    };
-
     const getIcon = (name: string) => {
         switch (name) {
             case 'Stocks': return <FiTrendingUp />;
@@ -58,10 +47,10 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
             )}
 
             <aside className={`
-                fixed top-[60px] bottom-0 left-0 w-64 bg-indigo-50/95 backdrop-blur-md flex flex-col border-r border-indigo-100 z-[70] transition-transform duration-300 ease-in-out md:relative md:top-0 md:translate-x-0 md:bg-indigo-50/80
-                ${isOpen ? 'translate-x-0 shadow-2xl shadow-indigo-900/10' : '-translate-x-full md:flex-shrink-0 hide-scrollbar md:overflow-hidden overflow-y-auto'}
+                fixed top-[60px] bottom-0 left-0 w-64 bg-indigo-50/95 backdrop-blur-md flex flex-col border-r border-indigo-100 z-[70] transition-transform duration-300 ease-in-out md:relative md:top-0 md:translate-x-0 md:bg-indigo-50/80 md:h-full
+                ${isOpen ? 'translate-x-0 shadow-2xl shadow-indigo-900/10' : '-translate-x-full md:flex-shrink-0'}
             `}>
-                <div className="p-5 border-b border-indigo-100 flex items-center justify-between">
+                <div className="p-5 border-b border-indigo-100 flex items-center justify-between shrink-0">
                     <div className="font-bold text-indigo-900 text-lg tracking-tight uppercase text-xs opacity-50 px-2">
                         Market Explorer
                     </div>
@@ -74,8 +63,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                     </button>
                 </div>
 
-                <div className="p-5 pt-0 mt-4 h-full md:overflow-hidden overflow-y-auto">
-                    <div className="space-y-1">
+                <div className="p-3 pt-0 mt-2 flex-1 overflow-hidden">
+                    <div className="space-y-0.5">
                         {NAV_ITEMS.map((item) => (
                             <NavLink
                                 key={item.name}
@@ -84,7 +73,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                                     if (window.innerWidth < 768) onClose();
                                 }}
                                 className={({ isActive }) =>
-                                    `flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 ${isActive
+                                    `flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-xl transition-all duration-200 ${isActive
                                         ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/20 translate-x-1'
                                         : 'text-indigo-900/70 hover:bg-white hover:text-indigo-900 hover:translate-x-1'
                                     }`
@@ -95,20 +84,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                             </NavLink>
                         ))}
                     </div>
-
-                    <div className="mt-10 pt-6 border-t border-indigo-100">
-                        {/* News section removed as per request */}
-                    </div>
-                </div>
-
-                <div className="p-5 mt-auto border-t border-indigo-100">
-                    <button
-                        onClick={handleLogout}
-                        className="w-full flex items-center gap-3 px-4 py-3 text-sm font-bold text-rose-600 hover:bg-rose-50 rounded-xl transition-all group"
-                    >
-                        <FiLogOut className="text-lg group-hover:rotate-12 transition-transform" />
-                        <span>Logout Account</span>
-                    </button>
                 </div>
             </aside>
         </>

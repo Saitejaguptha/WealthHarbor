@@ -1,6 +1,13 @@
 import type { PriceHistoryPoint } from './history';
 
 export type MarketCap = 'High Cap' | 'Mid Cap' | 'Small Cap' | 'Micro Cap';
+export const MARKET_CAPS: MarketCap[] = ['High Cap', 'Mid Cap', 'Small Cap', 'Micro Cap'];
+
+export const SECTORS = [
+    'Banking', 'IT Services', 'FMCG', 'Energy', 'Automobile',
+    'Healthcare', 'Telecom', 'Construction', 'Metal & Mining',
+    'Chemicals', 'Consumer Durables', 'Financial Services', 'Agriculture'
+];
 
 export interface QuarterlyResult {
     quarter: string;

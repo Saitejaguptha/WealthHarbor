@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { FiStar, FiX, FiInfo } from 'react-icons/fi';
-import { METRIC_GLOSSARY } from '../../utils/metricDefinitions';
+import { METRIC_GLOSSARY } from '../../data/metricDefinitions';
 
 interface MetricInfoProps {
     metricKey: string;

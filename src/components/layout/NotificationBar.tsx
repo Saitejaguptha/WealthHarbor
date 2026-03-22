@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FiBell } from 'react-icons/fi';
-import { useAuth } from '../../features/auth/AuthContext';
+import { useAuth } from '../../features/auth/authHooks';
 import { getNotifications } from '../../utils/watchlistUtils';
 
 const NotificationBar: React.FC = () => {

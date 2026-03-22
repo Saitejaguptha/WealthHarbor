@@ -1,34 +1,33 @@
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import { AuthProvider } from './features/auth/AuthContext';
 import ProtectedRoute from './components/auth/ProtectedRoute';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import Home from './pages/Home';
-import ErrorPage from './pages/ErrorPage';
-import Stocks from './pages/Stocks';
-import StockDetails from './pages/StockDetails';
-import MutualFunds from './pages/MutualFunds';
-import MutualFundDetails from './pages/MutualFundDetails';
-import ETFs from './pages/ETFs';
-import ETFDetails from './pages/ETFDetails';
-import GoldSilver from './pages/GoldSilver';
-import Commodities from './pages/Commodities';
-import CommodityDetails from './pages/CommodityDetails';
-import Profile from './pages/Profile';
-import Watchlist from './pages/Watchlist';
-import NewsDetails from './pages/NewsDetails';
-import MarketAnalysis from './pages/MarketAnalysis';
-import Indices from './pages/Indices';
-import IndexDetails from './pages/IndexDetails';
-import StocksInNews from './pages/StocksInNews';
-import Notifications from './pages/Notifications';
-import ForgotPassword from './pages/ForgotPassword';
-import FIIDII from './pages/FIIDII';
-import About from './pages/About';
-import FandO from './pages/FandO';
-import IntradayStocks from './pages/IntradayStocks';
-import MarketSummary from './pages/MarketSummary';
+import Login from './pages/Login/Login';
+import Signup from './pages/Signup/Signup';
+import Home from './pages/Home/Home';
+import ErrorPage from './pages/ErrorPage/ErrorPage';
+import Stocks from './pages/Stocks/Stocks';
+import StockDetails from './pages/StockDetails/StockDetails';
+import MutualFunds from './pages/MutualFunds/MutualFunds';
+import MutualFundDetails from './pages/MutualFundDetails/MutualFundDetails';
+import ETFs from './pages/ETFs/ETFs';
+import ETFDetails from './pages/ETFDetails/ETFDetails';
+import GoldSilver from './pages/GoldSilver/GoldSilver';
+import Commodities from './pages/Commodities/Commodities';
+import CommodityDetails from './pages/CommodityDetails/CommodityDetails';
+import Profile from './pages/Profile/Profile';
+import Watchlist from './pages/Watchlist/Watchlist';
+import NewsDetails from './pages/NewsDetails/NewsDetails';
+import MarketAnalysis from './pages/MarketAnalysis/MarketAnalysis';
+import Indices from './pages/Indices/Indices';
+import IndexDetails from './pages/IndexDetails/IndexDetails';
+import StocksInNews from './pages/StocksInNews/StocksInNews';
+import Notifications from './pages/Notifications/Notifications';
+import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
+import FIIDII from './pages/FIIDII/FIIDII';
+import About from './pages/About/About';
+import FandO from './pages/FandO/FandO';
+import IntradayStocks from './pages/IntradayStocks/IntradayStocks';
+import MarketSummary from './pages/MarketSummary/MarketSummary';
 import ScrollToTop from './components/common/ScrollToTop';
 
 // Placeholder Pages
@@ -42,8 +41,7 @@ const PagePlaceholder = ({ title }: { title: string }) => (
 
 function App() {
   return (
-    <AuthProvider>
-      <HashRouter>
+    <HashRouter>
         <ScrollToTop />
         <Toaster position="top-right" />
         <Routes>
@@ -88,8 +86,7 @@ function App() {
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </HashRouter>
-    </AuthProvider>
-  );
+    );
 }
 
 export default App;
